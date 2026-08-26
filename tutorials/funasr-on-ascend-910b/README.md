@@ -9,11 +9,9 @@
 - FunASR 官方**硬依赖 torchaudio**，而昇腾交付环境是 **aarch64（鲲鹏 ARM）+ openEuler**，华为 fork 的 PyTorch 版本号 `2.14.0a0` 与官方脱钩，**仓库里根本没有匹配的 torchaudio wheel**。
 - 解法：把 FunASR 里对 torchaudio 的依赖全部改成**可选**，特征提取用独立的 `kaldi-native-fbank` 兜底，音频加载用 `soundfile` 兜底。
 - 结果：**不装 torchaudio，FunASR 在 910B 上完整跑通**，paraformer-large 识别 70.47 秒音频仅用 1.14 秒，**RTF ≈ 0.016（约 62 倍实时）**。
-- 改动已拆成两个 PR 提交上游，欢迎 review：
-  - **PR #3526**（核心，先看这个）：Remove hard torchaudio dependency for inference; add kaldi-native-fbank fbank backend
+- 改动已合并为一个 PR 提交上游（原 #3527 已并入 #3526，使改动原子化）；已收到维护者 LauraGPT 的 CHANGES_REQUESTED review 并逐条修复，欢迎继续 review：
+  - **PR #3526**：Remove hard torchaudio dependency for inference; add kaldi-native-fbank fbank backend
     https://github.com/modelscope/FunASR/pull/3526
-  - **PR #3527**（扩展）：Make torchaudio import optional in paraformer_v2, fun_asr_nano and dataset preprocessors
-    https://github.com/modelscope/FunASR/pull/3527
 
 ---
 
@@ -145,16 +143,20 @@ PY
 
 ---
 
-## 六、两个 PR 的拆分逻辑
+## 六、PR 演进：从拆分到合并 + 应对 review
 
-按"小量多次分批提交更利于社区 review"的思路，把 9 个文件拆成两个独立可合入的 PR：
+最初按"小量多次分批提交更利于社区 review"的思路，把 9 个文件拆成两个独立 PR（#3526 核心 + #3527 扩展）。但维护者 LauraGPT review 后指出：**#3527 功能上依赖 #3526，单独看是 broken 的**，建议 combine 或 rebase。于是把 #3527 并入 #3526，使改动原子化。
 
-| PR | 范围 | 文件 | 提交 |
-|----|------|------|------|
-| #3526 | 核心推理路径去 torchaudio | 5 文件（fbank.py 新增 + wav_frontend/speaker_utils/campplus/load_utils） | `b6e3d8e` |
-| #3527 | 次要模型/训练路径 torchaudio 可选化 | 4 文件（paraformer_v2/fun_asr_nano/两个 preprocessor） | `025b8cd` |
+维护者还提出了几处改进，均已修复：
 
-PR1 是"让推理能跑起来"的最小闭环，可以独立合入；PR2 是"让整个包在任何环境都 import 不崩"的完善，等 PR1 有反馈后再推进，避免两个 review 分散火力。
+| 反馈 | 修复 |
+| --- | --- |
+| kaldi-native-fbank 未声明依赖，干净环境 import 仍崩 | 加 optional `knf` extra，`fbank()` 调用时无后端才报可操作 ImportError |
+| fbank shim 的 `**kwargs` 静默吞参（如 `channel`） | 显式处理 `channel`；`subtract_mean`/`min_duration`/VTLN/`blackman_coeff` 显式 NotImplementedError |
+| `forced_align` 把"缺 torchaudio"吞成空结果 | 新增统一 `torchaudio_compat` guard，依赖缺失时传播 ImportError |
+| 没测"torchaudio 完全缺席"环境 | 新增 `tests/test_torchaudio_optional.py` 回归测试（10/10 通过） |
+
+修复后重新验证：RTF ≈ 0.0164，识别正确，零 torchaudio 依赖成立。
 
 欢迎各位顺手 review / 点 star，也欢迎在昇腾、寒武纪、摩尔线程等其它 aarch64 国产卡上帮忙验证。
 
@@ -163,13 +165,16 @@ PR1 是"让推理能跑起来"的最小闭环，可以独立合入；PR2 是"让
 ## 附：关键文件
 
 ```
-funasr/utils/fbank.py                  # 新增：kaldi-native-fbank 兜底 shim（87 行）
+funasr/utils/fbank.py                  # 新增：kaldi-native-fbank 兜底 shim（含 channel 处理 + 显式 reject）
+funasr/utils/torchaudio_compat.py      # 新增：统一 torchaudio 依赖 guard
 funasr/frontends/wav_frontend.py       # fbank import 切换
 funasr/utils/speaker_utils.py          # fbank import 切换
 funasr/models/campplus/utils.py        # fbank import 切换
-funasr/utils/load_utils.py             # torchaudio 可选 + soundfile 兜底
-funasr/models/paraformer_v2_community/model.py   # torchaudio try/except
-funasr/models/fun_asr_nano/tools/utils.py        # torchaudio try/except
-funasr/datasets/audio_datasets/preprocessor.py   # torchaudio try/except
+funasr/utils/load_utils.py             # torchaudio 可选 + soundfile/librosa 兜底
+funasr/models/paraformer_v2_community/model.py   # torchaudio try/except + force_align guard
+funasr/models/fun_asr_nano/tools/utils.py        # torchaudio 可选 + forced_align guard
+funasr/datasets/audio_datasets/preprocessor.py   # torchaudio 可选 + speed_perturb guard
 funasr/datasets/llm_datasets/preprocessor.py     # torchaudio try/except
+tests/test_torchaudio_optional.py      # 新增：无 torchaudio 回归测试
+setup.py                               # 新增 optional knf extra
 ```
