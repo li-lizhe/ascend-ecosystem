@@ -4,7 +4,7 @@
 
 ## 状态
 
-🔧 代码完成 · 上游已 review（CHANGES_REQUESTED）· 按意见修复后等待 re-review
+✅ **已合并**（2026-08-26，by LauraGPT）—— 任务首个成功合入上游的 PR。CHANGES_REQUESTED → 修复 → APPROVED → merged。
 
 ## 问题
 
