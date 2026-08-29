@@ -5,6 +5,8 @@
 ## 状态
 
 ✅ PR #1469 已提交（open，等 review）：torchaudio 可选化 + Hugging Face 兜底。
+- 2026-08-27 Copilot bot review（COMMENTED，4 条建议）。
+- 2026-08-29 已全部处理并推送 51ca65b：import guard 改为 `except Exception`、中文注释译英、新增 fallback 行为单测（monkeypatch torchaudio=None，验证 bundle 名重映射到 HF checkpoint）。昇腾 910B 上 3/3 测试通过，已在 PR 回复说明并请求 re-review。
 
 ## 问题
 
