@@ -13,3 +13,4 @@
 ## 已排除
 
 - `Stability-AI/stable-audio-tools — 2026-08-31 — merge 率 47%<50% 且最近 merge 5-26（90 天无 merge），PR #263 撤回（踩线不达标）`
+- `emelex-ai/BRIDGE — 2026-09-01 — 仅 3 star，不满足影响力门槛（issue #223 device 比较问题本身干净，但项目太小）`
