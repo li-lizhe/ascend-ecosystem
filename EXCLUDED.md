@@ -14,3 +14,6 @@
 
 - `Stability-AI/stable-audio-tools — 2026-08-31 — merge 率 47%<50% 且最近 merge 5-26（90 天无 merge），PR #263 撤回（踩线不达标）`
 - `emelex-ai/BRIDGE — 2026-09-01 — 仅 3 star，不满足影响力门槛（issue #223 device 比较问题本身干净，但项目太小）`
+- `fishaudio/fish-speech — 2026-09-01 — 近 30 条 closed merge 12/30=40%<50%（32k★ 但 merge 率不达标）`
+- `SWivid/F5-TTS — 2026-09-01 — 最近 push 2026-07-23（40 天无 push >30 天门槛）`
+- `myshell-ai/OpenVoice — 2026-09-01 — 僵尸：最近 push 2025-04-19（500+ 天无 push）`
