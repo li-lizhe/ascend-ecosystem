@@ -9,5 +9,5 @@
   - 修复后: 正常前向 (2,128,64) fp16
   - 数值等价: dtype 已匹配路径 allclose=True
 - **分支**: 本地 `D:\code\mindlog\xql\ComfyUI-KJNodes` 分支 `fix/wan-nag-dtype-mismatch`（commit aec5dbb）
-- **状态**: ⛔ **2026-09-02 未能提交 PR — GitHub PAT (C:\Users\华为\.config\ghtoken) 已失效**（API 恒 401 Bad credentials，与伪造 token 同报错；SSH git push 认证正常）。fork li-lizhe/ComfyUI-KJNodes 无法创建（需 API）。
-- **待办**: 恢复 PAT 后 (1) POST /repos/kijai/ComfyUI-KJNodes/forks (2) push 分支 (3) 开 PR body 含 Problem/Root cause/Fix/Verification/Fixes #601 (4) 加入 check_prs.py PRS。
+- **状态**: ✅ 已提交 PR [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749)（2026-09-02，PAT 恢复后完成 fork + push + 开 PR）
+- **tracking**: check_prs.py key `kjnodes-PR`
