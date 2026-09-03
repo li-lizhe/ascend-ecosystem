@@ -9,5 +9,5 @@
   - conv2d 前向 + RMBG 式 model/input 流程在 npu:0 正常
   - `torch.accelerator.empty_cache()` 可调用
 - **分支**: `scan-today/ComfyUI_LayerStyle` 分支 `comfy-device-selection`（commit 6555d35）
-- **状态**: ✅ 已提交 PR [#609](https://github.com/chflame163/ComfyUI_LayerStyle/pull/609)（2026-09-02）
-- **tracking**: check_prs.py key `layerstyle-PR`
+- **状态**: ✅ **已合并** — PR [#609](https://github.com/chflame163/ComfyUI_LayerStyle/pull/609) merged_at 2026-09-03（维护者 chflame163 merge，merge commit 5ba9390）✅ 首个昇腾适配 PR 成功合入
+- **tracking**: 已移出 check_prs.py（2026-09-03 晚间，MERGED）
