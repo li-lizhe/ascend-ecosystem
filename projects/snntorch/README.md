@@ -1,0 +1,35 @@
+# snntorch (jeshraghian/snntorch)
+
+★2040 SNN (Spiking Neural Network) 训练框架。硬门槛 2026-09-03 全 PASS：push 3 天内、近 30 条 closed PR merge 率 22/30=73%、最近 merge 3 天前（PR #432 dtype 系列刚合入）。
+
+## 2026-09-03 — dtype 保持系列（PR #444 / #445）
+
+### 目标 issue
+- #439 `state_quant` returns float32 for float64 inputs（0 评论，未认领，作者 GraceDyer 老账号非马甲）
+- #440 `spikegen.latency` returns float32 for float64 inputs（0 评论，未认领，同作者，描述专业带最小复现）
+
+背景：维护者正系统性收 dtype 保持系列（PR #432 已 merged、#434 open），此二 issue 是同族未认领项，正合时宜。
+
+### 根因
+- **#439** `snntorch/functional/quant.py`：量化电平 `torch.linspace/torch.tensor` 默认 float32，`StateQuant.forward` 只做 `levels.to(device)` 不转 dtype，输出 `levels[idx_match]` 继承 float32。
+- **#440** `snntorch/spikegen.py`：模块级 `dtype = torch.float` 硬编码 + `latency_interpolate` 里 `torch.round(x).float()` 显式下转，三处硬编码 float32。
+
+### 修复（设备无关、dtype 无关）
+- #439：`levels = levels.to(device=device, dtype=input_.dtype)`（1 行）+ 回归测试。
+- #440：`torch.zeros(..., dtype=data.dtype)`；`.float()` → `.to(spike_time.dtype)`；`torch.ones(..., dtype=spike_time.dtype)`。模块级 `dtype` 常量保留给 `to_one_hot` 等整型路径，改动严格限定 latency 路径。
+
+### 昇腾验证（177 / npu-lizhe 容器，torch 2.14.0a0 + torch_npu 910B）
+- latency 4 条路径（default/normalize/linear+normalize/interpolate+normalize）× {cpu, npu} × {f32, f64} dtype 全保持；bf16 在 NPU 上也正确保持。
+- state_quant 3 种模式 × {cpu, npu} × {f32, f64} 全过（NPU f32）。
+- 数值等价：f64 与 f32 输出逐元素一致；STE 梯度 float64 正常回流。
+- e2e：latency 编码 → Linear → Leaky 神经元在 npu:0 上 dtype/设备正确。
+- 已知限制（非本次引入）：NPU 上 float64 `aclnnMinDim` 报 DT_DOUBLE 不支持（torch_npu 算子覆盖限制），修复前后行为一致（pre-fix 复现确认）。
+
+### PR
+- PR #444 Fix state_quant to preserve the input tensor's dtype — https://github.com/jeshraghian/snntorch/pull/444（Fixes #439）
+- PR #445 Fix spikegen.latency to preserve the input tensor's dtype — https://github.com/jeshraghian/snntorch/pull/445（Fixes #440）
+
+分支：li-lizhe/snntorch `fix/state-quant-dtype` / `fix/latency-dtype`（基于 master 83e1d15）。
+
+### 备注
+两 issue 同族但代码路径独立（quant.py vs spikegen.py），按 skill「小量多次分批提交」原则拆成两个 PR。
