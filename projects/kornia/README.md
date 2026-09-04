@@ -35,3 +35,13 @@ CUDA→"cuda"、NPU→"npu"、无加速器→"cpu"。改动 6 行。
 ## 状态
 
 2026-09-04 提交，PR open，待 review。
+
+### 2026-09-04 晚间 — 维护者 review 回应
+
+维护者 @ducha-aiki 提交 CHANGES_REQUESTED 指出：
+1. `torch.accelerator` 在 torch 2.5.1（kornia 最低版本）不存在 → 代码在 2.5.1 上会 `AttributeError`
+2. 即使存在，`map_location` 设备也被 `load_state_dict` 丢弃（模型在 CPU 上构建，state_dict 拷贝进已有 CPU 参数）
+
+**修复**：改为 `map_location="cpu"` — 版本安全、无设备探测、消除无意义传输、由调用方用 `.to(device)` 移至目标设备。已 push 并 @ 维护者请求 re-review。
+
+**上一条更新**：2026-09-04 提交，PR open，待 review。

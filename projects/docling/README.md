@@ -29,3 +29,7 @@ RuntimeError: mat1 and mat2 must have the same dtype, but got Float and BFloat16
 
 - **PR #4158**：fix: align transformer engine input dtype with model weights (fixes #3110)
   https://github.com/docling-project/docling/pull/4158
+
+### 2026-09-04 晚间 — DCO 修复
+
+DCO 检查失败（commit 缺少 Signed-off-by）。已添加 remediation commit（`DCO Remediation Commit for li-lizhe <147392333@qq.com>`），DCO 检查已通过（success）。所有 4 项 CI 检查（Mergify、lint-and-type、dco_advisor、DCO）均通过，PR ready to merge。

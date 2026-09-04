@@ -33,3 +33,9 @@
 
 ### 备注
 两 issue 同族但代码路径独立（quant.py vs spikegen.py），按 skill「小量多次分批提交」原则拆成两个 PR。
+
+### 2026-09-04 晚间 — CI 修复
+
+维护者 @ixfd64 指出 #444 的 CI 测试失败。根因：PR #444 和 #445 共享了相同的测试文件 `test_quant_dtype.py`，该文件同时测试了 `latency` 和 `state_quant`。PR #444（只修 state_quant）包含了 latency 测试但无 latency 修复 → latency 测试失败。
+
+**修复**：从 #444 的测试文件中移除 `test_latency_preserves_dtype`（该测试正确属于 #445）。已 push 修复并回复维护者。
