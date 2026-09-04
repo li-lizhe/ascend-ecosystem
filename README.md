@@ -15,6 +15,8 @@
 | 项目 | 内容 | 状态 | 上游 PR |
 |------|------|------|---------|
 | [FunASR](projects/funasr/) | 去 torchaudio 硬依赖（fbank → kaldi-native-fbank、音频加载 → soundfile、可选导入） | PR 待 review | [#3526](https://github.com/modelscope/FunASR/pull/3526) · [#3527](https://github.com/modelscope/FunASR/pull/3527) |
+| [kornia](projects/kornia/) | RT-DETR `from_pretrained` 设备无关 map_location（`torch.accelerator`） | PR 待 review | [#4212](https://github.com/kornia/kornia/pull/4212) |
+| [GPT-SoVITS](projects/gpt-sovits/) | 导出脚本 device 无关加速器检测（NPU/XPU/MPS） | PR 待 review | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) |
 
 ## 规划中
 
