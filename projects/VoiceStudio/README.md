@@ -46,3 +46,9 @@ torch.cuda.is_available() == False                      # 旧代码的判定依�
 - https://github.com/debpalash/VoiceStudio/pull/1831 — `fix(tts-engines): select device via torch.accelerator in confucius4 and dots_tts`
 
 提交日期: 2026-09-06（早间新增）
+追踪状态: 2026-09-06 晚间
+
+**Review 反馈处理**: 两个 PR 均收到 bot review (greptile-apps + coderabbitai)，指出 `current_accelerator()` 在纯 CPU 构建上返回 `None`（无加速器编译），`.type` 会崩溃。已修复：
+- 全部添加 `check_available=True` + `None` → `"cpu"` 后备
+- `dots_tts` 额外排除 MPS（bf16 仅用于 CUDA/NPU/XPU，MPS 用 fp32）
+- 已在 Ascend 910B 验证通过，push 到分支并回复 commment
