@@ -1,47 +1,38 @@
-# kornia — RT-DETR device-agnostic weight loading
+# kornia (kornia/kornia)
 
-**Repo**: [kornia/kornia](https://github.com/kornia/kornia) (11.3k★, 100% merge rate, active)
-**PR**: [#4212](https://github.com/kornia/kornia/pull/4212) — fix(rt_detr): use device-agnostic map_location in from_pretrained
+Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend 910B 验证。
 
-## 目标 issue
+- 仓库: https://github.com/kornia/kornia (~30700★)
+- 活跃度: pushed<1d, 近 30 条 closed merge 率 80% —— 高活跃社区
 
-非特定 issue——通过「主动发现 device 假设」扫描 `kornia/models/` 发现
-`RTDETR.from_pretrained()` 硬编码 `map_location="cuda:0" if torch.cuda.is_available() else "cpu"`。
+## PR #4212 — RT-DETR device-agnostic weight loading (已合并)
 
-## 根因
+**状态**: 2026-09-05 已合入
 
-kornia 要求 `torch>=2.5.1`（`torch.accelerator` 必存在），但 `rt_detr/model.py` 的
-`from_pretrained` 仍用 CUDA 专属的 `torch.cuda.is_available()` 决定加载目标设备。
-在非 CUDA 加速器（昇腾 NPU / 英特尔 XPU / Apple MPS）上要么把权重放到错误设备、
-要么退回 CPU，造成多余拷贝或设备不匹配错误。其余 models（base.py/dexined/yunet）
-均用 `map_location="cpu"` 或传入 device，唯独 rt_detr 硬编码 cuda。
+**Fix**: 在 `from_pretrained` 中使用 `torch.accelerator.current_accelerator()` 替代硬编码的 `map_location="cuda"`，让非 CUDA 加速器（NPU/XPU/MPS）也能正确加载权重。
 
-## 修复
+**PR**: https://github.com/kornia/kornia/pull/4212
 
-```python
-device = str(torch.accelerator.current_accelerator()) if torch.accelerator.is_available() else "cpu"
-state_dict = load_state_dict_from_url(URLs[model_name], map_location=device)
-```
+## PR #4340 — Z1Projection.unproject 标量 depth 的设备/dtype 修复
 
-设备无关：`torch.accelerator.current_accelerator()` 在运行时发现当前加速器，
-CUDA→"cuda"、NPU→"npu"、无加速器→"cpu"。改动 6 行。
+**问题**: `Z1Projection.unproject` 用 `torch.Tensor([depth])` 创建 CPU float32 张量，不继承 points 的设备（CUDA/NPU/XPU/MPS）和 dtype（float16/bfloat16/float64）
+- 在 NPU 上抛出 `Expected all tensors to be on the same device. Expected NPU tensor`
+- 在 CPU 上 float16/float64 被静默拓宽到 float32
 
-## 验证（昇腾 910B2）
+**修复**: `torch.Tensor([depth])` → `torch.as_tensor([depth], device=points.data.device, dtype=points.data.dtype)`
 
-- 容器 npu-lizhe（torch 2.14.0a0 + torch_npu）：`str(torch.accelerator.current_accelerator())` 返回 `"npu"`
-- `torch.load(..., map_location="npu")` 直接把权重加载到 NPU
-- CPU 回退路径保持原语义
+**验证（Ascend 910B, torch 2.14 + torch_npu）**：旧代码崩溃，新代码通过，CPU float64 回归通过。
 
-## 状态
+**PR**: https://github.com/kornia/kornia/pull/4340 — Fixes #4313
+**提交日期**: 2026-09-07（早间新增）
 
-2026-09-04 提交，PR open，待 review。
+## PR #4341 — PinholeCamera.scale_ 的 int64 height/width dtype 提升
 
-### 2026-09-04 晚间 — 维护者 review 回应
+**问题**: `scale_()` 用 `self.height *= scale_factor` 原地写入，把 float 结果写回 int64 存储时报错。
 
-维护者 @ducha-aiki 提交 CHANGES_REQUESTED 指出：
-1. `torch.accelerator` 在 torch 2.5.1（kornia 最低版本）不存在 → 代码在 2.5.1 上会 `AttributeError`
-2. 即使存在，`map_location` 设备也被 `load_state_dict` 丢弃（模型在 CPU 上构建，state_dict 拷贝进已有 CPU 参数）
+**修复**: `self.height *= scale_factor` → `self.height = self.height * scale_factor`（重新绑定到提升后的 float 张量）
 
-**修复**：改为 `map_location="cpu"` — 版本安全、无设备探测、消除无意义传输、由调用方用 `.to(device)` 移至目标设备。已 push 并 @ 维护者请求 re-review。
+**验证（Ascend 910B, torch 2.14 + torch_npu）**：旧代码崩溃，新代码通过，float32 回归通过。
 
-**上一条更新**：2026-09-04 提交，PR open，待 review。
+**PR**: https://github.com/kornia/kornia/pull/4341 — Fixes #4265
+**提交日期**: 2026-09-07（早间新增）
