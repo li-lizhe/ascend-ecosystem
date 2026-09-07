@@ -26,6 +26,8 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 **PR**: https://github.com/kornia/kornia/pull/4340 — Fixes #4313
 **提交日期**: 2026-09-07（早间新增）
 
+**Review 反馈处理**（ducha-aiki, 2026-09-07）：已按 review 完成 P1 回归测试（`test_unproject_scalar_depth`）、P1 CHANGELOG 条目、P2 docstring 更新，PR body 措辞已修正，push 到分支并回复（32401b26）。
+
 ## PR #4341 — PinholeCamera.scale_ 的 int64 height/width dtype 提升
 
 **问题**: `scale_()` 用 `self.height *= scale_factor` 原地写入，把 float 结果写回 int64 存储时报错。
@@ -36,3 +38,5 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 
 **PR**: https://github.com/kornia/kornia/pull/4341 — Fixes #4265
 **提交日期**: 2026-09-07（早间新增）
+
+**Review 反馈处理**（ducha-aiki, 2026-09-07）：已按 review 完成 P1 回归测试（`test_scale_inplace_int64_size`）、P1 CHANGELOG 条目（标注 height/width 重绑定的副作用）、P1 PR body 副作用说明（#4264 保持 open）、P2 docstring 更新，push 到分支并回复（5f1a61c6）。PR 叠在 #4340 之上，待 #4340 合入后 rebase。

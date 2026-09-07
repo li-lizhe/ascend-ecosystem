@@ -18,7 +18,7 @@ RuntimeError: mat1 and mat2 must have the same dtype, but got Float and BFloat16
 
 ## 修复
 
-在 `.to(self._device)` 后，将浮点输入张量 cast 到 `self._model.dtype`；整数张量（如 `pixel_mask`）保持不变（不参与 matmul）。两个引擎同模式一并修复。device-agnostic（用 `self._model.dtype`，无任何 `if cuda/npu` 分支）。
+用 transformers 内置 API：`BatchFeature.to(device, dtype)` 只 cast 浮点张量、保留整数张量（如 `pixel_mask`）。两个引擎的 `predict_batch()` 中把 `.to(self._device)` 改为 `.to(self._device, self._model.dtype)`，与模型权重 dtype 对齐。device-agnostic（用 `self._model.dtype`，无任何 `if cuda/npu` 分支）。
 
 ## 验证
 
@@ -29,6 +29,10 @@ RuntimeError: mat1 and mat2 must have the same dtype, but got Float and BFloat16
 
 - **PR #4158**：fix: align transformer engine input dtype with model weights (fixes #3110)
   https://github.com/docling-project/docling/pull/4158
+
+### 2026-09-07 晚间 — Review 反馈处理
+
+cau-git 建议用 `BatchFeature.to(device, dtype)` 替代手动 cast 循环（`BatchFeature.to()` 接受 dtype 作为第二参数，只 cast 浮点张量）。已按建议修改，push 到分支并回复评论（0c6fb887）。
 
 ### 2026-09-04 晚间 — DCO 修复
 

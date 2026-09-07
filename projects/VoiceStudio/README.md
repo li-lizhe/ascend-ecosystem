@@ -45,8 +45,12 @@ torch.cuda.is_available() == False                      # 旧代码的判定依�
 - https://github.com/debpalash/VoiceStudio/pull/1830 — `fix(moss_tts_v15): select device via torch.accelerator instead of CUDA hardcode`
 - https://github.com/debpalash/VoiceStudio/pull/1831 — `fix(tts-engines): select device via torch.accelerator in confucius4 and dots_tts`
 
-提交日期: 2026-09-06（早间新增）
-追踪状态: 2026-09-06 晚间
+## PR 状态
+
+| PR | 状态 | 合入日期 |
+|----|------|---------|
+| [#1830 — moss_tts_v15 device-agnostic fix](https://github.com/debpalash/VoiceStudio/pull/1830) | ✅ **已合并** | 2026-09-07 |
+| [#1831 — tts-engines device-agnostic fix](https://github.com/debpalash/VoiceStudio/pull/1831) | ✅ **已合并** | 2026-09-07 |
 
 **Review 反馈处理**: 两个 PR 均收到 bot review (greptile-apps + coderabbitai)，指出 `current_accelerator()` 在纯 CPU 构建上返回 `None`（无加速器编译），`.type` 会崩溃。已修复：
 - 全部添加 `check_available=True` + `None` → `"cpu"` 后备
