@@ -1,0 +1,1 @@
+Add kornia PRs #4340/#4341 (device-agnostic scalar-depth & scale_ dtype, NPU-verified)

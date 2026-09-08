@@ -39,3 +39,22 @@
 维护者 @ixfd64 指出 #444 的 CI 测试失败。根因：PR #444 和 #445 共享了相同的测试文件 `test_quant_dtype.py`，该文件同时测试了 `latency` 和 `state_quant`。PR #444（只修 state_quant）包含了 latency 测试但无 latency 修复 → latency 测试失败。
 
 **修复**：从 #444 的测试文件中移除 `test_latency_preserves_dtype`（该测试正确属于 #445）。已 push 修复并回复维护者。
+
+## 2026-09-08 — PR #449 `reset(net)` 作用域修复
+
+### 目标 issue
+- [#438](https://github.com/jeshraghian/snntorch/issues/438) — `utils.reset(net_a)` 会顺带清零另一个独立网络 `net_b` 的隐藏状态
+
+### 根因
+`reset()` → `_layer_check()` → `_layer_reset()` 调用类级 `cls.reset_hidden()`（@classmethod），它遍历 `cls.instances`——**该类的全部实例注册表**，而非 `net` 内所属模块
+
+### 修复
+保留全局 flags 与 `_layer_check()`（供 `backprop.py` 读取），把类级 `_layer_reset()` 替换为直接遍历 `net.modules()` 调用实例级 `reset_mem()`，将 reset 限定在传入网络内。仅 `snntorch/utils.py` 改 18+/4-。
+
+### 昇腾验证（177 / npu-lizhe 容器，torch 2.14.0a0 + torch_npu 910B）
+- 修复前：`reset(net_a)` 后 `net_b` mem 也被清零（BUG CONFIRMED）
+- 修复后：`net_a` 清零、`net_b` 保持原值（PASS）
+- 回归：3 步独立 forward/backward/step/reset 循环正常，无 NaN
+
+### PR
+- PR #449 Fix `utils.reset(net)` to scope reset to the given network — https://github.com/jeshraghian/snntorch/pull/449（Fixes #438）

@@ -40,3 +40,23 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 **提交日期**: 2026-09-07（早间新增）
 
 **Review 反馈处理**（ducha-aiki, 2026-09-07）：已按 review 完成 P1 回归测试（`test_scale_inplace_int64_size`）、P1 CHANGELOG 条目（标注 height/width 重绑定的副作用）、P1 PR body 副作用说明（#4264 保持 open）、P2 docstring 更新，push 到分支并回复（5f1a61c6）。PR 叠在 #4340 之上，待 #4340 合入后 rebase。
+
+## PR #4356 — rad2deg/deg2rad 用 math.pi 保留全精度
+
+### 目标 issue
+- [#3937](https://github.com/kornia/kornia/issues/3937) — 整数输入时 `pi` 被截断为 3（结果偏 5%）；float64 输入丢 ~7 位有效数字
+
+### 根因
+`rad2deg/deg2rad` 用 `pi.to(device).type(tensor.dtype)` 将 float32 常数强转成输入 dtype：整数输入 → `pi=3`；float64 → 从已截断的 float32 再升精度，丢失的信息无法恢复。
+
+### 修复
+改用 `math.pi`（Python double，全精度），删除 `pi.to(device).type(dtype)` 强转。仅 `kornia/geometry/conversions.py` 改 3+/2-（新增 `import math`）。
+
+### 昇腾验证（Ascend NPU）
+- `rad2deg(torch.tensor([1,2,3]))` → `[57.2958, 114.5916, 171.8873]`（修复前为 `[60,120,180]`）
+- `rad2deg(torch.tensor(math.pi, dtype=torch.float64))` → `180.0`（<1e-10 误差）
+- 结果与 NumPy `np.degrees` 一致；设备位置保持
+
+### PR
+- PR #4356 Fix `rad2deg`/`deg2rad` to use `math.pi` for full precision — https://github.com/kornia/kornia/pull/4356（Fixes #3937）
+- **提交日期**: 2026-09-08（早间新增收尾）
