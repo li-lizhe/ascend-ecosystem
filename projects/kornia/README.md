@@ -60,3 +60,22 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 ### PR
 - PR #4356 Fix `rad2deg`/`deg2rad` to use `math.pi` for full precision — https://github.com/kornia/kornia/pull/4356（Fixes #3937）
 - **提交日期**: 2026-09-08（早间新增收尾）
+
+## PR #4376 — bbox_to_mask3d 保留输入 dtype
+
+### 目标 issue
+- [#4250](https://github.com/kornia/kornia/issues/4250) — `bbox_to_mask3d` 无条件返回 float32，不保留输入 dtype（`bbox_to_mask`/`Boxes3D.to_mask` 都保留）
+
+### 根因
+`bbox_to_mask3d` 用 `return m.float()` 硬编码 float32 输出；2D 版本 `bbox_to_mask` 用 `mask.to(boxes.dtype)` 正确保留输入 dtype。
+
+### 修复
+`return m.float()` → `return m.to(boxes.dtype)`。仅改 1 行 + docstring（去 4250 wart 引用）+ 测试改名断言新行为。
+
+### 昇腾验证（Ascend NPU, torch 2.14 + torch_npu）
+- float32→float32, float16→float16, int64→int64, float64→float32（NPU 不支持 double 自动钳制，与 `bbox_to_mask` 同约束）
+- mask 数值不变（unit cube: interior 全1、z=0 全0、sum=8）
+
+### PR
+- PR #4376 fix(geometry): make `bbox_to_mask3d` preserve the input dtype — https://github.com/kornia/kornia/pull/4376（Fixes #4250）
+- **提交日期**: 2026-09-09（早间新增）
