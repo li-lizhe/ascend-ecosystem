@@ -79,3 +79,27 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 ### PR
 - PR #4376 fix(geometry): make `bbox_to_mask3d` preserve the input dtype — https://github.com/kornia/kornia/pull/4376（Fixes #4250）
 - **提交日期**: 2026-09-09（早间新增）
+
+## PR #4379 — Boxes/Boxes3D 整数坐标按默认 dtype 转浮点（而非硬编码 float32）
+
+### 目标 issue
+- [#4012](https://github.com/kornia/kornia/issues/4012) — `Boxes(...)` 默认拒绝整数坐标，而 `from_tensor` 静默 `float()` 转 float32，无视 `torch.get_default_dtype()`，两种 dtype 策略不一致。
+
+### 根因
+5 处 `.float()` 硬编码把整数输入强转 float32，忽略用户配置的默认浮点 dtype（`torch.get_default_dtype()`）。
+
+### 修复
+5 处 `.float()` → `.to(torch.get_default_dtype())`，让整数→浮点转换尊重默认 dtype：
+- `_transform_boxes`（boxes.py:62）
+- `_boxes_to_quadrilaterals`（boxes.py:114）
+- `Boxes.__init__`（boxes.py:293）
+- `Boxes3D.__init__`（boxes.py:1211）
+- `_boxes_to_hexahedrons`（boxes.py:1317）
+
+### 验证
+- `py_compile` 通过。
+- 默认 dtype float32 下行为不变（转 float32）；`torch.set_default_dtype(torch.float64)` 下整数输入转 float64。
+
+### PR
+- PR #4379 fix: cast integer boxes to default dtype instead of hardcoded float32 — https://github.com/kornia/kornia/pull/4379（Fixes #4012）
+- **提交日期**: 2026-09-09（手工新增）
