@@ -28,7 +28,7 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 
 **Review 反馈处理**（ducha-aiki, 2026-09-07）：已按 review 完成 P1 回归测试（`test_unproject_scalar_depth`）、P1 CHANGELOG 条目、P2 docstring 更新，PR body 措辞已修正，push 到分支并回复（32401b26）。
 
-## PR #4341 — PinholeCamera.scale_ 的 int64 height/width dtype 提升
+## PR #4341 — PinholeCamera.scale_ 的 int64 height/width dtype 提升（已关闭，功能迁移至 #4371）
 
 **问题**: `scale_()` 用 `self.height *= scale_factor` 原地写入，把 float 结果写回 int64 存储时报错。
 
@@ -38,10 +38,11 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 
 **PR**: https://github.com/kornia/kornia/pull/4341 — Fixes #4265
 **提交日期**: 2026-09-07（早间新增）
+**关闭原因**: 2026-09-08 主动关闭，功能迁移至 PR #4371（review 要求改方案，原地 `*=` 改为 `self.height = self.height * scale_factor` 重绑定）
 
 **Review 反馈处理**（ducha-aiki, 2026-09-07）：已按 review 完成 P1 回归测试（`test_scale_inplace_int64_size`）、P1 CHANGELOG 条目（标注 height/width 重绑定的副作用）、P1 PR body 副作用说明（#4264 保持 open）、P2 docstring 更新，push 到分支并回复（5f1a61c6）。PR 叠在 #4340 之上，待 #4340 合入后 rebase。
 
-## PR #4356 — rad2deg/deg2rad 用 math.pi 保留全精度
+## PR #4356 — rad2deg/deg2rad 用 math.pi 保留全精度（已关闭）
 
 ### 目标 issue
 - [#3937](https://github.com/kornia/kornia/issues/3937) — 整数输入时 `pi` 被截断为 3（结果偏 5%）；float64 输入丢 ~7 位有效数字
@@ -61,7 +62,7 @@ Ascend NPU 设备无关适配：三个 device-agnostic 修复，均已在 Ascend
 - PR #4356 Fix `rad2deg`/`deg2rad` to use `math.pi` for full precision — https://github.com/kornia/kornia/pull/4356（Fixes #3937）
 - **提交日期**: 2026-09-08（早间新增收尾）
 
-## PR #4376 — bbox_to_mask3d 保留输入 dtype
+## PR #4376 — bbox_to_mask3d 保留输入 dtype（open，等待 review）
 
 ### 目标 issue
 - [#4250](https://github.com/kornia/kornia/issues/4250) — `bbox_to_mask3d` 无条件返回 float32，不保留输入 dtype（`bbox_to_mask`/`Boxes3D.to_mask` 都保留）
