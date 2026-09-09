@@ -1,21 +1,22 @@
 # 弃投清单（扫描时跳过——不达标项目）
 
-规则（用户 2026-08-31 定）：
+规则（用户 2026-09-09 重定义）：
 
-1. **提交前筛选（硬门槛）**：repo 30 天内无 push、或近 30 条 closed 合并率 <50%、或近 90 天无 merge 的「僵尸/低响应」项目，一律跳过不投——不为僵尸项目做贡献。
-2. **提交后持续跟踪**：一旦提交 PR 就持续跟踪到底（直到 merged / closed / 维护者明确拒绝），不设 7 天排除、不因「N 天无合入」弃投。
+1. **提交前筛选（唯一硬门槛）**：最近 14 天是否有人 merge PR —— 有 = 社区正常 review+merge，活项目可投；很久（如 ≥30 天）无任何 merge 的才算僵尸，弃投。**不 care closed 数、不 care merge 率、不以 star 背书**。
+2. **提交后持续跟踪**：一旦提交 PR 就持续跟踪到底（直到 merged / closed / 维护者明确拒绝）。
+3. **项目排除（动态，check_prs.py 计算）**：7 天内无人真人 review/评论 → `PENDING_7D` 暂停投新 PR，有人响应即恢复；只有 `CLOSED_UNMERGED`（维护者明确不响应）才 `EXCLUDED` 永久不投。**已合入的 repo 永不排除，可继续投**。
 
-本清单列出被「硬门槛」拒绝的项目，此后「每天一 PR」扫描跳过。
+本清单列出被「硬门槛」拒绝的僵尸项目，此后扫描跳过。
 
 格式（每行一条）：
 - `repo/name — 排除日期 — 原因摘要`
 
-## 已排除
+## 已排除（僵尸 / 不达标）
 
-- `Stability-AI/stable-audio-tools — 2026-08-31 — merge 率 47%<50% 且最近 merge 5-26（90 天无 merge），PR #263 撤回（踩线不达标）`
+- `Stability-AI/stable-audio-tools — 2026-08-31 — 最近 merge 5-26（90 天无 merge）且 merge 率 47%，PR #263 撤回（踩线不达标）`
 - `emelex-ai/BRIDGE — 2026-09-01 — 仅 3 star，不满足影响力门槛（issue #223 device 比较问题本身干净，但项目太小）`
-- `fishaudio/fish-speech — 2026-09-01 — 近 30 条 closed merge 12/30=40%<50%（32k★ 但 merge 率不达标）`
-- `SWivid/F5-TTS — 2026-09-01 — 最近 push 2026-07-23（40 天无 push >30 天门槛）`
+- `fishaudio/fish-speech — 2026-09-01 — 长期无 merge（32k★ 但社区不活跃）`
+- `SWivid/F5-TTS — 2026-09-01 — 最近 push 2026-07-23（40 天无 push）`
 - `myshell-ai/OpenVoice — 2026-09-01 — 僵尸：最近 push 2025-04-19（500+ 天无 push）`
 
 ## 2026-09-03 dtype 金矿线扫描淘汰

@@ -8,11 +8,10 @@
 
 | # | 项目 | 方向 | 适配点 | 依据 |
 |---|------|------|--------|------|
-| 1 | FunASR 家族新模型（SenseVoice / GLM-ASR / Qwen3-ASR） | 语音识别 | 复用去 torchaudio 方案 | 同一仓库，能力直接复用，见效快 |
-| 2 | CosyVoice | 语音合成 | 去 torchaudio + NPU 推理验证 | 同为 ModelScope 生态 |
-| 3 | Sherpa-ONNX / k2-fsa 生态 | 语音 | fbank 结果一致性对照 | 与 kaldi-native-fbank 同源 |
-| 4 | Faster-Whisper（CTranslate2） | 语音识别 | 纯 C++ 后端昇腾适配 | 关注度高的 ASR 项目 |
-| 5 | vLLM / llama.cpp 昇腾后端 | 通用 LLM 推理 | 国产算力规模化推理 | 拓到 LLM 方向 |
+| 1 | CosyVoice | 语音合成 | 去 torchaudio + NPU 推理验证 | 同为 ModelScope 生态，FunASR 方案可复用 |
+| 2 | Sherpa-ONNX / k2-fsa 生态 | 语音 | fbank 结果一致性对照 | 与 kaldi-native-fbank 同源 |
+| 3 | Faster-Whisper（CTranslate2） | 语音识别 | 纯 C++ 后端昇腾适配 | 关注度高的 ASR 项目 |
+| 4 | Unsloth / llama.cpp 昇腾后端 | 通用 LLM 推理 | 国产算力规模化推理 | 拓到 LLM 方向 |
 
 ## 状态标记
 
@@ -28,5 +27,6 @@
 
 ## 当前焦点
 
-- [ ] **FunASR PR review 跟进** —— [PR #3526](https://github.com/modelscope/FunASR/pull/3526) / [#3527](https://github.com/modelscope/FunASR/pull/3527)
-- [ ] 候选池 #1（FunASR 家族新模型）评估启动
+- [ ] **kornia PR #4371 review 跟进** — ducha-aiki CHANGES_REQUESTED，需回复修复
+- [ ] **docling PR #4158 review 跟进** — 维护者已回复，需跟进
+- [ ] 候选池 #1（CosyVoice）评估启动
