@@ -15,10 +15,9 @@
 | 分类 | 计数 | 详情 |
 |------|------|------|
 | ✅ **已合并**（上游合入） | 10 | kornia(2) · snntorch(3) · FunASR · VoiceStudio(2) · ComfyUI LayerStyle · spikingjelly |
-| 📡 **跟踪中**（PR 待 review） | 15 | 详见下方 |
-| 🔒 已关闭未合入 | 3 | kornia(2) · stable-audio-tools(1) |
+| 📡 **跟踪中**（PR 待 review） | 18 | 详见下方 |
 
-详见 **[PRS.md](PRS.md)**（已合入 10 · 跟踪中 15 · 已关闭 3，分表格）。每项目细节见 `projects/<name>/README.md`。
+详见 **[PRS.md](PRS.md)**（已合入 10 · 跟踪中 18，分表格）。每项目细节见 `projects/<name>/README.md`。
 
 ## 规划中
 

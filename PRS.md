@@ -17,7 +17,7 @@
 | [snntorch](projects/snntorch/) | `utils.reset(net)` 作用域修复 | [#449](https://github.com/jeshraghian/snntorch/pull/449) | 2026-09-08 |
 | [spikingjelly](projects/spikingjelly/) | DSpike surrogate 函数重构兼容（`__init__` 参数顺序错位） | [#748](https://github.com/fangwei123456/spikingjelly/pull/748) | 2026-09-06 |
 
-## 📡 跟踪中（PR open / 待 review，15 个）
+## 📡 跟踪中（PR open / 待 review，18 个）
 
 | 项目 | 变更 | PR | 状态 |
 |------|------|----|------|
@@ -36,12 +36,5 @@
 | [FastVideo](projects/FastVideo/) | device_map 设备无关 + autocast 修复（2 PR） | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) · [#1818](https://github.com/hao-ai-lab/FastVideo/pull/1818) | 待 review |
 | [MOSS-TTS-Nano](projects/moss-tts-nano/) | 设备无关适配 | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 待 review |
 | [ebook2audiobook](projects/ebook2audiobook/) | 设备无关适配 | [#2071](https://github.com/DrewThomasson/ebook2audiobook/pull/2071) | 待 review |
+| langgenius/dify | monaco worker 设备无关适配 | [#39341](https://github.com/langgenius/dify/pull/39341) | 待 review |
 | [OpenADMET](projects/openadmet/) | TabPFN 模型类 accelerator→device 映射修复 | [#601](https://github.com/OpenADMET/openadmet-models/pull/601) | open（新提交） |
-
-## 🔒 已关闭（未合入，3 个）
-
-| 项目 | 变更 | PR | 关闭原因 |
-|------|------|----|---------|
-| [kornia](projects/kornia/) | PinholeCamera.scale_ int64 height/width dtype 提升（原地版 v1） | [#4341](https://github.com/kornia/kornia/pull/4341) | 功能迁移至 #4371（review 要求改方案） |
-| [kornia](projects/kornia/) | rad2deg/deg2rad 用 math.pi 保留全精度 | [#4356](https://github.com/kornia/kornia/pull/4356) | 被 li-lizhe 主动关闭 |
-| [stable-audio-tools](projects/stable-audio-tools/) | apg_project float64 崩溃 + Gradio 切片 TypeError | [#263](https://github.com/Stability-AI/stable-audio-tools/pull/263) | 维护者活跃度不达标，撤回 |
