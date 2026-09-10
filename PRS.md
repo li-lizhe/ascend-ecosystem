@@ -17,7 +17,7 @@
 | [snntorch](projects/snntorch/) | `utils.reset(net)` 作用域修复 | [#449](https://github.com/jeshraghian/snntorch/pull/449) | 2026-09-08 |
 | [spikingjelly](projects/spikingjelly/) | DSpike surrogate 函数重构兼容（`__init__` 参数顺序错位） | [#748](https://github.com/fangwei123456/spikingjelly/pull/748) | 2026-09-06 |
 
-## 📡 跟踪中（PR open / 待 review，18 个）
+## 📡 跟踪中（PR open / 待 review，19 个）
 
 | 项目 | 变更 | PR | 状态 |
 |------|------|----|------|
@@ -38,3 +38,4 @@
 | [ebook2audiobook](projects/ebook2audiobook/) | 设备无关适配 | [#2071](https://github.com/DrewThomasson/ebook2audiobook/pull/2071) | 待 review |
 | langgenius/dify | monaco worker 设备无关适配 | [#39341](https://github.com/langgenius/dify/pull/39341) | 待 review |
 | [OpenADMET](projects/openadmet/) | TabPFN 模型类 accelerator→device 映射修复 | [#601](https://github.com/OpenADMET/openadmet-models/pull/601) | open（新提交） |
+| [snntorch](projects/snntorch/) | population-code helpers 保留输入 dtype 修复 #428 #429 | [#451](https://github.com/jeshraghian/snntorch/pull/451) | open（2026-09-10 新增） |
