@@ -58,3 +58,29 @@
 
 ### PR
 - PR #449 Fix `utils.reset(net)` to scope reset to the given network — https://github.com/jeshraghian/snntorch/pull/449（Fixes #438）
+
+## 2026-09-10 — PR #451 population-code dtype 保持
+
+### 目标 issue
+- #428 `ce_rate_loss` / `ce_count_loss` 在 population_code=True 时，float64 输入/权重报 `RuntimeError: expected scalar type Float but found Double`
+- #429 `accuracy_rate` 在 population_code=True 时，float64 相近分数精度丢失、报错类别
+
+### 根因
+- `loss.py` 模块级 `dtype = torch.float` 硬编码 float32
+- `loss.py` / `acc.py` 的 `_population_code` 用 `torch.zeros(...)` 默认 float32 建累积张量，float64 输入/权重时内部 dtype 失配
+
+### 修复（设备无关、dtype 无关）
+`pop_code` 与 loss 累积张量全部改用 `spk_out.dtype`：
+- `loss.py`: `_population_code()` pop_code、`ce_rate_loss._compute_loss()` 的 pop_code 与 loss 累积张量
+- `acc.py`: `_population_code()` pop_code
+
+### 昇腾验证（177 / npu-lizhe 容器，torch 2.14.0a0 + torch_npu 910B）
+- Case1 default weight=None popcode → OK（修复前也过，保持兼容）
+- Case2 ce_rate_loss float64 权重+输入 → 返回 float64 loss（修复前报 Double 错）
+- Case3 ce_count_loss float64 权重+输入 → 返回 float64 loss
+- Case4 accuracy_rate float64 popcode → accuracy=1.0 正确类别
+- 全部 21 个既有 loss 测试在 NPU 通过，无回归
+
+### PR
+- PR #451 fix(population_code): preserve input dtype in population-code helpers — https://github.com/jeshraghian/snntorch/pull/451（Fixes #428, #429）
+
