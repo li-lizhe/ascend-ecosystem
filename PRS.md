@@ -43,7 +43,7 @@
 | [lmdeploy](projects/lmdeploy/) | [#4986](https://github.com/InternLM/lmdeploy/pull/4986) | 有维护者评论要回应（09-18） | `pos_freq_scaling.to(seq_len.device)` 每次 forward 拷贝 CPU→设备，decode 有性能回归；像 `inv_freq` 一样缓存迁移后的 tensor |
 | [peft](projects/peft/) | [#3734](https://github.com/huggingface/peft/pull/3734) | 有维护者质疑，需回应（09-17） | `ephemeral_gpu_offload=True` 语义是让 LoRA 临时上 GPU，直接用 base model device 可能违背该选项目的——回复解释或调整 |
 | [peft](projects/peft/) | [#3766](https://github.com/huggingface/peft/pull/3766) | 可能撞车（09-19） | 维护者 `eSVeeF` 说与 issue #3753 同 bug，且有意开 PR——考虑在 PR 里关联 issue，避免被抢 |
-| [PaddleOCR](projects/paddleocr/) | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | **CLA 未签** | 去 [cla-assistant](https://cla-assistant.io/PaddlePaddle/PaddleOCR?pullRequest=18370) 签署 CLA 才能合入 |
+| [PaddleOCR](projects/paddleocr/) | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | CLA 已签，等合并 | CLA 已签署（`license/cla: success`），当前 `mergeable_state=blocked` 仅为缺 approve / 待合并，无需签 CLA 动作 |
 
 ## 📡 跟踪中（PR open / 待 review，46 个）
 
