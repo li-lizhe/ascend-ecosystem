@@ -40,3 +40,16 @@
 - `yuenhy/stapler — 2026-09-03 — 2★、push 166 天前`
 - `krish1925/isotrieve — 2026-09-03 — 5★，影响力不足（维护活跃度本身 PASS）`
 - 竞争排除（项目本身活跃，但 issue 已被抢）：`PythonOT/POT #845`（PR #846 已开）、`sbi-dev/sbi #1954`（维护者分配 BHARATH0153，PR #1972）、`verl #7092`（内部认领中）、`fla-org/flash-linear-attention`（NPU 路线由专职团队主导，Ascend PR 均为团队产出）、`ModelTC/LightX2V #1439`（已被我们昨日 PR #1470 覆盖）、`nerfstudio #3683`（PR #3711）
+
+## 已投 PR 被关闭未合入（CLOSED_UNMERGED，更新 2026-09-20）
+
+以下是我们提交的 PR 被上游关闭且未合入（原因各异，留档）：
+
+- `DrewThomasson/ebook2audiobook #2071 — 2026-09-07 关闭 — Fix UnboundLocalError in detect_device（维护者未响应/关闭）`
+- `kornia/kornia #4341 — 2026-09-08 关闭 — PinholeCamera dtype 提升（已由 #4371 替代）`
+- `kornia/kornia #4356 — 2026-09-08 关闭 — rad2deg/deg2rad 用 math.pi`
+- `modelscope/FunASR #3527 — 2026-08-26 关闭 — paraformer torchaudio 可选化（与 #3526 冲突，主 PR 已合入）`
+- `open-webui/open-webui #30114/#30116/#30117 — 2026-09-18 关闭 — ColBERT torch.accelerator（维护者不采纳）`
+- `ultralytics/ultralytics #26202 — 2026-09-17 关闭 — results cuda() 设备无关化`
+- `Stability-AI/stable-audio-tools #263 — 2026-08-31 关闭 — apg_project float64 修复（僵尸项目，已排除）`
+- `crewAIInc/crewAI #7604 — 2026-09-19 关闭 — o1/o3 context window 注册（撞车）`
