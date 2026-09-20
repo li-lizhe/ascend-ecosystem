@@ -49,6 +49,8 @@
 
 | 项目 | 变更 | PR | 提交时间 | 状态 |
 |------|------|----|---------|------|
+| [F5-TTS](projects/f5-tts/) | eval faster-whisper 设备无关 | [#1318](https://github.com/SWivid/F5-TTS/pull/1318) | 2026-09-21 | open（待 review） |
+| [MiniMax-M1](projects/minimax-m1/) | main.py `.to("cuda")` 自动回退 CPU | [#43](https://github.com/MiniMax-AI/MiniMax-M1/pull/43) | 2026-09-21 | open（待 review） |
 | [kornia](projects/kornia/) | PinholeCamera.scale_ int64 height/width dtype 提升 | [#4371](https://github.com/kornia/kornia/pull/4371) | 2026-09-08 | 已回应10轮review，等re-review |
 | [kornia](projects/kornia/) | lightglue AMP device_type 通过 accelerator 解析 | [#4624](https://github.com/kornia/kornia/pull/4624) | 2026-09-17 | 已补测试+修forward，等re-review |
 | [GPT-SoVITS](projects/gpt-sovits/) | 导出脚本 device 无关加速器检测 | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) | 2026-09-04 | open（待 review） |
