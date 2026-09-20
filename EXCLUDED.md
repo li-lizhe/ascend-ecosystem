@@ -49,7 +49,7 @@
 - `kornia/kornia #4341 — 2026-09-08 关闭 — PinholeCamera dtype 提升（已由 #4371 替代）`
 - `kornia/kornia #4356 — 2026-09-08 关闭 — rad2deg/deg2rad 用 math.pi`
 - `modelscope/FunASR #3527 — 2026-08-26 关闭 — paraformer torchaudio 可选化（与 #3526 冲突，主 PR 已合入）`
-- `open-webui/open-webui #30114/#30116/#30117 — 2026-09-18 关闭 — ColBERT torch.accelerator（维护者不采纳）`
+- `open-webui/open-webui #30114/#30116/#30117 — 2026-09-18 关闭 — ColBERT torch.accelerator（owui-terminator[bot] 流程秒关：需 target dev 分支 + CLA checkbox + 关联 issue + maintainer 明确邀请 checkbox，自动流水线无法获得维护者邀请，非维护者不采纳）`
 - `ultralytics/ultralytics #26202 — 2026-09-17 关闭 — results cuda() 设备无关化`
 - `Stability-AI/stable-audio-tools #263 — 2026-08-31 关闭 — apg_project float64 修复（僵尸项目，已排除）`
 - `crewAIInc/crewAI #7604 — 2026-09-19 关闭 — o1/o3 context window 注册（撞车）`
