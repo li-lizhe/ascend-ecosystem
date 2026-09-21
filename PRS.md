@@ -1,9 +1,9 @@
 # 汇总 PR 清单
 
-> 每项目详情见 `projects/<name>/README.md`。状态由 GitHub API 核实（截至 2026-09-20）。
-> 已合入 22 · 跟踪中 46 · 关闭未合入 10（见 EXCLUDED.md）。其中 **8 个有维护者 review/评论需跟进**（见 🔴 需处理区块，多数已处理到「等 re-review」）。
+> 每项目详情见 `projects/<name>/README.md`。状态由 GitHub API 核实（截至 2026-09-21）。
+> 已合入 23 · 跟踪中 45 · 关闭未合入 10（见 EXCLUDED.md）。其中 **8 个有维护者 review/评论需跟进**（见 🔴 需处理区块，多数已处理到「等 re-review」）。
 
-## ✅ 已合并（上游合入，22 个）
+## ✅ 已合并（上游合入，23 个）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -29,6 +29,7 @@
 | [ComfyUI LayerStyle](projects/ComfyUI_LayerStyle/) | 硬编码 CUDA 节点加 'auto' 设备选项 | [#610](https://github.com/chflame163/ComfyUI_LayerStyle/pull/610) | 2026-09-16 |
 | [spikingjelly](projects/spikingjelly/) | `_resolve_device_type` 返回实际 device type | [#755](https://github.com/fangwei123456/spikingjelly/pull/755) | 2026-09-18 |
 | [VoiceStudio](projects/VoiceStudio/) | model_manager 增加 Ascend NPU 支持 | [#2194](https://github.com/debpalash/VoiceStudio/pull/2194) | 2026-09-18 |
+| [FunASR](projects/funasr/) | y.device 替代硬编码 .cuda() | [#3710](https://github.com/modelscope/FunASR/pull/3710) | 2026-09-21 |
 
 ## 🔴 需处理（维护者有要求 / 未解决，2026-09-20 核实）
 
@@ -38,14 +39,13 @@
 |------|----|------|---------|
 | [kornia](projects/kornia/) | [#4624](https://github.com/kornia/kornia/pull/4624) | 已补测试 + 修 forward dict 顺序依赖（`c73c2a96`），CI 全绿 | 等 ducha-aiki re-review（晚班跟进） |
 | [kornia](projects/kornia/) | [#4371](https://github.com/kornia/kornia/pull/4371) | 已连续回应 10 轮 review（含 float64 dtype 修复，`1ffc2091`） | 等 ducha-aiki re-review（晚班跟进） |
-| [FunASR](projects/funasr/) | [#3710](https://github.com/modelscope/FunASR/pull/3710) | **已补 try/finally 清理**（`91876b8d`，09-20）+ 已回复 LauraGPT 请求 re-review；import/spawn 两问题已修 | 等 LauraGPT re-review |
 | [docling](projects/docling/) | [#4158](https://github.com/docling-project/docling/pull/4158) | 已按建议改 `.to(self._device, self._model.dtype)`（`0c6fb88`），mergify ready，等 CI+merge | 无（等合并） |
 | [lmdeploy](projects/lmdeploy/) | [#4986](https://github.com/InternLM/lmdeploy/pull/4986) | 已修 lazy migration（`887587e`），维护者已认可 | 无 |
 | [peft](projects/peft/) | [#3734](https://github.com/huggingface/peft/pull/3734) | 已改用 `infer_device()`（`425afb7`），回应了维护者质疑 | 等 BenjaminBossan re-review（晚班跟进） |
 | [peft](projects/peft/) | [#3766](https://github.com/huggingface/peft/pull/3766) | 已关联 issue #3753 | 无 |
 | [PaddleOCR](projects/paddleocr/) | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | CLA 已签（`license/cla: success`），blocked 仅为缺 approve/待合并 | 无（等合并） |
 
-## 📡 跟踪中（PR open / 待 review，46 个）
+## 📡 跟踪中（PR open / 待 review，45 个）
 
 | 项目 | 变更 | PR | 提交时间 | 状态 |
 |------|------|----|---------|------|
@@ -67,7 +67,6 @@
 | [MOSS-TTS-Nano](projects/moss-tts-nano/) | ONNX runtime 路径 torch-free | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 2026-08-30 | open（待 review） |
 | langgenius/dify | MonacoEnvironment.getWorkerUrl 设备无关 | [#39341](https://github.com/langgenius/dify/pull/39341) | 2026-07-21 | open（待 review） |
 | [OpenADMET](projects/openadmet/) | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-09-18 | open（待 review） |
-| [FunASR](projects/funasr/) | y.device 替代硬编码 .cuda() | [#3710](https://github.com/modelscope/FunASR/pull/3710) | 2026-09-15 | 已补try/finally(09-20)，等re-review |
 | openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 | open（待 review） |
 | [unsloth](projects/unsloth/) | LlamaFactory 梯度切分/设备回退 | [LlamaFactory #10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 | open（待 review） |
 | [unsloth](projects/unsloth/) | longlora device type 检查扩展 | [LlamaFactory #10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 | open（待 review） |
