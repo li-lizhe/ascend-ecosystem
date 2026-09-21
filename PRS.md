@@ -1,7 +1,7 @@
 # 汇总 PR 清单
 
 > 每项目详情见 `projects/<name>/README.md`。状态由 GitHub API 核实（截至 2026-09-21）。
-> 已合入 23 · 跟踪中 45 · 关闭未合入 10（见 EXCLUDED.md）。其中 **8 个有维护者 review/评论需跟进**（见 🔴 需处理区块，多数已处理到「等 re-review」）。
+> 已合入 23 · 跟踪中 44 · 关闭未合入 11（见 EXCLUDED.md）。其中 **7 个有维护者 review/评论需跟进**（见 🔴 需处理区块，多数已处理到「等 re-review」）。
 
 ## ✅ 已合并（上游合入，23 个）
 
@@ -42,10 +42,9 @@
 | [docling](projects/docling/) | [#4158](https://github.com/docling-project/docling/pull/4158) | 已按建议改 `.to(self._device, self._model.dtype)`（`0c6fb88`），mergify ready，等 CI+merge | 无（等合并） |
 | [lmdeploy](projects/lmdeploy/) | [#4986](https://github.com/InternLM/lmdeploy/pull/4986) | 已修 lazy migration（`887587e`），维护者已认可 | 无 |
 | [peft](projects/peft/) | [#3734](https://github.com/huggingface/peft/pull/3734) | 已改用 `infer_device()`（`425afb7`），回应了维护者质疑 | 等 BenjaminBossan re-review（晚班跟进） |
-| [peft](projects/peft/) | [#3766](https://github.com/huggingface/peft/pull/3766) | 已关联 issue #3753 | 无 |
 | [PaddleOCR](projects/paddleocr/) | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | CLA 已签（`license/cla: success`），blocked 仅为缺 approve/待合并 | 无（等合并） |
 
-## 📡 跟踪中（PR open / 待 review，45 个）
+## 📡 跟踪中（PR open / 待 review，44 个）
 
 | 项目 | 变更 | PR | 提交时间 | 状态 |
 |------|------|----|---------|------|
@@ -79,7 +78,6 @@
 | [diffusers](projects/diffusers/) | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) | 2026-09-16 | open（待 review） |
 | [diffusers](projects/diffusers/) | modular_pipeline 含 Ascend NPU | [#14786](https://github.com/huggingface/diffusers/pull/14786) | 2026-09-16 | open（待 review） |
 | [peft](projects/peft/) | dora 用 base layer device | [#3734](https://github.com/huggingface/peft/pull/3734) | 2026-09-13 | 已改用infer_device，等re-review |
-| [peft](projects/peft/) | 新注入 layer 传播 training/eval 模式 | [#3766](https://github.com/huggingface/peft/pull/3766) | 2026-09-19 | 已关联issue#3753 |
 | [transformers](projects/transformers/) | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) | 2026-09-18 | open（待 review） |
 | [lerobot](projects/lerobot/) | embedder 设备无关默认值 | [#4676](https://github.com/huggingface/lerobot/pull/4676) | 2026-09-18 | open（待 review） |
 | [lerobot](projects/lerobot/) | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-09-18 | open（待 review） |
