@@ -69,8 +69,7 @@
 | openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 | open（待 review） |
 | [unsloth](projects/unsloth/) | LlamaFactory 梯度切分/设备回退 | [LlamaFactory #10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 | open（待 review） |
 | [unsloth](projects/unsloth/) | longlora device type 检查扩展 | [LlamaFactory #10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 | open（待 review） |
-| [axolotl](projects/axolotl/) | 梯度 checkpointing offload 设备无关 | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 | open（待 review） |
-| [axolotl](projects/axolotl/) | AMP custom_fwd/bwd 设备无关 | [#3996](https://github.com/axolotl-ai-cloud/axolotl/pull/3996) | 2026-09-11 | open（待 review） |
+| [axolotl](projects/axolotl/) | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 | open（已APPROVED，待merge） |
 | [DeepSpeed](projects/deepspeed/) | zenflow 用 optimizer_z3.device | [#8524](https://github.com/deepspeedai/DeepSpeed/pull/8524) | 2026-09-15 | open（待 review） |
 | [DeepSpeed](projects/deepspeed/) | data_pipeline 默认 active accelerator | [#8525](https://github.com/deepspeedai/DeepSpeed/pull/8525) | 2026-09-15 | open（待 review） |
 | [diffusers](projects/diffusers/) | wan 设备无关默认值 | [#14765](https://github.com/huggingface/diffusers/pull/14765) | 2026-09-14 | open（待 review） |
