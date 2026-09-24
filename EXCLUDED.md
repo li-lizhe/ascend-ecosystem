@@ -64,3 +64,4 @@
 - `huggingface/peft #3766 — 2026-09-21 关闭 — fix: propagate training/eval mode to newly injected adapter modules`
 - `huggingface/lerobot #4676 — 2026-09-21 关闭 — fix(embedder): use device-agnostic default instead of hardcoded "cuda"`
 - `axolotl-ai-cloud/axolotl #3996 — 2026-09-22 关闭 — fix(kernels): make AMP custom_fwd/bwd device-agnostic`
+- `pytorch/pytorch #193347 — 2026-08-13 关闭 — [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py`
