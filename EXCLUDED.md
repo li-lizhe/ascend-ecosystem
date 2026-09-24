@@ -41,27 +41,34 @@
 - `krish1925/isotrieve — 2026-09-03 — 5★，影响力不足（维护活跃度本身 PASS）`
 - 竞争排除（项目本身活跃，但 issue 已被抢）：`PythonOT/POT #845`（PR #846 已开）、`sbi-dev/sbi #1954`（维护者分配 BHARATH0153，PR #1972）、`verl #7092`（内部认领中）、`fla-org/flash-linear-attention`（NPU 路线由专职团队主导，Ascend PR 均为团队产出）、`ModelTC/LightX2V #1439`（已被我们昨日 PR #1470 覆盖）、`nerfstudio #3683`（PR #3711）
 
-## 已投 PR 被关闭未合入（CLOSED_UNMERGED，更新 2026-09-20）
+## 已投 PR 被关闭未合入（CLOSED_UNMERGED，原因已核实 2026-09-25）
+
+**B 类 19 个按原因分四类**：
+- ① 被上游明确否掉 **3**：accelerate #4292（技术否决，点名软 PR）、ultralytics #26202（设计取向）、peft #3766（未预先认领）
+- ② bot/流程秒关 **4**：langchain #40692、open-webui #30114/#30116/#30117
+- ③ 自己关·重复撞车 **3**：crewAI #7604、kornia #4356、hermes-agent #112924
+- ④ 自己关·并入/被取代/转移/撤回 **9**：axolotl #3996、kornia #4341、FunASR #3527、vllm-ascend #9543/#9549、lerobot #4676、Ascend/pytorch #165、stable-audio-tools #263、ebook2audiobook #2071（维护者自修）
+> 真正被社区否决的只有 3 个；撞车/重复占 8 个 → **提交前查重 + 先认领 issue 这条纪律是硬的**。
 
 以下是我们提交的 PR 被上游关闭且未合入（原因各异，留档）：
 
-- `DrewThomasson/ebook2audiobook #2071 — 2026-09-07 关闭 — Fix UnboundLocalError in detect_device（维护者未响应/关闭）`
-- `kornia/kornia #4341 — 2026-09-08 关闭 — PinholeCamera dtype 提升（已由 #4371 替代）`
-- `kornia/kornia #4356 — 2026-09-08 关闭 — rad2deg/deg2rad 用 math.pi`
-- `modelscope/FunASR #3527 — 2026-08-26 关闭 — paraformer torchaudio 可选化（与 #3526 冲突，主 PR 已合入）`
-- `open-webui/open-webui #30114/#30116/#30117 — 2026-09-18 关闭 — ColBERT torch.accelerator（owui-terminator[bot] 流程秒关：需 target dev 分支 + CLA checkbox + 关联 issue + maintainer 明确邀请 checkbox，自动流水线无法获得维护者邀请，非维护者不采纳）`
-- `ultralytics/ultralytics #26202 — 2026-09-17 关闭 — results cuda() 设备无关化`
-- `Stability-AI/stable-audio-tools #263 — 2026-08-31 关闭 — apg_project float64 修复（僵尸项目，已排除）`
-- `crewAIInc/crewAI #7604 — 2026-09-19 关闭 — o1/o3 context window 注册（撞车）`
-- `vllm-project/vllm-ascend #9543 — 2026-05-26 关闭 — [BugFix] Fix scheduler dead lock for long requests by adding admissio…`
-- `vllm-project/vllm-ascend #9549 — 2026-05-27 关闭 — [Attention][BugFix] Fix scheduler dead lock for long requests by addi…`
-- `Ascend/pytorch #165 — 2026-08-29 关闭 — Register the NPU DTensor RNG tracker and dispatch key`
-- `NousResearch/hermes-agent #112924 — 2026-09-17 关闭 — fix(model-switch): re-resolve reasoning_config when switching models`
-- `open-webui/open-webui #30117 — 2026-09-18 关闭 — fix(retrieval): use torch.accelerator for ColBERT device selection`
-- `open-webui/open-webui #30116 — 2026-09-18 关闭 — fix(retrieval): use torch.accelerator for ColBERT device selection`
-- `langchain-ai/langchain #40692 — 2026-09-20 关闭 — fix(openai): exclude cache-write tokens from service-tier input counts`
-- `huggingface/accelerate #4292 — 2026-09-21 关闭 — fix(launch): capture child output in simple_launcher so callers can i…`
-- `huggingface/peft #3766 — 2026-09-21 关闭 — fix: propagate training/eval mode to newly injected adapter modules`
-- `huggingface/lerobot #4676 — 2026-09-21 关闭 — fix(embedder): use device-agnostic default instead of hardcoded "cuda"`
-- `axolotl-ai-cloud/axolotl #3996 — 2026-09-22 关闭 — fix(kernels): make AMP custom_fwd/bwd device-agnostic`
+- `DrewThomasson/ebook2audiobook #2071 — 2026-09-07 关闭 — Fix UnboundLocalError in detect_device（维护者未响应/关闭）｜原因：维护者关：新版本已自行修复（`fixed already on the next version`）`
+- `kornia/kornia #4341 — 2026-09-08 关闭 — PinholeCamera dtype 提升（已由 #4371 替代）｜原因：自己关：由 #4371 替代（#4371 已合入）`
+- `kornia/kornia #4356 — 2026-09-08 关闭 — rad2deg/deg2rad 用 math.pi｜原因：自己关：#4358 已覆盖同一修复（撞车）`
+- `modelscope/FunASR #3527 — 2026-08-26 关闭 — paraformer torchaudio 可选化（与 #3526 冲突，主 PR 已合入）｜原因：自己关：并入 #3526（#3526 已合入）`
+- `open-webui/open-webui #30114/#30116/#30117 — 2026-09-18 关闭 — ColBERT torch.accelerator（owui-terminator[bot] 流程秒关：需 target dev 分支 + CLA checkbox + 关联 issue + maintainer 明确邀请 checkbox，自动流水线无法获得维护者邀请，非维护者不采纳）｜原因：`owui-terminator[bot]` 秒关（需 dev 分支+CLA+关联 issue+维护者邀请）`
+- `ultralytics/ultralytics #26202 — 2026-09-17 关闭 — results cuda() 设备无关化｜原因：维护者 glenn-jocher **设计否决**：`.cuda()` 命名即目标设备，不做设备无关化`
+- `Stability-AI/stable-audio-tools #263 — 2026-08-31 关闭 — apg_project float64 修复（僵尸项目，已排除）｜原因：自己关：内部复核后撤回（僵尸项目）`
+- `crewAIInc/crewAI #7604 — 2026-09-19 关闭 — o1/o3 context window 注册（撞车）｜原因：自己关：已被 #7354/#7323/#7411 覆盖（撞车）`
+- `vllm-project/vllm-ascend #9543 — 2026-05-26 关闭 — [BugFix] Fix scheduler dead lock for long requests by adding admissio…｜原因：自己关：由 #9549 取代`
+- `vllm-project/vllm-ascend #9549 — 2026-05-27 关闭 — [Attention][BugFix] Fix scheduler dead lock for long requests by addi…｜原因：自己关：5 月旧 PR，问题已不再复现（维护者问“这个问题还有吗”后关闭）`
+- `Ascend/pytorch #165 — 2026-08-29 关闭 — Register the NPU DTensor RNG tracker and dispatch key｜原因：自己关：正式评审迁至 GitCode MR（GitHub 是镜像）`
+- `NousResearch/hermes-agent #112924 — 2026-09-17 关闭 — fix(model-switch): re-resolve reasoning_config when switching models｜原因：自己关：与已合入的 #113117 重复`
+- `open-webui/open-webui #30117 — 2026-09-18 关闭 — fix(retrieval): use torch.accelerator for ColBERT device selection｜原因：`owui-terminator[bot]` 秒关（同上）`
+- `open-webui/open-webui #30116 — 2026-09-18 关闭 — fix(retrieval): use torch.accelerator for ColBERT device selection｜原因：`owui-terminator[bot]` 秒关（同上，同一改动开 3 个 PR）`
+- `langchain-ai/langchain #40692 — 2026-09-20 关闭 — fix(openai): exclude cache-write tokens from service-tier input counts｜原因：`github-actions[bot]` 秒关（无真人 review；缺关联 issue）`
+- `huggingface/accelerate #4292 — 2026-09-21 关闭 — fix(launch): capture child output in simple_launcher so callers can i…｜原因：维护者 albertvillanova **技术否决**：未修 #4277 且破坏 `accelerate launch`（静默吞掉子进程输出）`
+- `huggingface/peft #3766 — 2026-09-21 关闭 — fix: propagate training/eval mode to newly injected adapter modules｜原因：维护者 BenjaminBossan 关闭：**未预先认领**，issue 提出者自己要做`
+- `huggingface/lerobot #4676 — 2026-09-21 关闭 — fix(embedder): use device-agnostic default instead of hardcoded "cuda"｜原因：维护者关：被我们自己的 #4677 取代（#4677 仍 open）`
+- `axolotl-ai-cloud/axolotl #3996 — 2026-09-22 关闭 — fix(kernels): make AMP custom_fwd/bwd device-agnostic｜原因：自己关：AMP kernels 改动并入 #3995（#3995 已合入）`
 - `pytorch/pytorch #193347 — 2026-08-13 关闭 — [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py`
