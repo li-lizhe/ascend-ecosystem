@@ -1,6 +1,6 @@
 # 汇总 PR 清单（全景）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-25 01:52
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-25 02:03
 >
 > **全景：提交 118 · ✅ 已合入 36 · 📡 跟踪中 62 · ❌ 关闭未合入 20**
 >
@@ -51,6 +51,8 @@
 | huggingface/pytorch-image-models | `init_distributed_device_so` 补 `torch.npu.set_device` | [#2801](https://github.com/huggingface/pytorch-image-models/pull/2801) | 2026-09-24 |
 
 ## 📡 跟踪中（49）
+
+> 本表为第三方生态/社区 PR。另有 13 个 pytorch 上游 open PR 见下方「PyTorch 上游 PR」节，两处合计 62 个在跟踪。
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
