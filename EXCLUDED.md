@@ -53,3 +53,14 @@
 - `ultralytics/ultralytics #26202 — 2026-09-17 关闭 — results cuda() 设备无关化`
 - `Stability-AI/stable-audio-tools #263 — 2026-08-31 关闭 — apg_project float64 修复（僵尸项目，已排除）`
 - `crewAIInc/crewAI #7604 — 2026-09-19 关闭 — o1/o3 context window 注册（撞车）`
+- `vllm-project/vllm-ascend #9543 — 2026-05-26 关闭 — [BugFix] Fix scheduler dead lock for long requests by adding admissio…`
+- `vllm-project/vllm-ascend #9549 — 2026-05-27 关闭 — [Attention][BugFix] Fix scheduler dead lock for long requests by addi…`
+- `Ascend/pytorch #165 — 2026-08-29 关闭 — Register the NPU DTensor RNG tracker and dispatch key`
+- `NousResearch/hermes-agent #112924 — 2026-09-17 关闭 — fix(model-switch): re-resolve reasoning_config when switching models`
+- `open-webui/open-webui #30117 — 2026-09-18 关闭 — fix(retrieval): use torch.accelerator for ColBERT device selection`
+- `open-webui/open-webui #30116 — 2026-09-18 关闭 — fix(retrieval): use torch.accelerator for ColBERT device selection`
+- `langchain-ai/langchain #40692 — 2026-09-20 关闭 — fix(openai): exclude cache-write tokens from service-tier input counts`
+- `huggingface/accelerate #4292 — 2026-09-21 关闭 — fix(launch): capture child output in simple_launcher so callers can i…`
+- `huggingface/peft #3766 — 2026-09-21 关闭 — fix: propagate training/eval mode to newly injected adapter modules`
+- `huggingface/lerobot #4676 — 2026-09-21 关闭 — fix(embedder): use device-agnostic default instead of hardcoded "cuda"`
+- `axolotl-ai-cloud/axolotl #3996 — 2026-09-22 关闭 — fix(kernels): make AMP custom_fwd/bwd device-agnostic`

@@ -1,35 +1,108 @@
-# 汇总 PR 清单
+# 汇总 PR 清单（全景）
 
-> 每项目详情见 `projects/<name>/README.md`。状态由 GitHub API 核实（截至 2026-09-21）。
-> 已合入 23 · 跟踪中 44 · 关闭未合入 11（见 EXCLUDED.md）。其中 **7 个有维护者 review/评论需跟进**（见 🔴 需处理区块，多数已处理到「等 re-review」）。
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-25 01:52
+>
+> **全景：提交 118 · ✅ 已合入 36 · 📡 跟踪中 62 · ❌ 关闭未合入 20**
+>
+> 其中 PyTorch 上游（`pytorch/*`、`li-lizhe/pytorch`）16 个：合入 2 / 跟踪 13 / 关闭 1 —— 属 **A 类**，任何回复与改码都必须经用户审视确认，不自动处置。
+>
+> 每日 06:00 的「昇腾PR邮件哨兵」以本表「跟踪中」为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即从「跟踪中」出栈归档。
+> 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
 
-## ✅ 已合并（上游合入，23 个）
+## ✅ 已合入（36）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
-| [FunASR](projects/funasr/) | 去 torchaudio 硬依赖（fbank → kaldi-native-fbank、音频加载 → soundfile、可选导入） | [#3526](https://github.com/modelscope/FunASR/pull/3526) | 2026-08-26 |
-| [ComfyUI LayerStyle](projects/ComfyUI_LayerStyle/) | 设备无关映射（`torch.cuda` → `torch.accelerator`） | [#609](https://github.com/chflame163/ComfyUI_LayerStyle/pull/609) | 2026-09-03 |
-| [snntorch](projects/snntorch/) | state_quant 保留输入 dtype | [#444](https://github.com/jeshraghian/snntorch/pull/444) | 2026-09-05 |
-| [snntorch](projects/snntorch/) | spikegen.latency 保留输入 dtype | [#445](https://github.com/jeshraghian/snntorch/pull/445) | 2026-09-05 |
-| [kornia](projects/kornia/) | RT-DETR device-agnostic map_location | [#4212](https://github.com/kornia/kornia/pull/4212) | 2026-09-05 |
-| [spikingjelly](projects/spikingjelly/) | DSpike surrogate 函数重构兼容（`__init__` 参数顺序错位） | [#748](https://github.com/fangwei123456/spikingjelly/pull/748) | 2026-09-06 |
-| [VoiceStudio](projects/VoiceStudio/) | TTS engine 设备无关（`torch.accelerator` 替代硬编码 CUDA） | [#1830](https://github.com/debpalash/VoiceStudio/pull/1830) | 2026-09-07 |
-| [VoiceStudio](projects/VoiceStudio/) | TTS engine 设备无关（`torch.accelerator` 替代硬编码 CUDA） | [#1831](https://github.com/debpalash/VoiceStudio/pull/1831) | 2026-09-07 |
-| [kornia](projects/kornia/) | Z1Projection.unproject 标量 depth 设备/dtype 继承 | [#4340](https://github.com/kornia/kornia/pull/4340) | 2026-09-07 |
-| [snntorch](projects/snntorch/) | `utils.reset(net)` 作用域修复 | [#449](https://github.com/jeshraghian/snntorch/pull/449) | 2026-09-08 |
-| [OpenADMET](projects/openadmet/) | TabPFN 模型类 accelerator→device 映射修复 | [#601](https://github.com/OpenADMET/openadmet-models/pull/601) | 2026-09-10 |
-| [sdnext](projects/sdnext/) | framepack 用 text_mask.device 替代硬编码 | [#5085](https://github.com/vladmandic/sdnext/pull/5085) | 2026-09-12 |
-| [kornia](projects/kornia/) | bbox_to_mask3d 保留输入 dtype | [#4376](https://github.com/kornia/kornia/pull/4376) | 2026-09-13 |
-| [snntorch](projects/snntorch/) | population-code helpers 保留输入 dtype（#428 #429） | [#451](https://github.com/jeshraghian/snntorch/pull/451) | 2026-09-14 |
-| [unsloth](projects/unsloth/) | chat_templates 移除 CUDA 硬编码设备 | [#10684](https://github.com/unslothai/unsloth/pull/10684) | 2026-09-14 |
-| [unsloth](projects/unsloth/) | device_type 增加 Ascend NPU 检测 | [#10686](https://github.com/unslothai/unsloth/pull/10686) | 2026-09-14 |
-| [unsloth](projects/unsloth/) | sentence_transformer 设备一致性 | [#10843](https://github.com/unslothai/unsloth/pull/10843) | 2026-09-14 |
-| [kornia](projects/kornia/) | Boxes 整数坐标按默认 dtype 转浮点 | [#4379](https://github.com/kornia/kornia/pull/4379) | 2026-09-15 |
-| [FastVideo](projects/FastVideo/) | AdaLayerNorm autocast 设备无关 | [#1818](https://github.com/hao-ai-lab/FastVideo/pull/1818) | 2026-09-15 |
-| [ComfyUI LayerStyle](projects/ComfyUI_LayerStyle/) | 硬编码 CUDA 节点加 'auto' 设备选项 | [#610](https://github.com/chflame163/ComfyUI_LayerStyle/pull/610) | 2026-09-16 |
-| [spikingjelly](projects/spikingjelly/) | `_resolve_device_type` 返回实际 device type | [#755](https://github.com/fangwei123456/spikingjelly/pull/755) | 2026-09-18 |
-| [VoiceStudio](projects/VoiceStudio/) | model_manager 增加 Ascend NPU 支持 | [#2194](https://github.com/debpalash/VoiceStudio/pull/2194) | 2026-09-18 |
-| [FunASR](projects/funasr/) | y.device 替代硬编码 .cuda() | [#3710](https://github.com/modelscope/FunASR/pull/3710) | 2026-09-21 |
+| modelscope/FunASR | 去 torchaudio 硬依赖（fbank → kaldi-native-fbank、音频加载 → soundfile、可选导入） | [#3526](https://github.com/modelscope/FunASR/pull/3526) | 2026-08-26 |
+| chflame163/ComfyUI_LayerStyle | 设备无关映射（`torch.cuda` → `torch.accelerator`） | [#609](https://github.com/chflame163/ComfyUI_LayerStyle/pull/609) | 2026-09-03 |
+| kornia/kornia | RT-DETR device-agnostic map_location | [#4212](https://github.com/kornia/kornia/pull/4212) | 2026-09-05 |
+| jeshraghian/snntorch | spikegen.latency 保留输入 dtype | [#445](https://github.com/jeshraghian/snntorch/pull/445) | 2026-09-05 |
+| jeshraghian/snntorch | state_quant 保留输入 dtype | [#444](https://github.com/jeshraghian/snntorch/pull/444) | 2026-09-05 |
+| fangwei123456/spikingjelly | DSpike surrogate 函数重构兼容（`__init__` 参数顺序错位） | [#748](https://github.com/fangwei123456/spikingjelly/pull/748) | 2026-09-06 |
+| kornia/kornia | Z1Projection.unproject 标量 depth 设备/dtype 继承 | [#4340](https://github.com/kornia/kornia/pull/4340) | 2026-09-07 |
+| debpalash/VoiceStudio | TTS engine 设备无关（`torch.accelerator` 替代硬编码 CUDA） | [#1831](https://github.com/debpalash/VoiceStudio/pull/1831) | 2026-09-07 |
+| debpalash/VoiceStudio | TTS engine 设备无关（`torch.accelerator` 替代硬编码 CUDA） | [#1830](https://github.com/debpalash/VoiceStudio/pull/1830) | 2026-09-07 |
+| jeshraghian/snntorch | `utils.reset(net)` 作用域修复 | [#449](https://github.com/jeshraghian/snntorch/pull/449) | 2026-09-08 |
+| OpenADMET/openadmet-models | TabPFN 模型类 accelerator→device 映射修复 | [#601](https://github.com/OpenADMET/openadmet-models/pull/601) | 2026-09-10 |
+| vladmandic/sdnext | framepack 用 text_mask.device 替代硬编码 | [#5085](https://github.com/vladmandic/sdnext/pull/5085) | 2026-09-12 |
+| kornia/kornia | bbox_to_mask3d 保留输入 dtype | [#4376](https://github.com/kornia/kornia/pull/4376) | 2026-09-13 |
+| unslothai/unsloth | sentence_transformer 设备一致性 | [#10843](https://github.com/unslothai/unsloth/pull/10843) | 2026-09-14 |
+| unslothai/unsloth | device_type 增加 Ascend NPU 检测 | [#10686](https://github.com/unslothai/unsloth/pull/10686) | 2026-09-14 |
+| unslothai/unsloth | chat_templates 移除 CUDA 硬编码设备 | [#10684](https://github.com/unslothai/unsloth/pull/10684) | 2026-09-14 |
+| jeshraghian/snntorch | population-code helpers 保留输入 dtype（#428 #429） | [#451](https://github.com/jeshraghian/snntorch/pull/451) | 2026-09-14 |
+| pytorch/pytorch | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 … | [#192698](https://github.com/pytorch/pytorch/pull/192698) | 2026-09-14 |
+| kornia/kornia | Boxes 整数坐标按默认 dtype 转浮点 | [#4379](https://github.com/kornia/kornia/pull/4379) | 2026-09-15 |
+| hao-ai-lab/FastVideo | AdaLayerNorm autocast 设备无关 | [#1818](https://github.com/hao-ai-lab/FastVideo/pull/1818) | 2026-09-15 |
+| chflame163/ComfyUI_LayerStyle | 硬编码 CUDA 节点加 'auto' 设备选项 | [#610](https://github.com/chflame163/ComfyUI_LayerStyle/pull/610) | 2026-09-16 |
+| debpalash/VoiceStudio | model_manager 增加 Ascend NPU 支持 | [#2194](https://github.com/debpalash/VoiceStudio/pull/2194) | 2026-09-18 |
+| fangwei123456/spikingjelly | `_resolve_device_type` 返回实际 device type | [#755](https://github.com/fangwei123456/spikingjelly/pull/755) | 2026-09-18 |
+| jeshraghian/snntorch | fix(export_nir): move tensors to CPU before numpy convers… | [#456](https://github.com/jeshraghian/snntorch/pull/456) | 2026-09-20 |
+| kornia/kornia | #4624 | [#4624](https://github.com/kornia/kornia/pull/4624) | 2026-09-20 |
+| kornia/kornia | #4371 | [#4371](https://github.com/kornia/kornia/pull/4371) | 2026-09-20 |
+| SWivid/F5-TTS | eval faster-whisper 设备无关 | [#1318](https://github.com/SWivid/F5-TTS/pull/1318) | 2026-09-21 |
+| kornia/kornia | docs(augmentation): remove incorrect per-channel fill cla… | [#4694](https://github.com/kornia/kornia/pull/4694) | 2026-09-21 |
+| vladmandic/sdnext | autoencoder_kl 用 x.device | [#5098](https://github.com/vladmandic/sdnext/pull/5098) | 2026-09-21 |
+| modelscope/FunASR | y.device 替代硬编码 .cuda() | [#3710](https://github.com/modelscope/FunASR/pull/3710) | 2026-09-21 |
+| pytorch/pytorch | [Testcase Refactoring] Generalize requires_world_size to … | [#192694](https://github.com/pytorch/pytorch/pull/192694) | 2026-09-21 |
+| unslothai/unsloth | fix(grpo): autocast with DEVICE_TYPE_TORCH instead of a p… | [#11461](https://github.com/unslothai/unsloth/pull/11461) | 2026-09-22 |
+| InternLM/lmdeploy | #4986 | [#4986](https://github.com/InternLM/lmdeploy/pull/4986) | 2026-09-22 |
+| huggingface/peft | #3734 | [#3734](https://github.com/huggingface/peft/pull/3734) | 2026-09-22 |
+| debpalash/VoiceStudio | 设备缓存释放跟随实际加速器 | [#2317](https://github.com/debpalash/VoiceStudio/pull/2317) | 2026-09-24 |
+| huggingface/pytorch-image-models | `init_distributed_device_so` 补 `torch.npu.set_device` | [#2801](https://github.com/huggingface/pytorch-image-models/pull/2801) | 2026-09-24 |
+
+## 📡 跟踪中（49）
+
+| 项目 | 变更 | PR | 提交日期 |
+|------|------|----|---------|
+| vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-05-28 |
+| vllm-project/vllm-ascend | [Feature] Enable oproj_tensor_parallel_size for eager mode | [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 2026-05-30 |
+| langgenius/dify | MonacoEnvironment.getWorkerUrl 设备无关 | [#39341](https://github.com/langgenius/dify/pull/39341) | 2026-07-21 |
+| m-bain/whisperX | torchaudio 可选化 + Hugging Face 兜底 | [#1469](https://github.com/m-bain/whisperX/pull/1469) | 2026-08-27 |
+| resemble-ai/chatterbox | `from_local`/`from_pretrained` device 标准化 | [#554](https://github.com/resemble-ai/chatterbox/pull/554) | 2026-08-27 |
+| ostris/ai-toolkit | torchaudio 可选化 + captioner librosa 兜底 | [#1022](https://github.com/ostris/ai-toolkit/pull/1022) | 2026-08-29 |
+| OpenMOSS/MOSS-TTS-Nano | ONNX runtime 路径 torch-free | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 2026-08-30 |
+| kohya-ss/musubi-tuner | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-08-31 |
+| ModelTC/LightX2V | pre-weights 忽略 dit_quant_scheme（fp8 dtype） | [#1470](https://github.com/ModelTC/LightX2V/pull/1470) | 2026-09-01 |
+| speechbrain/speechbrain | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-09-02 |
+| kijai/ComfyUI-KJNodes | WanVideoNAG dtype mismatch 修复 | [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749) | 2026-09-02 |
+| RVC-Boss/GPT-SoVITS | 导出脚本 device 无关加速器检测 | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) | 2026-09-04 |
+| docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-09-04 |
+| hao-ai-lab/FastVideo | SceneMetric device_map 设备无关 | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | 2026-09-05 |
+| hiyouga/LlamaFactory | longlora device type 检查扩展 | [#10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 |
+| hiyouga/LlamaFactory | LlamaFactory 梯度切分/设备回退 | [#10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 |
+| axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 |
+| openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 |
+| huggingface/diffusers | minimax 全加速器 autocast | [#14766](https://github.com/huggingface/diffusers/pull/14766) | 2026-09-14 |
+| huggingface/diffusers | wan 设备无关默认值 | [#14765](https://github.com/huggingface/diffusers/pull/14765) | 2026-09-14 |
+| deepspeedai/DeepSpeed | data_pipeline 默认 active accelerator | [#8525](https://github.com/deepspeedai/DeepSpeed/pull/8525) | 2026-09-15 |
+| deepspeedai/DeepSpeed | zenflow 用 optimizer_z3.device | [#8524](https://github.com/deepspeedai/DeepSpeed/pull/8524) | 2026-09-15 |
+| Comfy-Org/ComfyUI | pixart 用输入 tensor device 做 label | [#16331](https://github.com/Comfy-Org/ComfyUI/pull/16331) | 2026-09-15 |
+| huggingface/diffusers | modular_pipeline 含 Ascend NPU | [#14786](https://github.com/huggingface/diffusers/pull/14786) | 2026-09-16 |
+| huggingface/diffusers | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) | 2026-09-16 |
+| NVIDIA/Megatron-LM | torch.amp.custom_fwd 动态 device_type | [#7422](https://github.com/NVIDIA/Megatron-LM/pull/7422) | 2026-09-17 |
+| huggingface/transformers | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) | 2026-09-18 |
+| huggingface/lerobot | device type 比较含 npu/xpu | [#4678](https://github.com/huggingface/lerobot/pull/4678) | 2026-09-18 |
+| huggingface/lerobot | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-09-18 |
+| OpenADMET/openadmet-models | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-09-18 |
+| huggingface/datasets | py_utils 保存/恢复 NPU RNG state | [#8644](https://github.com/huggingface/datasets/pull/8644) | 2026-09-18 |
+| PaddlePaddle/PaddleOCR | #18370 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 |
+| Lightning-AI/torchmetrics | forward 保留累计 metric state | [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 2026-09-19 |
+| sgl-project/sglang | frozen-kv-mtp 接受 pp_proxy_tensors | [#40355](https://github.com/sgl-project/sglang/pull/40355) | 2026-09-19 |
+| Lightning-AI/torchmetrics | V-measure 独立聚类返回 0.0 非 1.0 | [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 2026-09-19 |
+| Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-19 |
+| speechbrain/speechbrain | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-09-19 |
+| crewAIInc/crewAI | evaluation 返回 False 替代 True | [#7603](https://github.com/crewAIInc/crewAI/pull/7603) | 2026-09-19 |
+| crewAIInc/crewAI | crewai-tools strip UTF-8 BOM | [#7602](https://github.com/crewAIInc/crewAI/pull/7602) | 2026-09-19 |
+| MiniMax-AI/MiniMax-M1 | main.py `.to("cuda")` 自动回退 CPU | [#43](https://github.com/MiniMax-AI/MiniMax-M1/pull/43) | 2026-09-20 |
+| Vaibhavs10/insanely-fast-whisper | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#288](https://github.com/Vaibhavs10/insanely-fast-whisper/pull/288) | 2026-09-21 |
+| m-bain/whisperX | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#1483](https://github.com/m-bain/whisperX/pull/1483) | 2026-09-21 |
+| opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-09-22 |
+| modelscope/ms-swift | Janus 模板 `.cuda()` → `input_ids.device` | [#10230](https://github.com/modelscope/ms-swift/pull/10230) | 2026-09-22 |
+| chflame163/ComfyUI_LayerStyle | crop mask multiple 设备无关 | [#612](https://github.com/chflame163/ComfyUI_LayerStyle/pull/612) | 2026-09-22 |
+| modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-09-23 |
+| fangwei123456/spikingjelly | fix(neuron): keep GatedLIFNode spike state in the input d… | [#758](https://github.com/fangwei123456/spikingjelly/pull/758) | 2026-09-24 |
+| fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-09-24 |
+| OpenRLHF/OpenRLHF | loss 归一化设备取自 loss mask（非 `torch.cuda`） | [#1365](https://github.com/OpenRLHF/OpenRLHF/pull/1365) | 2026-09-24 |
 
 ## 🔴 需处理（维护者有要求 / 未解决，2026-09-20 核实）
 
@@ -44,52 +117,27 @@
 | [peft](projects/peft/) | [#3734](https://github.com/huggingface/peft/pull/3734) | 已改用 `infer_device()`（`425afb7`），回应了维护者质疑 | 等 BenjaminBossan re-review（晚班跟进） |
 | [PaddleOCR](projects/paddleocr/) | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | CLA 已签（`license/cla: success`），blocked 仅为缺 approve/待合并 | 无（等合并） |
 
-## 📡 跟踪中（PR open / 待 review，44 个）
+## 🧪 PyTorch 上游 PR（16，A 类：只报不动）
 
-| 项目 | 变更 | PR | 提交时间 | 状态 |
-|------|------|----|---------|------|
-| [F5-TTS](projects/f5-tts/) | eval faster-whisper 设备无关 | [#1318](https://github.com/SWivid/F5-TTS/pull/1318) | 2026-09-21 | open（待 review） |
-| [MiniMax-M1](projects/minimax-m1/) | main.py `.to("cuda")` 自动回退 CPU | [#43](https://github.com/MiniMax-AI/MiniMax-M1/pull/43) | 2026-09-21 | open（待 review） |
-| [kornia](projects/kornia/) | PinholeCamera.scale_ int64 height/width dtype 提升 | [#4371](https://github.com/kornia/kornia/pull/4371) | 2026-09-08 | 已回应10轮review，等re-review |
-| [kornia](projects/kornia/) | lightglue AMP device_type 通过 accelerator 解析 | [#4624](https://github.com/kornia/kornia/pull/4624) | 2026-09-17 | 已补测试+修forward，等re-review |
-| [GPT-SoVITS](projects/gpt-sovits/) | 导出脚本 device 无关加速器检测 | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) | 2026-09-04 | open（待 review） |
-| [chatterbox](projects/chatterbox/) | `from_local`/`from_pretrained` device 标准化 | [#554](https://github.com/resemble-ai/chatterbox/pull/554) | 2026-08-27 | open（待 review） |
-| [whisperX](projects/whisperX/) | torchaudio 可选化 + Hugging Face 兜底 | [#1469](https://github.com/m-bain/whisperX/pull/1469) | 2026-08-27 | open（待 review） |
-| [ai-toolkit](projects/ai-toolkit/) | torchaudio 可选化 + captioner librosa 兜底 | [#1022](https://github.com/ostris/ai-toolkit/pull/1022) | 2026-08-29 | open（待 review） |
-| [docling](projects/docling/) | transformer engine 输入 dtype 与模型权重对齐 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-09-04 | 已按建议改好，等CI+merge |
-| [speechbrain](projects/speechbrain/) | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-09-02 | open（待 review） |
-| [speechbrain](projects/speechbrain/) | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-09-19 | open（待 review） |
-| [ComfyUI-KJNodes](projects/comfyui-kjnodes/) | WanVideoNAG dtype mismatch 修复 | [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749) | 2026-09-02 | open（待 review） |
-| [musubi-tuner](projects/musubi-tuner/) | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-08-31 | open（待 review） |
-| [LightX2V](projects/LightX2V/) | pre-weights 忽略 dit_quant_scheme（fp8 dtype） | [#1470](https://github.com/ModelTC/LightX2V/pull/1470) | 2026-09-01 | open（待 review） |
-| [FastVideo](projects/FastVideo/) | SceneMetric device_map 设备无关 | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | 2026-09-05 | open（待 review） |
-| [MOSS-TTS-Nano](projects/moss-tts-nano/) | ONNX runtime 路径 torch-free | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 2026-08-30 | open（待 review） |
-| langgenius/dify | MonacoEnvironment.getWorkerUrl 设备无关 | [#39341](https://github.com/langgenius/dify/pull/39341) | 2026-07-21 | open（待 review） |
-| [OpenADMET](projects/openadmet/) | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-09-18 | open（待 review） |
-| openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 | open（待 review） |
-| [unsloth](projects/unsloth/) | LlamaFactory 梯度切分/设备回退 | [LlamaFactory #10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 | open（待 review） |
-| [unsloth](projects/unsloth/) | longlora device type 检查扩展 | [LlamaFactory #10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 | open（待 review） |
-| [axolotl](projects/axolotl/) | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 | open（已APPROVED，待merge） |
-| [DeepSpeed](projects/deepspeed/) | zenflow 用 optimizer_z3.device | [#8524](https://github.com/deepspeedai/DeepSpeed/pull/8524) | 2026-09-15 | open（待 review） |
-| [DeepSpeed](projects/deepspeed/) | data_pipeline 默认 active accelerator | [#8525](https://github.com/deepspeedai/DeepSpeed/pull/8525) | 2026-09-15 | open（待 review） |
-| [diffusers](projects/diffusers/) | wan 设备无关默认值 | [#14765](https://github.com/huggingface/diffusers/pull/14765) | 2026-09-14 | open（待 review） |
-| [diffusers](projects/diffusers/) | minimax 全加速器 autocast | [#14766](https://github.com/huggingface/diffusers/pull/14766) | 2026-09-14 | open（待 review） |
-| [diffusers](projects/diffusers/) | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) | 2026-09-16 | open（待 review） |
-| [diffusers](projects/diffusers/) | modular_pipeline 含 Ascend NPU | [#14786](https://github.com/huggingface/diffusers/pull/14786) | 2026-09-16 | open（待 review） |
-| [peft](projects/peft/) | dora 用 base layer device | [#3734](https://github.com/huggingface/peft/pull/3734) | 2026-09-13 | 已改用infer_device，等re-review |
-| [transformers](projects/transformers/) | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) | 2026-09-18 | open（待 review） |
-| [lerobot](projects/lerobot/) | embedder 设备无关默认值 | [#4676](https://github.com/huggingface/lerobot/pull/4676) | 2026-09-18 | open（待 review） |
-| [lerobot](projects/lerobot/) | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-09-18 | open（待 review） |
-| [lerobot](projects/lerobot/) | device type 比较含 npu/xpu | [#4678](https://github.com/huggingface/lerobot/pull/4678) | 2026-09-18 | open（待 review） |
-| [datasets](projects/datasets/) | py_utils 保存/恢复 NPU RNG state | [#8644](https://github.com/huggingface/datasets/pull/8644) | 2026-09-18 | open（待 review） |
-| [lmdeploy](projects/lmdeploy/) | dlinfer NTK rotary 移除 CUDA 硬编码 | [#4986](https://github.com/InternLM/lmdeploy/pull/4986) | 2026-09-18 | 已修lazy migration，维护者认可 |
-| [PaddleOCR](projects/paddleocr/) | parseq_head 移除冗余 cpu/cuda 往返 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 | CLA已签，等合并 |
-| [Megatron-LM](projects/megatron-lm/) | torch.amp.custom_fwd 动态 device_type | [#7422](https://github.com/NVIDIA/Megatron-LM/pull/7422) | 2026-09-17 | open（待 review） |
-| [sdnext](projects/sdnext/) | autoencoder_kl 用 x.device | [#5098](https://github.com/vladmandic/sdnext/pull/5098) | 2026-09-19 | open（待 review） |
-| [ComfyUI](projects/comfyui/) | pixart 用输入 tensor device 做 label | [#16331](https://github.com/Comfy-Org/ComfyUI/pull/16331) | 2026-09-15 | open（待 review） |
-| [crewAI](projects/crewai/) | crewai-tools strip UTF-8 BOM | [#7602](https://github.com/crewAIInc/crewAI/pull/7602) | 2026-09-19 | open（待 review） |
-| [crewAI](projects/crewai/) | evaluation 返回 False 替代 True | [#7603](https://github.com/crewAIInc/crewAI/pull/7603) | 2026-09-19 | open（待 review） |
-| [sglang](projects/sglang/) | frozen-kv-mtp 接受 pp_proxy_tensors | [#40355](https://github.com/sgl-project/sglang/pull/40355) | 2026-09-19 | open（待 review） |
-| [pytorch-lightning](projects/pytorch-lightning/) | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-19 | open（待 review） |
-| [torchmetrics](projects/torchmetrics/) | V-measure 独立聚类返回 0.0 非 1.0 | [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 2026-09-19 | open（待 review） |
-| [torchmetrics](projects/torchmetrics/) | forward 保留累计 metric state | [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 2026-09-19 | open（待 review） |
+| PR | 标题 | 提交日期 | 状态 |
+|----|------|---------|------|
+| [pytorch/pytorch#192208](https://github.com/pytorch/pytorch/pull/192208) | [Testcase Refactoring] Migrate test_fsdp_tp_integration.py to capabil… | 2026-08-05 | 跟踪中 |
+| [pytorch/pytorch#192701](https://github.com/pytorch/pytorch/pull/192701) | [Testcase Refactoring] Migrate test_fsdp_comm to capability gating | 2026-08-10 | 跟踪中 |
+| [pytorch/pytorch#192700](https://github.com/pytorch/pytorch/pull/192700) | [Testcase Refactoring] Migrate test_fsdp_dtensor_state_dict to capabi… | 2026-08-10 | 跟踪中 |
+| [pytorch/pytorch#192699](https://github.com/pytorch/pytorch/pull/192699) | [Testcase Refactoring] Migrate test_fsdp_exec_order to capability gat… | 2026-08-10 | 跟踪中 |
+| [pytorch/pytorch#192697](https://github.com/pytorch/pytorch/pull/192697) | [Testcase Refactoring] Migrate test_fsdp_flatten_params to capability… | 2026-08-10 | 跟踪中 |
+| [pytorch/pytorch#192696](https://github.com/pytorch/pytorch/pull/192696) | [Testcase Refactoring] Migrate test_fsdp_fine_tune to capability gati… | 2026-08-10 | 跟踪中 |
+| [li-lizhe/pytorch#1](https://github.com/li-lizhe/pytorch/pull/1) | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | 2026-08-13 | 跟踪中 |
+| [pytorch/pytorch#195261](https://github.com/pytorch/pytorch/pull/195261) | [Feature Refactoring] Route non-cpu RNG states from the accelerator s… | 2026-08-29 | 跟踪中 |
+| [pytorch/pytorch#195260](https://github.com/pytorch/pytorch/pull/195260) | [Feature Refactoring] Resolve fake process group supported devices la… | 2026-08-29 | 跟踪中 |
+| [pytorch/pytorch#195248](https://github.com/pytorch/pytorch/pull/195248) | [Feature Refactoring] Fall back to full-state RNG sync check for non-… | 2026-08-29 | 跟踪中 |
+| [pytorch/pytorch#195247](https://github.com/pytorch/pytorch/pull/195247) | [Feature Refactoring] Generalize RemoteModule device handling beyond … | 2026-08-29 | 跟踪中 |
+| [pytorch/pytorch#195246](https://github.com/pytorch/pytorch/pull/195246) | [Feature Refactoring] Consume registered RNG trackers in DTensor rand… | 2026-08-29 | 跟踪中 |
+| [pytorch/pytorch#195245](https://github.com/pytorch/pytorch/pull/195245) | [Feature Refactoring] Add register_rng_tracker API for device-specifi… | 2026-08-29 | 跟踪中 |
+| [pytorch/pytorch#192698](https://github.com/pytorch/pytorch/pull/192698) | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 / GENERIC | 2026-08-10 | 已合入 2026-09-14 |
+| [pytorch/pytorch#192694](https://github.com/pytorch/pytorch/pull/192694) | [Testcase Refactoring] Generalize requires_world_size to be hardware-… | 2026-08-10 | 已合入 2026-09-21 |
+| [pytorch/pytorch#193347](https://github.com/pytorch/pytorch/pull/193347) | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | 2026-08-13 | 关闭未合入 2026-08-13 |
+
+## ❌ 已关闭未合入（20）
+
+逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
