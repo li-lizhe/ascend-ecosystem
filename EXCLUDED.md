@@ -72,3 +72,5 @@
 - `huggingface/lerobot #4676 — 2026-09-21 关闭 — fix(embedder): use device-agnostic default instead of hardcoded "cuda"｜原因：维护者关：被我们自己的 #4677 取代（#4677 仍 open）`
 - `axolotl-ai-cloud/axolotl #3996 — 2026-09-22 关闭 — fix(kernels): make AMP custom_fwd/bwd device-agnostic｜原因：自己关：AMP kernels 改动并入 #3995（#3995 已合入）`
 - `pytorch/pytorch #193347 — 2026-08-13 关闭 — [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py`
+- `huggingface/diffusers #14766 — 2026-09-25 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding`
+- `huggingface/diffusers #14765 — 2026-09-25 关闭 — fix(wan): use device-agnostic default for get_i2v_mask`

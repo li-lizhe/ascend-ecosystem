@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-25 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-26 06:02
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
-> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (—) | 2 (—) | 13 (—) | 1 (—) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 102 (—) | 34 (—) | 49 (—) | 19 (—) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 118 (—) | 36 (—) | 62 (—) | 20 (—) | |
+> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 105 (+3) | 36 (+2) | 48 (-1) | 21 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 121 (+3) | 38 (+2) | 61 (-1) | 22 (+2) | |
 >
-> **较昨日：无基线**（首次记录，从下一次开始对比）
+> **较昨日（基线 2026-09-25）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 -1 · ❌ 关闭未合入 +2**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -52,7 +52,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（49）
+## 📡 B 类跟踪中（48）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -74,8 +74,6 @@
 | hiyouga/LlamaFactory | LlamaFactory 梯度切分/设备回退 | [#10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 |
 | axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 |
 | openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 |
-| huggingface/diffusers | minimax 全加速器 autocast | [#14766](https://github.com/huggingface/diffusers/pull/14766) | 2026-09-14 |
-| huggingface/diffusers | wan 设备无关默认值 | [#14765](https://github.com/huggingface/diffusers/pull/14765) | 2026-09-14 |
 | deepspeedai/DeepSpeed | data_pipeline 默认 active accelerator | [#8525](https://github.com/deepspeedai/DeepSpeed/pull/8525) | 2026-09-15 |
 | deepspeedai/DeepSpeed | zenflow 用 optimizer_z3.device | [#8524](https://github.com/deepspeedai/DeepSpeed/pull/8524) | 2026-09-15 |
 | Comfy-Org/ComfyUI | pixart 用输入 tensor device 做 label | [#16331](https://github.com/Comfy-Org/ComfyUI/pull/16331) | 2026-09-15 |
@@ -99,14 +97,15 @@
 | Vaibhavs10/insanely-fast-whisper | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#288](https://github.com/Vaibhavs10/insanely-fast-whisper/pull/288) | 2026-09-21 |
 | m-bain/whisperX | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#1483](https://github.com/m-bain/whisperX/pull/1483) | 2026-09-21 |
 | opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-09-22 |
-| modelscope/ms-swift | Janus 模板 `.cuda()` → `input_ids.device` | [#10230](https://github.com/modelscope/ms-swift/pull/10230) | 2026-09-22 |
 | chflame163/ComfyUI_LayerStyle | crop mask multiple 设备无关 | [#612](https://github.com/chflame163/ComfyUI_LayerStyle/pull/612) | 2026-09-22 |
 | modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-09-23 |
-| fangwei123456/spikingjelly | fix(neuron): keep GatedLIFNode spike state in the input d… | [#758](https://github.com/fangwei123456/spikingjelly/pull/758) | 2026-09-24 |
 | fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-09-24 |
 | OpenRLHF/OpenRLHF | loss 归一化设备取自 loss mask（非 `torch.cuda`） | [#1365](https://github.com/OpenRLHF/OpenRLHF/pull/1365) | 2026-09-24 |
+| jeshraghian/snntorch | fix(loss): apply class weights per sample in the MSE loss… | [#463](https://github.com/jeshraghian/snntorch/pull/463) | 2026-09-25 |
+| espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-09-25 |
+| InternLM/xtuner | fix(datasets): build the DP all_reduce tensor on the mesh… | [#2127](https://github.com/InternLM/xtuner/pull/2127) | 2026-09-25 |
 
-## ✅ B 类已合入（34）
+## ✅ B 类已合入（36）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -144,8 +143,10 @@
 | huggingface/peft | #3734 | [#3734](https://github.com/huggingface/peft/pull/3734) | 2026-09-22 |
 | debpalash/VoiceStudio | 设备缓存释放跟随实际加速器 | [#2317](https://github.com/debpalash/VoiceStudio/pull/2317) | 2026-09-24 |
 | huggingface/pytorch-image-models | `init_distributed_device_so` 补 `torch.npu.set_device` | [#2801](https://github.com/huggingface/pytorch-image-models/pull/2801) | 2026-09-24 |
+| fangwei123456/spikingjelly | fix(neuron): keep GatedLIFNode spike state in the input d… | [#758](https://github.com/fangwei123456/spikingjelly/pull/758) | 2026-09-25 |
+| modelscope/ms-swift | Janus 模板 `.cuda()` → `input_ids.device` | [#10230](https://github.com/modelscope/ms-swift/pull/10230) | 2026-09-25 |
 
-## ❌ B 类关闭未合入（19）
+## ❌ B 类关闭未合入（21）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -168,6 +169,8 @@
 | huggingface/peft | fix: propagate training/eval mode to newly injected adapt… | [#3766](https://github.com/huggingface/peft/pull/3766) | 2026-09-21 |
 | huggingface/lerobot | fix(embedder): use device-agnostic default instead of har… | [#4676](https://github.com/huggingface/lerobot/pull/4676) | 2026-09-21 |
 | axolotl-ai-cloud/axolotl | fix(kernels): make AMP custom_fwd/bwd device-agnostic | [#3996](https://github.com/axolotl-ai-cloud/axolotl/pull/3996) | 2026-09-22 |
+| huggingface/diffusers | minimax 全加速器 autocast | [#14766](https://github.com/huggingface/diffusers/pull/14766) | 2026-09-25 |
+| huggingface/diffusers | wan 设备无关默认值 | [#14765](https://github.com/huggingface/diffusers/pull/14765) | 2026-09-25 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 
