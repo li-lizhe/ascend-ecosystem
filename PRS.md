@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-27 01:11
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-27 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
-> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 1 (-1) | 13 (±0) | 2 (+1) | **只报不动**：回复/改码/push 须用户审视确认 |
+> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
 > | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 109 (+4) | 37 (+1) | 48 (±0) | 24 (+3) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 125 (+4) | 38 (±0) | 61 (±0) | 26 (+4) | |
+> | **合计** | | 125 (+4) | 39 (+1) | 61 (±0) | 25 (+3) | |
 >
-> **较昨日（基线 2026-09-26）：提交 +4 · ✅ 已合入 ±0 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +4**
+> **较昨日（基线 2026-09-26）：提交 +4 · ✅ 已合入 +1 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +3**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -35,18 +35,18 @@
 | pytorch/pytorch | [Feature Refactoring] Consume registered RNG trackers in DTensor rand… | [#195246](https://github.com/pytorch/pytorch/pull/195246) | 2026-08-29 |
 | pytorch/pytorch | [Feature Refactoring] Add register_rng_tracker API for device-specifi… | [#195245](https://github.com/pytorch/pytorch/pull/195245) | 2026-08-29 |
 
-## ✅ A 类已合入（1）
+## ✅ A 类已合入（2）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
+| pytorch/pytorch | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 … | [#192698](https://github.com/pytorch/pytorch/pull/192698) | 2026-09-14 |
 | pytorch/pytorch | [Testcase Refactoring] Generalize requires_world_size to … | [#192694](https://github.com/pytorch/pytorch/pull/192694) | 2026-09-21 |
 
-## ❌ A 类关闭未合入（2）
+## ❌ A 类关闭未合入（1）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
 | pytorch/pytorch | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | [#193347](https://github.com/pytorch/pytorch/pull/193347) | 2026-08-13 |
-| pytorch/pytorch | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 … | [#192698](https://github.com/pytorch/pytorch/pull/192698) | 2026-09-14 |
 
 逐条留档见 `EXCLUDED.md`。
 
