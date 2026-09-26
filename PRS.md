@@ -207,5 +207,6 @@
 | ❌ 关闭·僵尸 | vllm-project/vllm-ascend [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 120 天、bot 两次标记冲突、**零人类参与**、落后 2198 个提交 ⇒ 需按当前 OTP 实现重做而非 rebase |
 | ❌ 关闭·被取代 | Lightning-AI/torchmetrics [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 同一 issue #3484 已由上游 #3485 修（master `85f4e168`，09-20 合入，改动与我们逐字相同） |
 | 🧹 清理僵尸 job | — | 删除暂停中的 7 点「昇腾PR跟踪检查」、8 点「PyTorch解耦早报」。⚠️ 两者的 **prompt 未成功归档**（备份写入未校验，已确认文件不存在）；其能力仍在：`check_prs.py` 及其状态文件由 21 点 job 继续跑，躺平维度进了 `stale_nudge.py` + 6 点 job 第三步，8 点早报的内容源（mindlog/log）未受影响 |
+| ✅ 修 CI·重建测试文件 | Lightning-AI/torchmetrics [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 该分支的 `tests/unittests/bases/test_metric.py` 不是 master 版本（净删 539 行 master 已有测试，且为 CRLF）⇒ 以 master 原文 + 单条回归测试重建（`f7bb5a0`），PR diff 收窄为 `metric.py +38/-29` + `test_metric.py +30/-0`。本机核验（177, torch 2.10.0+cpu）：未打补丁时回归测试失败（`Query 0 was dropped ... Remaining: [1]`），打补丁后整文件 `45 passed, 12 skipped`；CI 重跑中（integrations.yml 已绿） |
 
 **机制修正（已落地）**：新增 `scripts/stale_nudge.py`（时间驱动、四桶分类：可温和催办 / 冲突需 rebase / CI 红 / 零真人理会；每 PR 7 天冷却、每轮 ≤3 条、**A 类 pytorch 只报不动**），接入 6 点 job 第三步。
