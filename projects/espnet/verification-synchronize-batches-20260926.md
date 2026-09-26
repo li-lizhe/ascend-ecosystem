@@ -190,3 +190,81 @@ PR head 变为 `7131ce88`，`mergeable=True` / `mergeable_state=blocked`（等 r
 - `probe_accel.py` / `probe_env.py` / `probe_gloo.py` / `probe_npu.py` / `scan_envs.py` — 探针
 - `run2.sh` / `run3.sh` / `run4.sh` — 运行脚本
 - `results.txt` — 三段探针的完整原始输出
+
+---
+
+## 11. 第二轮（同日）：review 第 2 点「零 batch」→ 姊妹 PR #6813
+
+### 11.1 起因与判断
+
+- 维护者 `sw005320` 原话：「Also, CodeRabbit points out that a rank can potentially end up with zero batches
+  before `synchronize_batches()`. This appears to be a pre-existing issue for CUDA as well, so I don't
+  necessarily think it needs to be fixed in this PR, but it would be good to **either handle it here or track
+  it separately**.」
+- CodeRabbit 行内意见（`batch.py:296`）原话：「**Handle zero-batch ranks before padding.** … Add a consistent
+  cross-rank validation error for zero batches, or define and implement a valid empty-rank or synthetic-batch
+  contract.」
+- 处置：**另开 PR**（不塞进 #6808 扩大 diff），基于 `master` 保持独立可合。
+
+### 11.2 修的时候又发现第二个 bug（同一段代码）
+
+`batches = batches + batches[-(tgt_n_batches - n_batches):]` —— 当 `n_batches < tgt_n_batches - n_batches`
+（该 rank 的 batch 数不到最大值一半）时切片长度不够，**补齐后仍然对不齐**：
+
+| n | tgt | 原式结果 | |
+|---|---|---|---|
+| 1 | 3 | 2 | 仍然短 |
+| 2 | 5 | 4 | 仍然短 |
+| 2 | 4 | 4 | OK |
+| 3 | 5 | 5 | OK |
+
+（纯 Python 切片语义即可判定，随后在真机上以 n=2/tgt=5 复现，见 `results_round2.txt` A/B 段。）
+⇒ 「各 rank 以不同 batch 数继续」不只是零 batch 的问题，这条是**没人报过**的。
+
+### 11.3 改动（`batch.py` +26/−2）
+
+1. `all_gather` 后取 `batch_counts`；`tgt_n_batches > 0 and min(batch_counts) == 0` → 全体 rank 同一条
+   `RuntimeError`（所有 rank 看到同一份 counts，天然一致，且在 padding **之前**）。
+2. 补齐改为循环尾部：`tail = batches[-n_missing:] if n_missing <= n_batches else batches` +
+   `list(islice(cycle(tail), n_missing))`（新增 `from itertools import cycle, islice`）。
+3. docstring 补 `Raises:` 段与 Notes。
+4. 新增 3 条单测（纯 CPU 可跑）：`test_sync_pads_short_rank_fully` /
+   `test_sync_zero_batches_on_some_rank` / `test_sync_all_ranks_empty`。
+
+### 11.4 真机验证（910B2；gloo 与 hccl 结果完全一致）
+
+| counts(rank0,rank1) | 改动前 | 改动后 |
+|---|---|---|
+| 5, 0 | rank0=5 / rank1=0（静默，无报错） | 两 rank 同一条 `RuntimeError` |
+| 5, 2 | rank0=5 / rank1=**4** | rank0=5 / rank1=5 |
+| 5, 3 | rank1=5（原路径） | rank1=5（不变） |
+| 0, 0 | no-op | no-op（不误报） |
+
+报错后 `dist.barrier()` 仍通过 ⇒ 不会把一个静默错误换成一个挂死。
+上游单测原文 + 新增 3 例 = **25 passed**（上游原有 22 例）。
+
+### 11.5 诚实标注（这一轮特有）
+
+master 版 `synchronize_batches()` 有**两处 CUDA 硬绑定**：`torch.cuda.is_available()` 门 + `device="cuda"`。
+在无 CUDA 的测试机上，这两者不重映射则该分支**根本不可达**、逻辑无法被触发。探针**只**重映射「设备字符串
+cuda」与 CUDA 可用性门（把模块的 `torch` 换成只改 device 的 `SimpleNamespace`），**被测函数体逐字节原样**，
+集合通信是真实 gloo/hccl。#6808 合入后该门被移除，本逻辑即可在任何加速器上原样运行 —— 届时这两处重映射
+都不再需要。新单测里用同一手法（`_fake_dist()` 只重映射 device），因为 CI 无 CUDA。
+
+### 11.6 提交与回读
+
+| 项 | 值 |
+|---|---|
+| 分支 | `li-lizhe/espnet:fix/speechlm-synchronize-batches-zero-batch` |
+| commit | `38f3d2784f9d5ad99a9a7f1ac74d0ed27a7e28d3`（parent `152fc02` = master head） |
+| PR | https://github.com/espnet/espnet/pull/6813 —— open / mergeable=True / 1 commit / 2 files (+79/−2) |
+| 回读 | `batch.py` online=aac5311256e4 local=aac5311256e4 OK；`test_batch.py` online=28057d13278d local=28057d13278d OK |
+| 回帖 | [#6812](https://github.com/espnet/espnet/issues/6812#issuecomment-5845657932) 关联 PR；[#6808](https://github.com/espnet/espnet/pull/6808#issuecomment-5845658397) 告知「单独跟踪」已落成 PR |
+
+### 11.7 证据文件（第二轮）
+
+`C:\Users\华为\ascend-eco-repo\projects\espnet\evidence-20260926-pr6813\`
+
+- `batch_master.py`（上游 master 原文）/ `batch_zero.py`（本 PR 推送内容）/ `test_batch_zero.py`
+- `probe_zb.py` / `run_zb.sh` / `run_zbB.sh`
+- `results_round2.txt` — gloo + HCCL + 单测 + 回读的完整原始输出

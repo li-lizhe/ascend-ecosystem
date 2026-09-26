@@ -1,0 +1,108 @@
+========================================================================
+espnet#6808 姊妹 PR（#6813）真机验证原始输出（2026-09-26）
+主机 192.168.9.177（8×910B2）容器 npu-lizhe，env npu215
+被测文件与 GitHub 原文逐字节一致（容器内 md5 复核）
+========================================================================
+
+被测文件 md5（容器内 == 本地 == GitHub blob）
+  dad6d0d9a5b92a0de3c66fdd7a929e94  batch_master.py   (= espnet master 152fc02 的 batch.py)
+  aac5311256e46f75efe0de9a3743cb2b  batch_zero.py     (= 本 PR 推送内容，回读 online=local OK)
+  28057d13278d80ca7f7a968d938edf81  test_batch_zero.py(= 本 PR 推送内容，回读 online=local OK)
+  上游 test_batch.py@master md5 bbef021c00f5a350086492f2350338bf（本地副本一致）
+
+【重要前提 / 诚实标注】master 版 synchronize_batches() 有两个 CUDA 硬绑定：
+  ① `if not torch.cuda.is_available() ...: return batches` 门
+  ② `torch.tensor(..., device="cuda")`
+在无 CUDA 的测试机上这两者必须重映射，否则该分支根本不可达、逻辑无法被触发。
+探针**只**重映射「设备字符串 cuda」与 CUDA 可用性门（`B.torch = SimpleNamespace(tensor=..., long=torch.long,
+cuda=SimpleNamespace(is_available=lambda: True))`，device 落到 cpu / npu:$RANK），
+被测函数体逐字节原样，集合通信是真实 gloo / hccl。
+（#6808 合入后这层门被移除，本逻辑即可在任何加速器上原样运行。）
+
+
+############ A. gloo（CPU，无需 accelerator）before / after ############
+
+--- counts=5,0  mod=batch_master
+[rank0] backend=gloo counts=[5, 0] in=5 out=5 err=None
+[rank1] backend=gloo counts=[5, 0] in=0 out=0 err=None          ← 静默跳过，rank 数不一致，无任何报错
+[rank0] barrier OK (no rank stuck)
+[rank1] barrier OK (no rank stuck)
+
+--- counts=5,0  mod=batch_zero
+[rank0] backend=gloo counts=[5, 0] in=5 out=None err=RuntimeError: synchronize_batches() cannot synchronize a rank with no batches: batch counts per rank are [5, 0]. Duplicating the last batches cannot give an empty r...
+[rank1] backend=gloo counts=[5, 0] in=0 out=None err=RuntimeError: synchronize_batches() cannot synchronize a rank with no batches: batch counts per rank are [5, 0]. Duplicating the last batches cannot give an empty r...
+[rank0] barrier OK (no rank stuck)                              ← 两 rank 同一条错误 + barrier 通过 = 不挂死
+[rank1] barrier OK (no rank stuck)
+
+--- counts=5,2  mod=batch_master
+[rank0] backend=gloo counts=[5, 2] in=5 out=5 err=None
+[rank1] backend=gloo counts=[5, 2] in=2 out=4 err=None          ← ★ 补齐 bug：应为 5，实际只补到 4
+
+--- counts=5,2  mod=batch_zero
+[rank0] backend=gloo counts=[5, 2] in=5 out=5 err=None
+[rank1] backend=gloo counts=[5, 2] in=2 out=5 err=None          ← 修复后正确补齐
+
+--- counts=5,3  mod=batch_master
+[rank1] backend=gloo counts=[5, 3] in=3 out=5 err=None          ← n_missing(2) <= n(3)，走原路径，本来就对
+[rank0] backend=gloo counts=[5, 3] in=5 out=5 err=None
+
+--- counts=5,3  mod=batch_zero
+[rank0] backend=gloo counts=[5, 3] in=5 out=5 err=None          ← 原路径行为不变（回归通过）
+[rank1] backend=gloo counts=[5, 3] in=3 out=5 err=None
+
+--- counts=0,0  mod=batch_master
+[rank0] backend=gloo counts=[0, 0] in=0 out=0 err=None
+[rank1] backend=gloo counts=[0, 0] in=0 out=0 err=None
+
+--- counts=0,0  mod=batch_zero
+[rank0] backend=gloo counts=[0, 0] in=0 out=0 err=None          ← 全 rank 都空 = 无可同步，保持 no-op，不误报
+[rank1] backend=gloo counts=[0, 0] in=0 out=0 err=None
+
+
+############ B. HCCL（真加速器 910B2，backend=hccl，DEV=npu）before / after ############
+
+--- counts=5,0  mod=batch_master
+[rank1] backend=hccl counts=[5, 0] in=0 out=0 err=None
+[rank0] backend=hccl counts=[5, 0] in=5 out=5 err=None
+[rank1] barrier OK (no rank stuck)
+[rank0] barrier OK (no rank stuck)
+
+--- counts=5,0  mod=batch_zero
+[rank0] backend=hccl counts=[5, 0] in=5 out=None err=RuntimeError: synchronize_batches() cannot synchronize a rank with no batches: batch counts per rank are [5, 0]. Duplicating the last batches cannot give an empty r...
+[rank1] backend=hccl counts=[5, 0] in=0 out=None err=RuntimeError: synchronize_batches() cannot synchronize a rank with no batches: batch counts per rank are [5, 0]. Duplicating the last batches cannot give an empty r...
+[rank1] barrier OK (no rank stuck)
+[rank0] barrier OK (no rank stuck)
+
+--- counts=5,2  mod=batch_master
+[rank0] backend=hccl counts=[5, 2] in=5 out=5 err=None
+[rank1] backend=hccl counts=[5, 2] in=2 out=4 err=None          ← ★ 同一 bug 在真加速器上复现
+
+--- counts=5,2  mod=batch_zero
+[rank0] backend=hccl counts=[5, 2] in=5 out=5 err=None
+[rank1] backend=hccl counts=[5, 2] in=2 out=5 err=None          ← 修复
+
+--- counts=5,3  mod=batch_master
+[rank0] backend=hccl counts=[5, 3] in=5 out=5 err=None
+[rank1] backend=hccl counts=[5, 3] in=3 out=5 err=None
+
+--- counts=5,3  mod=batch_zero
+[rank1] backend=hccl counts=[5, 3] in=3 out=5 err=None
+[rank0] backend=hccl counts=[5, 3] in=5 out=5 err=None
+
+
+############ C. 上游单测（原文 + 新增 3 例），最小包壳，纯 CPU ############
+
+25 passed in 0.20s
+（上游 test_batch.py 原有 22 例 + 新增 3 例：test_sync_pads_short_rank_fully /
+  test_sync_zero_batches_on_some_rank / test_sync_all_ranks_empty）
+
+
+############ D. 提交与回读 ############
+
+分支  li-lizhe/espnet:fix/speechlm-synchronize-batches-zero-batch
+commit 38f3d2784f9d5ad99a9a7f1ac74d0ed27a7e28d3   (parent 152fc02 = master head)
+PR    https://github.com/espnet/espnet/pull/6813   open / mergeable=True / 1 commit / 2 files (+79/-2)
+回读  batch.py       online=aac5311256e4 local=aac5311256e4 OK
+      test_batch.py  online=28057d13278d local=28057d13278d OK
+issue https://github.com/espnet/espnet/issues/6812（已回帖关联 #6813）
+#6808 https://github.com/espnet/espnet/pull/6808#issuecomment-5845658397（告知维护者「单独跟踪」已落成 PR）

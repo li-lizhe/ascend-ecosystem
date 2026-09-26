@@ -10,12 +10,13 @@
   - **回归**（2 进程 HCCL + `torch.npu.set_device`）：base rank1 `3→3`（原始 bug），PR 现状与**修复版**都是 rank1 `3→5` ⇒ accelerator 路径行为不变。
   - **上游单测**：`test/espnet2/speechlm/dataloader/test_batch.py` 原文 + 新增用例，跑在最小包壳上（不装完整 espnet）→ **23 passed**。
   - 既有 `test_sync_no_cuda` 是**假覆盖**：它只 patch `torch.cuda.is_available`，而 CI 里 `dist.is_initialized()` 本来就是 False，第一个 `return` 就返回了（Codecov patch coverage 只有 23% 的原因）。
+  - **第二轮（#6813：零 batch + 补齐）**：master 版有 `torch.cuda.is_available()` 门 + `device="cuda"` 两处硬绑定，无 CUDA 的测试机上不重映射则分支不可达 ⇒ 探针**只**重映射「设备字符串」与可用性门（被测函数体逐字节原样，集合通信真实）。真机 gloo 与 hccl 结果一致：`5,0` 前 rank0=5/rank1=0 静默、后两 rank 同一条 RuntimeError；`5,2` 前 rank1=**4**、后 5；`5,3` 行为不变；`0,0` 不误报。报错后 `dist.barrier()` 仍通过。单测 **25 passed**（上游 22 + 新增 3）。
 - **可达性结论**: CPU-only + gloo 进程组**可达**（真机复现）；经 espnet 自带训练入口**不可达**（`bin/train.py` L185 无条件 `torch.cuda.set_device()`、L191 `deepspeed.init_distributed()` / L195 `backend="nccl"`、L197 `assert dist.is_initialized()`）⇒ 报错不破坏任何受支持路径。
-- **分支**: `li-lizhe/espnet` 分支 `fix/speechlm-synchronize-batches-device`（commit `7131ce88`，parent `b18c225`，base `master` @ `152fc02`）
-- **状态**: 🔄 已提交 PR [#6808](https://github.com/espnet/espnet/pull/6808)（2026-09-25），已按 review 推修复（2026-09-26），等复看 + CI
+- **分支**: ① `li-lizhe/espnet:fix/speechlm-synchronize-batches-device`（commit `7131ce88`，parent `b18c225`，base `master` @ `152fc02`）② `li-lizhe/espnet:fix/speechlm-synchronize-batches-zero-batch`（commit `38f3d278`，parent `152fc02`）
+- **状态**: 🔄 两个 PR 都在等 review + CI —— [#6808](https://github.com/espnet/espnet/pull/6808)（2026-09-25 提；2026-09-26 按 review 推修复：`device is None` → 显式报错）、[#6813](https://github.com/espnet/espnet/pull/6813)（2026-09-26 提；review 第 2 点「零 batch」另开，同时修掉同一段的补齐 bug）
 - **tracking**: PRS.md 跟踪中表 `espnet/espnet`
 - **备注**:
-  - CodeRabbit 指出的「某 rank 可能拿到 0 个 batch 导致 `batches[-k:]` 切不出东西」是 CUDA 下也存在的既有问题，按维护者「可另开跟踪」的建议**单开 issue [#6812](https://github.com/espnet/espnet/issues/6812)**，未塞进本 PR 以免扩大 diff。
+  - CodeRabbit 指出的「某 rank 可能拿到 0 个 batch 导致 `batches[-k:]` 切不出东西」是 CUDA 下也存在的既有问题，按维护者「可另开跟踪」的建议**另开 PR [#6813](https://github.com/espnet/espnet/pull/6813)**（跟踪 issue [#6812](https://github.com/espnet/espnet/issues/6812)），基于 `master`、与 #6808 相互独立；同一 PR 顺带修掉同一段的补齐 bug（`n < tgt - n` 时切片不够，n=2/tgt=5 只补到 4）。
   - 回帖已明确告知：若将来要支持 CPU 分布式，把 device 显式取 `torch.device("cpu")` 是一行的替代方案（集合通信在 CPU 上本来就跑得通）。
   - 环境坑：NPU 主机上**不 source CANN 环境时 `torch.accelerator.is_available()` 返回 False**、`current_accelerator()` 返回 None、backend 名仍是默认的 `privateuseone`；source `set_env.sh` 后才变 True / `npu`。漏 source 会把「环境没配好」误判成「没有 accelerator」。
-- **过程记录**: [`verification-synchronize-batches-20260926.md`](verification-synchronize-batches-20260926.md)（含三态对照表、可达性分账、未验证项）；探针与原始输出见 [`evidence-20260926/`](evidence-20260926/)
+- **过程记录**: [`verification-synchronize-batches-20260926.md`](verification-synchronize-batches-20260926.md)（含三态对照表、可达性分账、未验证项、第二轮 #6813）；探针与原始输出见 [`evidence-20260926/`](evidence-20260926/) 与第二轮 [`evidence-20260926-pr6813/`](evidence-20260926-pr6813/)
