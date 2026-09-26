@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-26 06:02
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-27 01:11
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
-> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 105 (+3) | 36 (+2) | 48 (-1) | 21 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 121 (+3) | 38 (+2) | 61 (-1) | 22 (+2) | |
+> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 1 (-1) | 13 (±0) | 2 (+1) | **只报不动**：回复/改码/push 须用户审视确认 |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 109 (+4) | 37 (+1) | 48 (±0) | 24 (+3) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 125 (+4) | 38 (±0) | 61 (±0) | 26 (+4) | |
 >
-> **较昨日（基线 2026-09-25）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 -1 · ❌ 关闭未合入 +2**
+> **较昨日（基线 2026-09-26）：提交 +4 · ✅ 已合入 ±0 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +4**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -35,18 +35,18 @@
 | pytorch/pytorch | [Feature Refactoring] Consume registered RNG trackers in DTensor rand… | [#195246](https://github.com/pytorch/pytorch/pull/195246) | 2026-08-29 |
 | pytorch/pytorch | [Feature Refactoring] Add register_rng_tracker API for device-specifi… | [#195245](https://github.com/pytorch/pytorch/pull/195245) | 2026-08-29 |
 
-## ✅ A 类已合入（2）
+## ✅ A 类已合入（1）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
-| pytorch/pytorch | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 … | [#192698](https://github.com/pytorch/pytorch/pull/192698) | 2026-09-14 |
 | pytorch/pytorch | [Testcase Refactoring] Generalize requires_world_size to … | [#192694](https://github.com/pytorch/pytorch/pull/192694) | 2026-09-21 |
 
-## ❌ A 类关闭未合入（1）
+## ❌ A 类关闭未合入（2）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
 | pytorch/pytorch | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | [#193347](https://github.com/pytorch/pytorch/pull/193347) | 2026-08-13 |
+| pytorch/pytorch | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 … | [#192698](https://github.com/pytorch/pytorch/pull/192698) | 2026-09-14 |
 
 逐条留档见 `EXCLUDED.md`。
 
@@ -56,8 +56,6 @@
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
-| vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-05-28 |
-| vllm-project/vllm-ascend | [Feature] Enable oproj_tensor_parallel_size for eager mode | [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 2026-05-30 |
 | langgenius/dify | MonacoEnvironment.getWorkerUrl 设备无关 | [#39341](https://github.com/langgenius/dify/pull/39341) | 2026-07-21 |
 | m-bain/whisperX | torchaudio 可选化 + Hugging Face 兜底 | [#1469](https://github.com/m-bain/whisperX/pull/1469) | 2026-08-27 |
 | resemble-ai/chatterbox | `from_local`/`from_pretrained` device 标准化 | [#554](https://github.com/resemble-ai/chatterbox/pull/554) | 2026-08-27 |
@@ -88,7 +86,6 @@
 | PaddlePaddle/PaddleOCR | #18370 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 |
 | Lightning-AI/torchmetrics | forward 保留累计 metric state | [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 2026-09-19 |
 | sgl-project/sglang | frozen-kv-mtp 接受 pp_proxy_tensors | [#40355](https://github.com/sgl-project/sglang/pull/40355) | 2026-09-19 |
-| Lightning-AI/torchmetrics | V-measure 独立聚类返回 0.0 非 1.0 | [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 2026-09-19 |
 | Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-19 |
 | speechbrain/speechbrain | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-09-19 |
 | crewAIInc/crewAI | evaluation 返回 False 替代 True | [#7603](https://github.com/crewAIInc/crewAI/pull/7603) | 2026-09-19 |
@@ -104,8 +101,11 @@
 | jeshraghian/snntorch | fix(loss): apply class weights per sample in the MSE loss… | [#463](https://github.com/jeshraghian/snntorch/pull/463) | 2026-09-25 |
 | espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-09-25 |
 | InternLM/xtuner | fix(datasets): build the DP all_reduce tensor on the mesh… | [#2127](https://github.com/InternLM/xtuner/pull/2127) | 2026-09-25 |
+| EleutherAI/lm-evaluation-harness | fix(models): point the `hf-audiolm-qwen` lazy mapping at … | [#4244](https://github.com/EleutherAI/lm-evaluation-harness/pull/4244) | 2026-09-26 |
+| hpcaitech/ColossalAI | fix: use the accelerator API instead of hard-coded cuda/c… | [#6455](https://github.com/hpcaitech/ColossalAI/pull/6455) | 2026-09-26 |
+| espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-09-26 |
 
-## ✅ B 类已合入（36）
+## ✅ B 类已合入（37）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -145,8 +145,9 @@
 | huggingface/pytorch-image-models | `init_distributed_device_so` 补 `torch.npu.set_device` | [#2801](https://github.com/huggingface/pytorch-image-models/pull/2801) | 2026-09-24 |
 | fangwei123456/spikingjelly | fix(neuron): keep GatedLIFNode spike state in the input d… | [#758](https://github.com/fangwei123456/spikingjelly/pull/758) | 2026-09-25 |
 | modelscope/ms-swift | Janus 模板 `.cuda()` → `input_ids.device` | [#10230](https://github.com/modelscope/ms-swift/pull/10230) | 2026-09-25 |
+| kornia/kornia | fix(geometry): return the exact Euclidean distance instea… | [#4968](https://github.com/kornia/kornia/pull/4968) | 2026-09-26 |
 
-## ❌ B 类关闭未合入（21）
+## ❌ B 类关闭未合入（24）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -171,6 +172,9 @@
 | axolotl-ai-cloud/axolotl | fix(kernels): make AMP custom_fwd/bwd device-agnostic | [#3996](https://github.com/axolotl-ai-cloud/axolotl/pull/3996) | 2026-09-22 |
 | huggingface/diffusers | minimax 全加速器 autocast | [#14766](https://github.com/huggingface/diffusers/pull/14766) | 2026-09-25 |
 | huggingface/diffusers | wan 设备无关默认值 | [#14765](https://github.com/huggingface/diffusers/pull/14765) | 2026-09-25 |
+| Lightning-AI/torchmetrics | V-measure 独立聚类返回 0.0 非 1.0 | [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 2026-09-26 |
+| vllm-project/vllm-ascend | [Feature] Enable oproj_tensor_parallel_size for eager mode | [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 2026-09-26 |
+| vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-09-26 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 
@@ -186,3 +190,22 @@
 | [lmdeploy](projects/lmdeploy/) | [#4986](https://github.com/InternLM/lmdeploy/pull/4986) | 已修 lazy migration（`887587e`），维护者已认可 | 无 |
 | [peft](projects/peft/) | [#3734](https://github.com/huggingface/peft/pull/3734) | 已改用 `infer_device()`（`425afb7`），回应了维护者质疑 | 等 BenjaminBossan re-review（晚班跟进） |
 | [PaddleOCR](projects/paddleocr/) | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | CLA 已签（`license/cla: success`），blocked 仅为缺 approve/待合并 | 无（等合并） |
+
+## 🧹 2026-09-27 躺平 / 冲突 / CI 处置（本轮）
+
+> 起因：跟踪的驱动源是 QQ 邮箱通知邮件（**事件驱动**）⇒ 躺平的 PR 不产生邮件、永远看不到。本轮按**时间维度**全量扫 61 个跟踪中 PR（35 个从未有过一条真人评论，7~120 天），处置如下。
+
+| 处置 | PR | 依据（均经 API 回读校验） |
+|------|----|------|
+| ✅ rebase，冲突已解 | langgenius/dify [#39341](https://github.com/langgenius/dify/pull/39341) | 落后 1828 个提交；冲突仅 `web/global.d.ts`，与 main 新增的 `__marketplaceTracking__` 并存即可 ⇒ `mergeable=true` |
+| ✅ rebase + 收窄范围 | ostris/ai-toolkit [#1022](https://github.com/ostris/ai-toolkit/pull/1022) | main 已重构 captioner（`get_caption_for_file` → `_prep_file`/`_caption_item`/`run_caption_loop`），原 librosa 兜底代码已不存在 ⇒ 从 PR 移除，标题/描述同步改为 +21/−3 的 import 守卫 |
+| ✅ rebase（落后 2） | Lightning-AI/torchmetrics [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 干净三方合并；顺带刷新 lit-oss-bot 单测 |
+| ✅ 挂 issue 防自动关 | huggingface/diffusers [#14785](https://github.com/huggingface/diffusers/pull/14785) / [#14786](https://github.com/huggingface/diffusers/pull/14786) | repo 的 `pr-link-issue-reminder` 规定：description 无 closing keyword 则提醒后 **10 天自动关闭**（#14765/#14766 即因此被关）。已自建 [#14877](https://github.com/huggingface/diffusers/issues/14877) / [#14878](https://github.com/huggingface/diffusers/issues/14878) 并写入 description |
+| ✅ 重跑 CI | m-bain/whisperX [#1469](https://github.com/m-bain/whisperX/pull/1469) | 原 run 被 runner **取消**（test 3.13 起跑 7 秒即中止，其余 3 个 job 同时被取消），非代码失败 ⇒ 推空提交刷新 |
+| ⏳ 等维护者加标签 | sgl-project/sglang [#40355](https://github.com/sgl-project/sglang/pull/40355) | `pr-gate` 失败原因就是 `Missing required label 'run-ci'`（仓库规定 fork PR 需维护者加标签）⇒ 已评论请求 |
+| ⏸️ 非我方问题 | hao-ai-lab/FastVideo [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | Mergify 仅在等 `#approved-reviews-by>=1` + `full-suite-passed`（`fastcheck`/`pre-commit` 已绿） |
+| ❌ 关闭·僵尸 | vllm-project/vllm-ascend [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 120 天、bot 两次标记冲突、**零人类参与**、落后 2198 个提交 ⇒ 需按当前 OTP 实现重做而非 rebase |
+| ❌ 关闭·被取代 | Lightning-AI/torchmetrics [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 同一 issue #3484 已由上游 #3485 修（master `85f4e168`，09-20 合入，改动与我们逐字相同） |
+| 🧹 清理僵尸 job | — | 删除暂停中的 7 点「昇腾PR跟踪检查」、8 点「PyTorch解耦早报」（prompt 已备份到 `cron/jobs_removed_backup.json`） |
+
+**机制修正（已落地）**：新增 `scripts/stale_nudge.py`（时间驱动、四桶分类：可温和催办 / 冲突需 rebase / CI 红 / 零真人理会；每 PR 7 天冷却、每轮 ≤3 条、**A 类 pytorch 只报不动**），接入 6 点 job 第三步。

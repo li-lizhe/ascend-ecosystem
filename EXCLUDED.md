@@ -74,3 +74,7 @@
 - `pytorch/pytorch #193347 — 2026-08-13 关闭 — [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py`
 - `huggingface/diffusers #14766 — 2026-09-25 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding`
 - `huggingface/diffusers #14765 — 2026-09-25 关闭 — fix(wan): use device-agnostic default for get_i2v_mask`
+- `Lightning-AI/torchmetrics #3506 — 2026-09-26 关闭 — fix: V-measure returns 1.0 instead of 0.0 for independent nontrivial …`
+- `vllm-project/vllm-ascend #9737 — 2026-09-26 关闭 — [Feature] Enable oproj_tensor_parallel_size for eager mode`
+- `vllm-project/vllm-ascend #9669 — 2026-09-26 关闭 — add OTP (O-matrix Tensor Parallelism) support for general DP scenarios`
+- `pytorch/pytorch #192698 — 2026-09-14 关闭 — [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 / GENERIC`
