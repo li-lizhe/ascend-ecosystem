@@ -1,0 +1,154 @@
+========================================================================
+espnet#6808 探针原始输出（2026-09-26，192.168.9.177 容器 npu-lizhe，env npu215）
+被测文件与 GitHub 原文逐字节一致（容器内 md5 校验通过）
+========================================================================
+
+########## 环境扫描: 各 conda env 的 torch / accelerator 情况 ##########
+=== /opt/miniconda/envs/cpu/bin/python ===
+torch 2.14.0a0+git69231fe
+  has torch.accelerator True
+  accelerator.is_available() False
+  current_accelerator() None
+  cuda.is_available() False
+  dist.is_available() True
+  dist.is_gloo_available() True
+  has torch_npu False
+  has espnet False
+=== /opt/miniconda/envs/npu/bin/python ===
+torch 2.15.0.dev20260917+cpu
+  has torch.accelerator True
+  accelerator.is_available() False
+  current_accelerator() None
+  cuda.is_available() False
+  dist.is_available() True
+  dist.is_gloo_available() True
+  has torch_npu True
+  has espnet False
+=== /opt/miniconda/envs/npu215/bin/python ===
+torch 2.15.0.dev20260917+cpu
+  has torch.accelerator True
+  accelerator.is_available() False
+  current_accelerator() None
+  cuda.is_available() False
+  dist.is_available() True
+  dist.is_gloo_available() True
+  has torch_npu True
+  has espnet False
+
+
+########## 探针 A: torch_npu 的 import 是否影响 torch.accelerator (CANN 已 source) ##########
+[只 import torch] torch=2.15.0.dev20260917+cpu
+   accelerator.is_available() = True
+   accelerator.current_accelerator() = device(type='npu')
+   accelerator.device_count() = 4
+   torch.cuda.is_available() = False
+[import torch_npu 之后] torch=2.15.0.dev20260917+cpu
+   accelerator.is_available() = True
+   accelerator.current_accelerator() = device(type='npu')
+   accelerator.device_count() = 4
+   torch.cuda.is_available() = False
+torch_npu 版本: 2.15.0.dev20260917+gitec69335
+PrivateUse1 后端名: npu
+get_default_backend_for_device('npu'): hccl
+
+
+########## 探针 env(a): 不 source CANN 环境 ##########
+TORCH_DEVICE_BACKEND_AUTOLOAD = 0
+ASCEND_HOME_PATH            = None
+LD_LIBRARY_PATH 含 hccl 目录 = False
+只 import torch 后, 'torch_npu' in sys.modules = False
+torch.accelerator.is_available() = False
+current_accelerator() = None
+_get_privateuse1_backend_name() = privateuseone
+
+########## 探针 env(b): source CANN 环境后 ##########
+TORCH_DEVICE_BACKEND_AUTOLOAD = 0
+ASCEND_HOME_PATH            = /opt/ascend/cann-9.2.0-beta.2
+LD_LIBRARY_PATH 含 hccl 目录 = True
+只 import torch 后, 'torch_npu' in sys.modules = True
+torch.accelerator.is_available() = True
+current_accelerator() = npu
+_get_privateuse1_backend_name() = npu
+
+
+########## 探针 B1: gloo 2 进程 - base 版 (改动前) ##########
+[rank1] WHICH=base | dist.is_initialized=True backend=gloo ws=2[rank0] WHICH=base | dist.is_initialized=True backend=gloo ws=2
+[rank0] torch.accelerator.is_available()=False  _current_accelerator_device()='N/A (base 无此函数)'[rank1] torch.accelerator.is_available()=False  _current_accelerator_device()='N/A (base 无此函数)'
+[rank1] in=3 out=3 -> 静默跳过, 未同步 (rank 间不一致!)[rank0] in=5 out=5 -> 静默跳过, 未同步 (rank 间不一致!)
+[rank0] barrier 通过 -> 没有 rank 卡在集合通信上[rank1] barrier 通过 -> 没有 rank 卡在集合通信上
+
+########## 探针 B2: gloo 2 进程 - PR head 版 (当前 PR) ##########
+[rank1] WHICH=head | dist.is_initialized=True backend=gloo ws=2[rank0] WHICH=head | dist.is_initialized=True backend=gloo ws=2
+[rank1] torch.accelerator.is_available()=False  _current_accelerator_device()=None[rank0] torch.accelerator.is_available()=False  _current_accelerator_device()=None
+[rank1] in=3 out=3 -> 静默跳过, 未同步 (rank 间不一致!)[rank0] in=5 out=5 -> 静默跳过, 未同步 (rank 间不一致!)
+[rank1] barrier 通过 -> 没有 rank 卡在集合通信上
+[rank0] barrier 通过 -> 没有 rank 卡在集合通信上
+
+########## 探针 B3: gloo 2 进程 - 修复版 (显式报错) ##########
+[rank0] WHICH=fixed | dist.is_initialized=True backend=gloo ws=2[rank1] WHICH=fixed | dist.is_initialized=True backend=gloo ws=2
+[rank0] torch.accelerator.is_available()=False  _current_accelerator_device()=None[rank1] torch.accelerator.is_available()=False  _current_accelerator_device()=None
+[rank1] in=3 -> 显式报错 RuntimeError: synchronize_batches() requires an accelerator when torch.distributed is initialized, but no accelerator device[rank0] in=5 -> 显式报错 RuntimeError: synchronize_batches() requires an accelerator when torch.distributed is initialized, but no accelerator device
+[rank0] barrier 通过 -> 没有 rank 卡在集合通信上[rank1] barrier 通过 -> 没有 rank 卡在集合通信上
+
+
+########## 探针 C1: NPU/HCCL 2 进程 - base 版 (改动前) ##########
+[rank0] WHICH=base dist=True backend=hccl accelerator=True device='N/A'
+[rank0] in=5 out=5 expected_out=5  -> OK 已同步
+[rank1] WHICH=base dist=True backend=hccl accelerator=True device='N/A'
+[rank1] in=3 out=3 expected_out=5  -> FAIL 未同步
+[rank1] HCCL barrier OK
+[rank0] HCCL barrier OK
+
+########## 探针 C2: NPU/HCCL 2 进程 - PR head 版 (当前 PR) ##########
+[rank1] WHICH=head dist=True backend=hccl accelerator=True device=device(type='npu')[rank0] WHICH=head dist=True backend=hccl accelerator=True device=device(type='npu')
+[rank1] in=3 out=5 expected_out=5  -> OK 已同步[rank0] in=5 out=5 expected_out=5  -> OK 已同步
+[rank0] HCCL barrier OK[rank1] HCCL barrier OK
+
+########## 探针 C3: NPU/HCCL 2 进程 - 修复版 (回归必须通过) ##########
+[rank0] WHICH=fixed dist=True backend=hccl accelerator=True device=device(type='npu')
+[rank1] WHICH=fixed dist=True backend=hccl accelerator=True device=device(type='npu')
+[rank1] in=3 out=5 expected_out=5  -> OK 已同步
+[rank0] in=5 out=5 expected_out=5  -> OK 已同步
+[rank1] HCCL barrier OK
+[rank0] HCCL barrier OK
+
+
+########## 上游单测 (byte-identical test_batch.py + 新增用例) ##########
+2f87866caa079e1709cdc95b49ce97e3  batch_fixed.py
+cec4095388f94aefee278291c60cdc25  test_batch_fixed.py
+platform linux -- Python 3.12.14, pytest-8.3.2, pluggy-1.6.0 -- /opt/miniconda/envs/npu215/bin/python
+collected 23 items
+
+test_batch.py::TestBatchfyBucket::test_bucket_basic PASSED               [  4%]
+test_batch.py::TestBatchfyBucket::test_bucket_empty PASSED               [  8%]
+test_batch.py::TestBatchfyBucket::test_bucket_single_item PASSED         [ 13%]
+test_batch.py::TestBatchfyBucket::test_bucket_same_length PASSED         [ 17%]
+test_batch.py::TestBatchfyBucket::test_bucket_large_token PASSED         [ 21%]
+test_batch.py::TestBatchfyBucket::test_bucket_each_own_batch PASSED      [ 26%]
+test_batch.py::TestBfdWorker::test_bfd_worker_basic PASSED               [ 30%]
+test_batch.py::TestBfdWorker::test_bfd_worker_packing PASSED             [ 34%]
+test_batch.py::TestBfdWorker::test_bfd_worker_empty PASSED               [ 39%]
+test_batch.py::TestBfdWorker::test_bfd_worker_single PASSED              [ 43%]
+test_batch.py::TestDiverseBfdWorker::test_diverse_bfd_empty PASSED       [ 47%]
+test_batch.py::TestDiverseBfdWorker::test_diverse_bfd_basic PASSED       [ 52%]
+test_batch.py::TestDiverseBfdWorker::test_diverse_bfd_deterministic PASSED [ 56%]
+test_batch.py::TestBatchfyPack::test_pack_small_input PASSED             [ 60%]
+test_batch.py::TestBatchfyPack::test_pack_returns_keys_only PASSED       [ 65%]
+test_batch.py::TestBatchfy::test_batchfy_bucket_method PASSED            [ 69%]
+test_batch.py::TestBatchfy::test_batchfy_pack_method PASSED              [ 73%]
+test_batch.py::TestBatchfy::test_batchfy_invalid_method PASSED           [ 78%]
+test_batch.py::TestBatchfy::test_batchfy_discards_oversized PASSED       [ 82%]
+test_batch.py::TestBatchfy::test_batchfy_all_oversized PASSED            [ 86%]
+test_batch.py::TestSynchronizeBatches::test_sync_no_cuda PASSED          [ 91%]
+test_batch.py::TestSynchronizeBatches::test_sync_not_initialized PASSED  [ 95%]
+test_batch.py::TestSynchronizeBatches::test_sync_initialized_but_no_accelerator PASSED [100%]
+
+============================== 23 passed in 0.20s ==============================
+
+
+########## 容器内字节一致性校验 ##########
+072c9915db897c761a716afd8328b8f0  batch_head.py
+dad6d0d9a5b92a0de3c66fdd7a929e94  batch_base.py
+2f87866caa079e1709cdc95b49ce97e3  batch_fixed.py
+cec4095388f94aefee278291c60cdc25  test_batch_fixed.py
+（与 GitHub contents API 原文的 md5 逐一相同）
