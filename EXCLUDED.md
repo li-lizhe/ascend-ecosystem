@@ -85,3 +85,4 @@
   - **根因已修**：`check_prs.py` 的 `project_exclusions` 判定顺序——先判 `has_open`，只有「该 repo 已无任何 open PR」时才因 `closed_unmerged` 判 EXCLUDED（原来 closed_unmerged 先判 ⇒ 一条被关闭的 PR 就把整个 repo 永久拉黑）。
   - **两个 fix 已重开**：`#14765 → #14883`（Fixes #14881）、`#14766 → #14884`（Fixes #14882）。GitHub 拒绝原地 reopen（REST `422 Validation Failed`、GraphQL `reopenPullRequest → Could not open the pull request.`），故用新分支指向同一 commit 重开新 PR；旧 PR 已留评论指向新 PR。
   - **待人工动作**：diffusers 的 fork-PR workflow 需要维护者批准一次才会跑，#14785/#14786/#14883/#14884 的 CI 全部停在 `action_required`（#14785/#14786 自 2026-09-16 起 ≈11.6 天零测试执行），已在 PR 下 @ 维护者请批准。
+- `kohya-ss/musubi-tuner #1079 — 2026-09-27 关闭 — Fix fp8_scaled dtype mismatch on non-scaled_mm path`

@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-27 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-28 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 109 (+4) | 37 (+1) | 48 (±0) | 24 (+3) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 125 (+4) | 39 (+1) | 61 (±0) | 25 (+3) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 114 (+5) | 38 (+1) | 51 (+3) | 25 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 130 (+5) | 40 (+1) | 64 (+3) | 26 (+1) | |
 >
-> **较昨日（基线 2026-09-26）：提交 +4 · ✅ 已合入 +1 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +3**
+> **较昨日（基线 2026-09-27）：提交 +5 · ✅ 已合入 +1 · 📡 跟踪中 +3 · ❌ 关闭未合入 +1**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -52,7 +52,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（48）
+## 📡 B 类跟踪中（51）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -61,7 +61,6 @@
 | resemble-ai/chatterbox | `from_local`/`from_pretrained` device 标准化 | [#554](https://github.com/resemble-ai/chatterbox/pull/554) | 2026-08-27 |
 | ostris/ai-toolkit | torchaudio 可选化 + captioner librosa 兜底 | [#1022](https://github.com/ostris/ai-toolkit/pull/1022) | 2026-08-29 |
 | OpenMOSS/MOSS-TTS-Nano | ONNX runtime 路径 torch-free | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 2026-08-30 |
-| kohya-ss/musubi-tuner | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-08-31 |
 | ModelTC/LightX2V | pre-weights 忽略 dit_quant_scheme（fp8 dtype） | [#1470](https://github.com/ModelTC/LightX2V/pull/1470) | 2026-09-01 |
 | speechbrain/speechbrain | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-09-02 |
 | kijai/ComfyUI-KJNodes | WanVideoNAG dtype mismatch 修复 | [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749) | 2026-09-02 |
@@ -104,8 +103,12 @@
 | EleutherAI/lm-evaluation-harness | fix(models): point the `hf-audiolm-qwen` lazy mapping at … | [#4244](https://github.com/EleutherAI/lm-evaluation-harness/pull/4244) | 2026-09-26 |
 | hpcaitech/ColossalAI | fix: use the accelerator API instead of hard-coded cuda/c… | [#6455](https://github.com/hpcaitech/ColossalAI/pull/6455) | 2026-09-26 |
 | espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-09-26 |
+| huggingface/diffusers | fix(minimax): enable autocast on all accelerators in VAE … | [#14884](https://github.com/huggingface/diffusers/pull/14884) | 2026-09-27 |
+| huggingface/diffusers | fix(wan): use device-agnostic default for get_i2v_mask | [#14883](https://github.com/huggingface/diffusers/pull/14883) | 2026-09-27 |
+| EleutherAI/lm-evaluation-harness | fix(models): move hf-audiolm generate_until inputs to the… | [#4257](https://github.com/EleutherAI/lm-evaluation-harness/pull/4257) | 2026-09-27 |
+| xdit-project/xDiT | fix(sharding): resolve sharding device ids through the ac… | [#799](https://github.com/xdit-project/xDiT/pull/799) | 2026-09-27 |
 
-## ✅ B 类已合入（37）
+## ✅ B 类已合入（38）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -146,8 +149,9 @@
 | fangwei123456/spikingjelly | fix(neuron): keep GatedLIFNode spike state in the input d… | [#758](https://github.com/fangwei123456/spikingjelly/pull/758) | 2026-09-25 |
 | modelscope/ms-swift | Janus 模板 `.cuda()` → `input_ids.device` | [#10230](https://github.com/modelscope/ms-swift/pull/10230) | 2026-09-25 |
 | kornia/kornia | fix(geometry): return the exact Euclidean distance instea… | [#4968](https://github.com/kornia/kornia/pull/4968) | 2026-09-26 |
+| vladmandic/sdnext | fix(offload): create the offload move stream on the activ… | [#5117](https://github.com/vladmandic/sdnext/pull/5117) | 2026-09-27 |
 
-## ❌ B 类关闭未合入（24）
+## ❌ B 类关闭未合入（25）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -175,6 +179,7 @@
 | Lightning-AI/torchmetrics | V-measure 独立聚类返回 0.0 非 1.0 | [#3506](https://github.com/Lightning-AI/torchmetrics/pull/3506) | 2026-09-26 |
 | vllm-project/vllm-ascend | [Feature] Enable oproj_tensor_parallel_size for eager mode | [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 2026-09-26 |
 | vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-09-26 |
+| kohya-ss/musubi-tuner | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-09-27 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 
