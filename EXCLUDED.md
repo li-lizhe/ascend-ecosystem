@@ -72,9 +72,16 @@
 - `huggingface/lerobot #4676 — 2026-09-21 关闭 — fix(embedder): use device-agnostic default instead of hardcoded "cuda"｜原因：维护者关：被我们自己的 #4677 取代（#4677 仍 open）`
 - `axolotl-ai-cloud/axolotl #3996 — 2026-09-22 关闭 — fix(kernels): make AMP custom_fwd/bwd device-agnostic｜原因：自己关：AMP kernels 改动并入 #3995（#3995 已合入）`
 - `pytorch/pytorch #193347 — 2026-08-13 关闭 — [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py`
-- `huggingface/diffusers #14766 — 2026-09-25 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding`
-- `huggingface/diffusers #14765 — 2026-09-25 关闭 — fix(wan): use device-agnostic default for get_i2v_mask`
+- `huggingface/diffusers #14766 — 2026-09-25 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding｜原因：github-actions[bot] issue-link 流程性关闭（缺关联 issue，非社区否决）→ 2026-09-27 重开为 #14884（Fixes #14882）`
+- `huggingface/diffusers #14765 — 2026-09-25 关闭 — fix(wan): use device-agnostic default for get_i2v_mask｜原因：github-actions[bot] issue-link 流程性关闭（缺关联 issue，非社区否决）→ 2026-09-27 重开为 #14883（Fixes #14881）`
 - `Lightning-AI/torchmetrics #3506 — 2026-09-26 关闭 — fix: V-measure returns 1.0 instead of 0.0 for independent nontrivial …`
 - `vllm-project/vllm-ascend #9737 — 2026-09-26 关闭 — [Feature] Enable oproj_tensor_parallel_size for eager mode`
 - `vllm-project/vllm-ascend #9669 — 2026-09-26 关闭 — add OTP (O-matrix Tensor Parallelism) support for general DP scenarios`
 - `pytorch/pytorch #192698 — 2026-09-14 关闭 — [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 / GENERIC`
+
+## 项目级排除撤销（2026-09-27）
+
+- `huggingface/diffusers` — **撤销 EXCLUDED**。2026-09-27 被 `check_prs.py` 按「PR 被关闭未合入」自动标成 EXCLUDED，属误判：#14765/#14766 是被 `github-actions[bot]` 的 issue-link 流程关闭（缺关联 issue），同 repo 仍有 #14785/#14786 两个活跃 open PR 且已补链 issue（#14877/#14878）。按规则「只要该 repo 还有 open PR 就不作永久排除」撤销。
+  - **根因已修**：`check_prs.py` 的 `project_exclusions` 判定顺序——先判 `has_open`，只有「该 repo 已无任何 open PR」时才因 `closed_unmerged` 判 EXCLUDED（原来 closed_unmerged 先判 ⇒ 一条被关闭的 PR 就把整个 repo 永久拉黑）。
+  - **两个 fix 已重开**：`#14765 → #14883`（Fixes #14881）、`#14766 → #14884`（Fixes #14882）。GitHub 拒绝原地 reopen（REST `422 Validation Failed`、GraphQL `reopenPullRequest → Could not open the pull request.`），故用新分支指向同一 commit 重开新 PR；旧 PR 已留评论指向新 PR。
+  - **待人工动作**：diffusers 的 fork-PR workflow 需要维护者批准一次才会跑，#14785/#14786/#14883/#14884 的 CI 全部停在 `action_required`（#14785/#14786 自 2026-09-16 起 ≈11.6 天零测试执行），已在 PR 下 @ 维护者请批准。
