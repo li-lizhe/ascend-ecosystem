@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-28 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-29 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 114 (+5) | 38 (+1) | 51 (+3) | 25 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 130 (+5) | 40 (+1) | 64 (+3) | 26 (+1) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 117 (+3) | 40 (+2) | 51 (±0) | 26 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 133 (+3) | 42 (+2) | 64 (±0) | 27 (+1) | |
 >
-> **较昨日（基线 2026-09-27）：提交 +5 · ✅ 已合入 +1 · 📡 跟踪中 +3 · ❌ 关闭未合入 +1**
+> **较昨日（基线 2026-09-28）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +1**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -66,7 +66,6 @@
 | kijai/ComfyUI-KJNodes | WanVideoNAG dtype mismatch 修复 | [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749) | 2026-09-02 |
 | RVC-Boss/GPT-SoVITS | 导出脚本 device 无关加速器检测 | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) | 2026-09-04 |
 | docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-09-04 |
-| hao-ai-lab/FastVideo | SceneMetric device_map 设备无关 | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | 2026-09-05 |
 | hiyouga/LlamaFactory | longlora device type 检查扩展 | [#10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 |
 | hiyouga/LlamaFactory | LlamaFactory 梯度切分/设备回退 | [#10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 |
 | axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 |
@@ -103,12 +102,13 @@
 | EleutherAI/lm-evaluation-harness | fix(models): point the `hf-audiolm-qwen` lazy mapping at … | [#4244](https://github.com/EleutherAI/lm-evaluation-harness/pull/4244) | 2026-09-26 |
 | hpcaitech/ColossalAI | fix: use the accelerator API instead of hard-coded cuda/c… | [#6455](https://github.com/hpcaitech/ColossalAI/pull/6455) | 2026-09-26 |
 | espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-09-26 |
-| huggingface/diffusers | fix(minimax): enable autocast on all accelerators in VAE … | [#14884](https://github.com/huggingface/diffusers/pull/14884) | 2026-09-27 |
 | huggingface/diffusers | fix(wan): use device-agnostic default for get_i2v_mask | [#14883](https://github.com/huggingface/diffusers/pull/14883) | 2026-09-27 |
 | EleutherAI/lm-evaluation-harness | fix(models): move hf-audiolm generate_until inputs to the… | [#4257](https://github.com/EleutherAI/lm-evaluation-harness/pull/4257) | 2026-09-27 |
-| xdit-project/xDiT | fix(sharding): resolve sharding device ids through the ac… | [#799](https://github.com/xdit-project/xDiT/pull/799) | 2026-09-27 |
+| modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-28 |
+| Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
+| NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
 
-## ✅ B 类已合入（38）
+## ✅ B 类已合入（40）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -150,8 +150,10 @@
 | modelscope/ms-swift | Janus 模板 `.cuda()` → `input_ids.device` | [#10230](https://github.com/modelscope/ms-swift/pull/10230) | 2026-09-25 |
 | kornia/kornia | fix(geometry): return the exact Euclidean distance instea… | [#4968](https://github.com/kornia/kornia/pull/4968) | 2026-09-26 |
 | vladmandic/sdnext | fix(offload): create the offload move stream on the activ… | [#5117](https://github.com/vladmandic/sdnext/pull/5117) | 2026-09-27 |
+| xdit-project/xDiT | fix(sharding): resolve sharding device ids through the ac… | [#799](https://github.com/xdit-project/xDiT/pull/799) | 2026-09-28 |
+| hao-ai-lab/FastVideo | SceneMetric device_map 设备无关 | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | 2026-09-28 |
 
-## ❌ B 类关闭未合入（25）
+## ❌ B 类关闭未合入（26）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -180,6 +182,7 @@
 | vllm-project/vllm-ascend | [Feature] Enable oproj_tensor_parallel_size for eager mode | [#9737](https://github.com/vllm-project/vllm-ascend/pull/9737) | 2026-09-26 |
 | vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-09-26 |
 | kohya-ss/musubi-tuner | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-09-27 |
+| huggingface/diffusers | fix(minimax): enable autocast on all accelerators in VAE … | [#14884](https://github.com/huggingface/diffusers/pull/14884) | 2026-09-28 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 
