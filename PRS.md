@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-29 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-30 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 117 (+3) | 40 (+2) | 51 (±0) | 26 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 133 (+3) | 42 (+2) | 64 (±0) | 27 (+1) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 119 (+2) | 41 (+1) | 52 (+1) | 26 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 135 (+2) | 43 (+1) | 65 (+1) | 27 (±0) | |
 >
-> **较昨日（基线 2026-09-28）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +1**
+> **较昨日（基线 2026-09-29）：提交 +2 · ✅ 已合入 +1 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -52,7 +52,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（51）
+## 📡 B 类跟踪中（52）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -107,8 +107,9 @@
 | modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-28 |
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
 | NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
+| unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-09-29 |
 
-## ✅ B 类已合入（40）
+## ✅ B 类已合入（41）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -152,6 +153,7 @@
 | vladmandic/sdnext | fix(offload): create the offload move stream on the activ… | [#5117](https://github.com/vladmandic/sdnext/pull/5117) | 2026-09-27 |
 | xdit-project/xDiT | fix(sharding): resolve sharding device ids through the ac… | [#799](https://github.com/xdit-project/xDiT/pull/799) | 2026-09-28 |
 | hao-ai-lab/FastVideo | SceneMetric device_map 设备无关 | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | 2026-09-28 |
+| huggingface/speech-to-speech | fix: pick Ascend NPU when resolving the `auto` device | [#616](https://github.com/huggingface/speech-to-speech/pull/616) | 2026-09-29 |
 
 ## ❌ B 类关闭未合入（26）
 
