@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 06:11
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (-1) | 2 (+1) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 120 (+1) | 43 (+2) | 50 (-2) | 27 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 136 (+1) | 45 (+2) | 62 (-3) | 29 (+2) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 121 (+2) | 43 (+2) | 51 (-1) | 27 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 137 (+2) | 45 (+2) | 63 (-2) | 29 (+2) | |
 >
-> **较昨日（基线 2026-09-30）：提交 +1 · ✅ 已合入 +2 · 📡 跟踪中 -3 · ❌ 关闭未合入 +2**
+> **较昨日（基线 2026-09-30）：提交 +2 · ✅ 已合入 +2 · 📡 跟踪中 -2 · ❌ 关闭未合入 +2**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -52,7 +52,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（50）
+## 📡 B 类跟踪中（51）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -105,6 +105,7 @@
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
 | NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
 | unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-09-29 |
+| Lightning-AI/pytorch-lightning | fix: set sampler epoch before creating iterator in setup_… | [#21987](https://github.com/Lightning-AI/pytorch-lightning/pull/21987) | 2026-09-30 |
 | open-compass/VLMEvalKit | fix: return evaluation summaries from dataset.evaluate() … | [#1709](https://github.com/open-compass/VLMEvalKit/pull/1709) | 2026-09-30 |
 
 ## ✅ B 类已合入（43）
