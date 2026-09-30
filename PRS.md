@@ -1,23 +1,23 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-09-30 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
-> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 13 (±0) | 1 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 119 (+2) | 41 (+1) | 52 (+1) | 26 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 135 (+2) | 43 (+1) | 65 (+1) | 27 (±0) | |
+> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (-1) | 2 (+1) | **只报不动**：回复/改码/push 须用户审视确认 |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 120 (+1) | 43 (+2) | 50 (-2) | 27 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 136 (+1) | 45 (+2) | 62 (-3) | 29 (+2) | |
 >
-> **较昨日（基线 2026-09-29）：提交 +2 · ✅ 已合入 +1 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-09-30）：提交 +1 · ✅ 已合入 +2 · 📡 跟踪中 -3 · ❌ 关闭未合入 +2**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
 
 # 🅰️ A 类 · PyTorch 上游（只报不动，任何回复/改码须用户审视确认）
 
-## 📡 A 类跟踪中（13）
+## 📡 A 类跟踪中（12）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -29,7 +29,6 @@
 | pytorch/pytorch | [Testcase Refactoring] Migrate test_fsdp_fine_tune to capability gati… | [#192696](https://github.com/pytorch/pytorch/pull/192696) | 2026-08-10 |
 | li-lizhe/pytorch | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | [#1](https://github.com/li-lizhe/pytorch/pull/1) | 2026-08-13 |
 | pytorch/pytorch | [Feature Refactoring] Route non-cpu RNG states from the accelerator s… | [#195261](https://github.com/pytorch/pytorch/pull/195261) | 2026-08-29 |
-| pytorch/pytorch | [Feature Refactoring] Resolve fake process group supported devices la… | [#195260](https://github.com/pytorch/pytorch/pull/195260) | 2026-08-29 |
 | pytorch/pytorch | [Feature Refactoring] Fall back to full-state RNG sync check for non-… | [#195248](https://github.com/pytorch/pytorch/pull/195248) | 2026-08-29 |
 | pytorch/pytorch | [Feature Refactoring] Generalize RemoteModule device handling beyond … | [#195247](https://github.com/pytorch/pytorch/pull/195247) | 2026-08-29 |
 | pytorch/pytorch | [Feature Refactoring] Consume registered RNG trackers in DTensor rand… | [#195246](https://github.com/pytorch/pytorch/pull/195246) | 2026-08-29 |
@@ -42,17 +41,18 @@
 | pytorch/pytorch | [Testcase Refactoring] Demote test_fsdp_fx to Strategy 1 … | [#192698](https://github.com/pytorch/pytorch/pull/192698) | 2026-09-14 |
 | pytorch/pytorch | [Testcase Refactoring] Generalize requires_world_size to … | [#192694](https://github.com/pytorch/pytorch/pull/192694) | 2026-09-21 |
 
-## ❌ A 类关闭未合入（1）
+## ❌ A 类关闭未合入（2）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
 | pytorch/pytorch | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | [#193347](https://github.com/pytorch/pytorch/pull/193347) | 2026-08-13 |
+| pytorch/pytorch | [Feature Refactoring] Resolve fake process group supported devices la… | [#195260](https://github.com/pytorch/pytorch/pull/195260) | 2026-09-30 |
 
 逐条留档见 `EXCLUDED.md`。
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（52）
+## 📡 B 类跟踪中（50）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -68,7 +68,6 @@
 | docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-09-04 |
 | hiyouga/LlamaFactory | longlora device type 检查扩展 | [#10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 |
 | hiyouga/LlamaFactory | LlamaFactory 梯度切分/设备回退 | [#10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 |
-| axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-11 |
 | openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 |
 | deepspeedai/DeepSpeed | data_pipeline 默认 active accelerator | [#8525](https://github.com/deepspeedai/DeepSpeed/pull/8525) | 2026-09-15 |
 | deepspeedai/DeepSpeed | zenflow 用 optimizer_z3.device | [#8524](https://github.com/deepspeedai/DeepSpeed/pull/8524) | 2026-09-15 |
@@ -84,7 +83,6 @@
 | PaddlePaddle/PaddleOCR | #18370 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 |
 | Lightning-AI/torchmetrics | forward 保留累计 metric state | [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 2026-09-19 |
 | sgl-project/sglang | frozen-kv-mtp 接受 pp_proxy_tensors | [#40355](https://github.com/sgl-project/sglang/pull/40355) | 2026-09-19 |
-| Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-19 |
 | speechbrain/speechbrain | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-09-19 |
 | crewAIInc/crewAI | evaluation 返回 False 替代 True | [#7603](https://github.com/crewAIInc/crewAI/pull/7603) | 2026-09-19 |
 | crewAIInc/crewAI | crewai-tools strip UTF-8 BOM | [#7602](https://github.com/crewAIInc/crewAI/pull/7602) | 2026-09-19 |
@@ -104,12 +102,12 @@
 | espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-09-26 |
 | huggingface/diffusers | fix(wan): use device-agnostic default for get_i2v_mask | [#14883](https://github.com/huggingface/diffusers/pull/14883) | 2026-09-27 |
 | EleutherAI/lm-evaluation-harness | fix(models): move hf-audiolm generate_until inputs to the… | [#4257](https://github.com/EleutherAI/lm-evaluation-harness/pull/4257) | 2026-09-27 |
-| modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-28 |
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
 | NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
 | unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-09-29 |
+| open-compass/VLMEvalKit | fix: return evaluation summaries from dataset.evaluate() … | [#1709](https://github.com/open-compass/VLMEvalKit/pull/1709) | 2026-09-30 |
 
-## ✅ B 类已合入（41）
+## ✅ B 类已合入（43）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -154,8 +152,10 @@
 | xdit-project/xDiT | fix(sharding): resolve sharding device ids through the ac… | [#799](https://github.com/xdit-project/xDiT/pull/799) | 2026-09-28 |
 | hao-ai-lab/FastVideo | SceneMetric device_map 设备无关 | [#1817](https://github.com/hao-ai-lab/FastVideo/pull/1817) | 2026-09-28 |
 | huggingface/speech-to-speech | fix: pick Ascend NPU when resolving the `auto` device | [#616](https://github.com/huggingface/speech-to-speech/pull/616) | 2026-09-29 |
+| modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-30 |
+| axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-30 |
 
-## ❌ B 类关闭未合入（26）
+## ❌ B 类关闭未合入（27）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -185,6 +185,7 @@
 | vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-09-26 |
 | kohya-ss/musubi-tuner | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-09-27 |
 | huggingface/diffusers | fix(minimax): enable autocast on all accelerators in VAE … | [#14884](https://github.com/huggingface/diffusers/pull/14884) | 2026-09-28 |
+| Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-30 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 

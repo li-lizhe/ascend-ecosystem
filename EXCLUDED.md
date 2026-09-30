@@ -87,3 +87,5 @@
   - **待人工动作**：diffusers 的 fork-PR workflow 需要维护者批准一次才会跑，#14785/#14786/#14883/#14884 的 CI 全部停在 `action_required`（#14785/#14786 自 2026-09-16 起 ≈11.6 天零测试执行），已在 PR 下 @ 维护者请批准。
 - `kohya-ss/musubi-tuner #1079 — 2026-09-27 关闭 — Fix fp8_scaled dtype mismatch on non-scaled_mm path`
 - `huggingface/diffusers #14884 — 2026-09-28 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding`
+- `Lightning-AI/pytorch-lightning #21960 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
+- `pytorch/pytorch #195260 — 2026-09-30 关闭 — [Feature Refactoring] Resolve fake process group supported devices la…`
