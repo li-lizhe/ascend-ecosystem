@@ -89,3 +89,4 @@
 - `huggingface/diffusers #14884 — 2026-09-28 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding`
 - `Lightning-AI/pytorch-lightning #21960 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
 - `pytorch/pytorch #195260 — 2026-09-30 关闭 — [Feature Refactoring] Resolve fake process group supported devices la…`
+- `Lightning-AI/pytorch-lightning #21987 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`

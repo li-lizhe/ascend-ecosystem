@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 06:11
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 06:12
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (-1) | 2 (+1) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 121 (+2) | 43 (+2) | 51 (-1) | 27 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 137 (+2) | 45 (+2) | 63 (-2) | 29 (+2) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 121 (+2) | 43 (+2) | 50 (-2) | 28 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 137 (+2) | 45 (+2) | 62 (-3) | 30 (+3) | |
 >
-> **较昨日（基线 2026-09-30）：提交 +2 · ✅ 已合入 +2 · 📡 跟踪中 -2 · ❌ 关闭未合入 +2**
+> **较昨日（基线 2026-09-30）：提交 +2 · ✅ 已合入 +2 · 📡 跟踪中 -3 · ❌ 关闭未合入 +3**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -52,7 +52,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（51）
+## 📡 B 类跟踪中（50）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -105,7 +105,6 @@
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
 | NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
 | unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-09-29 |
-| Lightning-AI/pytorch-lightning | fix: set sampler epoch before creating iterator in setup_… | [#21987](https://github.com/Lightning-AI/pytorch-lightning/pull/21987) | 2026-09-30 |
 | open-compass/VLMEvalKit | fix: return evaluation summaries from dataset.evaluate() … | [#1709](https://github.com/open-compass/VLMEvalKit/pull/1709) | 2026-09-30 |
 
 ## ✅ B 类已合入（43）
@@ -156,7 +155,7 @@
 | modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-30 |
 | axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-30 |
 
-## ❌ B 类关闭未合入（27）
+## ❌ B 类关闭未合入（28）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -186,6 +185,7 @@
 | vllm-project/vllm-ascend | add OTP (O-matrix Tensor Parallelism) support for general… | [#9669](https://github.com/vllm-project/vllm-ascend/pull/9669) | 2026-09-26 |
 | kohya-ss/musubi-tuner | fp8_scaled 非 scaled_mm 路径 dtype mismatch | [#1079](https://github.com/kohya-ss/musubi-tuner/pull/1079) | 2026-09-27 |
 | huggingface/diffusers | fix(minimax): enable autocast on all accelerators in VAE … | [#14884](https://github.com/huggingface/diffusers/pull/14884) | 2026-09-28 |
+| Lightning-AI/pytorch-lightning | fix: set sampler epoch before creating iterator in setup_… | [#21987](https://github.com/Lightning-AI/pytorch-lightning/pull/21987) | 2026-09-30 |
 | Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-30 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
