@@ -1,0 +1,235 @@
+{
+  "title": "攻坚仓台账",
+  "created": "2026-10-01",
+  "scope_note": "用户 2026-10-01 企业微信点名的 5 个攻坚仓；后续新增范围由用户追加进 repos。本表与 PRS.md / EXCLUDED.md 完全分账：PRS.md 管日常探新+促活的全部 PR，本表只管这几个『攻坚仓』的进度与候选。",
+  "conventions": {
+    "language": "PR 标题/正文/评论一律英文。实查依据（2026-10-01 triton-ascend）：近 30 个 PR 标题 30/30 英文、正文 29/30 英文，维护者回 issue 用英文，CONTRIBUTING 与 issue 指南均无语言要求。仓库文档本身是 en/zh 双语，改文档要同步两份。",
+    "pr_title_format": "各仓不同，见每个仓的 gate 字段。",
+    "commit_identity": "author / committer / Signed-off-by 一律 li-lizhe <147392333@qq.com>（用户 2026-09-28 硬要求）。",
+    "no_npu_now": "2026-10-01 起 NPU 真机（177/169）不可达：只做静态可验证项（文档/CI 配置/纯 Python 逻辑），PR 里不得声称真机验证过。"
+  },
+  "repos": [
+    {
+      "repo": "triton-lang/triton-ascend",
+      "alias": "triton-ascend",
+      "role": "主攻（唯一官方 GitHub fork-pull + DCO 流程，外部 CONTRIBUTOR 持续合入）",
+      "gate": "docs/en/community/CONTRIBUTING.md：GitHub fork-pull + DCO（commit 需 Signed-off-by）；PR 标题格式 `[组件](feat|fix|NFC|style|test|chore|revert) 描述` 且 ≤72 字符（pr-title-check.yml 硬门）；CI 含 pre-commit / Docs gate / Docs examples test / RTD Preview。",
+      "our_prs": [
+        {
+          "num": 2449,
+          "kind": "PR",
+          "title": "[Docs](fix) add --no-build-isolation note and install verification",
+          "opened": "2026-10-01",
+          "for_issue": 2434,
+          "status_note": "纯文档 3 文件 +56/-0；提交身份 147392333@qq.com 已核；认领评论已留"
+        }
+      ],
+      "candidates": [
+        {
+          "ref": "#2434",
+          "type": "文档(安装指南)",
+          "status": "已投（PR #2449）",
+          "note": "预构建镜像补 --no-build-isolation + 安装自检步骤；问题2 的根因(requirements.txt 钉 triton==3.6.0)在 main 上不成立，未写入文档"
+        },
+        {
+          "ref": "#1800-#1812 【社区任务】",
+          "type": "算子适配/性能(Liger/attention)",
+          "status": "暂缓·需 NPU 真机",
+          "note": "官方邀请社区参与，但必须上机验证；等 177/169 恢复"
+        },
+        {
+          "ref": "#2018 / #1906",
+          "type": "文档(版本矩阵/驱动)",
+          "status": "排除·wait-feedback",
+          "note": "被维护者挂 wait-feedback，等外部信息才能推进"
+        }
+      ],
+      "excluded": []
+    },
+    {
+      "repo": "sgl-project/sglang",
+      "alias": "sglang",
+      "role": "守（唯一存量 PR 挂在此，先解卡再谈新增）",
+      "gate": "pr-gate 硬门：PR 事件必须有维护者加 `run-ci` 标签（fork PR 自己加不了）；draft 直接 fail；低权限用户 120 分钟冷却。36700★ / 5434 open issue / 近7天 802 合入 ⇒ 抢得极快。",
+      "our_prs": [
+        {
+          "num": 40355,
+          "kind": "PR",
+          "title": "fix: accept pp_proxy_tensors in frozen-kv-mtp, uno, and multi-layer-eagle forward",
+          "opened": "2026-09-19",
+          "for_issue": null,
+          "status_note": "CI 从未跑过（缺 run-ci 标签），2026-09-26 已评论请求维护者加标签，无人响应"
+        }
+      ],
+      "candidates": [
+        {
+          "ref": "docs/CONTRIBUTING.md 模板残留",
+          "type": "文档清理(微)",
+          "status": "待决",
+          "note": "该文件仍是 Mintlify 模板原文，首行留着 '> **Customize this file**: Tailor this template…'，全仓仅此 1 处；仍要等 run-ci 标签"
+        }
+      ],
+      "excluded": [
+        {
+          "ref": "新增 PR",
+          "reason": "run-ci 标签门卡死（#40355 已 5 天无 CI），在标签问题解决前不新增"
+        }
+      ]
+    },
+    {
+      "repo": "vllm-project/vllm-ascend",
+      "alias": "vllm-ascend",
+      "role": "攻（issue 量最大、最可静态核验，但内部 doc team 同场作业）",
+      "gate": "CONTRIBUTING 指向官方 developer guide；issue 侧有文档站 feedback bot 自动开单（160 个 documentation label，多为 0 评论 0 认领）；内部 doc team（ella1107 / FORFuture37）每天合 doc PR，撞车风险高。",
+      "our_prs": [
+        {
+          "num": 9543,
+          "kind": "PR",
+          "title": "[BugFix] Fix scheduler dead lock for long requests (admission cap)",
+          "opened": "2026-05-25",
+          "for_issue": null,
+          "status_note": "2026-05-26 自己关：由 #9549 取代"
+        },
+        {
+          "num": 9549,
+          "kind": "PR",
+          "title": "[Attention][BugFix] Fix scheduler dead lock for long requests",
+          "opened": "2026-05-26",
+          "for_issue": null,
+          "status_note": "2026-05-27 自己关：维护者问后确认问题不再复现"
+        },
+        {
+          "num": 9669,
+          "kind": "PR",
+          "title": "add OTP (O-matrix Tensor Parallelism) support for general DP scenarios",
+          "opened": "2026-05-28",
+          "for_issue": null,
+          "status_note": "2026-09-26 自己关：121 天零人类参与、bot 反复打 merge-conflicts，需按当前实现重做"
+        },
+        {
+          "num": 9737,
+          "kind": "PR",
+          "title": "[Feature] Enable oproj_tensor_parallel_size for eager mode",
+          "opened": "2026-05-30",
+          "for_issue": null,
+          "status_note": "2026-09-26 自己关：同上"
+        }
+      ],
+      "candidates": [
+        {
+          "ref": "#17718",
+          "type": "文档(开发者贡献场景)",
+          "status": "可投",
+          "note": "testing 文档缺上下文（挂载覆盖镜像内 vllm-ascend、requirements-dev 未预装、哪些 UT 必须 NPU）；0 评论 0 认领；仓库文件可静态核对，PR 需注明信息来自报告者"
+        },
+        {
+          "ref": "#16543",
+          "type": "文档(池化支持矩阵)",
+          "status": "可投",
+          "note": "缺池化支持矩阵；0 评论，可对着代码补表"
+        },
+        {
+          "ref": "#17329",
+          "type": "文档(支持矩阵)",
+          "status": "可投",
+          "note": "支持矩阵缺 GLM5.2；0 评论"
+        }
+      ],
+      "excluded": [
+        {
+          "ref": "#17377",
+          "reason": "已有 PR #17504 处理"
+        },
+        {
+          "ref": "#16160",
+          "reason": "已有 PR #16622 处理"
+        },
+        {
+          "ref": "#17075",
+          "reason": "已有 PR #17152 处理"
+        },
+        {
+          "ref": "#16594",
+          "reason": "'升腾'错字来自 po_translate.py 自动翻译流水线，脚本内明写术语规则禁止该写法且做了 zhconv 保护 ⇒ 改仓库文件会被流水线覆盖（属于改生成物而非生成器）"
+        }
+      ]
+    },
+    {
+      "repo": "vllm-project/vllm-omni",
+      "alias": "vllm-omni",
+      "role": "缓（门槛最重，候选基本被认领）",
+      "gate": "CONTRIBUTING 最严：AI 使用必须披露（工具名+角色）；提交前要跑仓库自带 precheck-pr skill；pre-commit 门含 SPDX header / 禁 torch.cuda / markdownlint；无写权限者最多 5 个 open PR。",
+      "our_prs": [],
+      "candidates": [
+        {
+          "ref": "#7874",
+          "type": "文档(VAE 并行口径)",
+          "status": "排除·已有 PR #7845",
+          "note": ""
+        },
+        {
+          "ref": "#6142",
+          "type": "文档(CLI 参考重组)",
+          "status": "排除·已被抢",
+          "note": "评论里已有外部贡献者请求认领，另有 PR #7163 在动"
+        },
+        {
+          "ref": "#6176",
+          "type": "文档(RFC 清点部署 YAML)",
+          "status": "暂缓",
+          "note": "RFC 性质，需维护者表态"
+        }
+      ],
+      "excluded": [
+        {
+          "ref": "本仓新增 PR",
+          "reason": "AI 披露+5 PR 上限+pre-commit 三重门，且候选池已被认领；优先投别仓"
+        }
+      ]
+    },
+    {
+      "repo": "verl-project/verl",
+      "alias": "verl",
+      "role": "攻（我们 0 历史=真新仓，doc PR 合入快，最易拿信任度）",
+      "gate": "CONTRIBUTING 明确欢迎 doc/bug fix/首次贡献；`[doc] fix:` 类 PR 合得快（#8053 Ascend 安装指南、#8062）。注意：677 open PR vs 近7天 21 合入 ⇒ review 有积压。仓已改名 volcengine/verl → verl-project/verl（老 URL 301）。",
+      "our_prs": [],
+      "candidates": [
+        {
+          "ref": "docs/advance/reward_loop.rst 拼写",
+          "type": "文档(拼写)",
+          "status": "可投·已核实未修",
+          "note": "'initalize' 2 处（应 initialize），同名错字也在 verl/trainer/ppo/ray_trainer.py 注释、verl/experimental/separation/ray_trainer.py；另有 multiturn_sft_dataset.py 的 'seperately'。按用户约定『同类缺陷一次性修干净』扫全 docs 再提一个 PR"
+        },
+        {
+          "ref": "Ascend 安装/示例文档 vs 脚本核对",
+          "type": "文档(一致性)",
+          "status": "可投·待做",
+          "note": "clone 仅 31MB，本机可做纯静态核对"
+        }
+      ],
+      "excluded": [
+        {
+          "ref": "#8076 (FSDP dtype)",
+          "reason": "报告者自己已开 PR #8083"
+        },
+        {
+          "ref": "#8021 (code reward)",
+          "reason": "报告者自己已开 PR #8022"
+        },
+        {
+          "ref": "#8011 (math_verify worker)",
+          "reason": "报告者自己已开 PR #8015"
+        },
+        {
+          "ref": "#8027 (HF 导出)",
+          "reason": "已有 PR #8019 / #7997"
+        },
+        {
+          "ref": "#8030 (tokenizer 误切)",
+          "reason": "等上游 transformers #49116 修"
+        }
+      ]
+    }
+  ],
+  "next_actions": "① triton-ascend #2449 等 CI/review（Docs gate、code-review 跑完，翻红即修）；② verl 文档 PR：扫全仓 docs 拼写/失效链接 + Ascend 安装文档对脚本核对，一次修干净（我们 0 历史，先拿一个 merged）；③ vllm-ascend：#17718（开发者贡献文档）/#16543（池化支持矩阵）静态可核对后投；④ sglang：只给 #40355 催 run-ci 标签，标签门解决前不新增；⑤ vllm-omni：暂缓（AI 披露 + 5 PR 上限 + 候选已被认领）。"
+}
