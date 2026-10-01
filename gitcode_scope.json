@@ -1,0 +1,485 @@
+{
+  "title": "GitCode 侧（CANN / Ascend 组织）活跃仓登记",
+  "created": "2026-10-01",
+  "source": "GitCode API v5 匿名实跑：/orgs/{cann|Ascend}/repos 全量 + /repos/{o}/{r}/pulls|issues|contributors|contents。脚本 C:/Users/华为/AppData/Local/Temp/gitcode_probe.py + gitcode_ext.py",
+  "scope_rule": "只登记近 30 天有更新的仓（cann 10 个 / Ascend 7 个，共 17 个）；其余 174 个仓（191-17，更新超 30 天，其中两边各约 20 个超 300 天）按用户口径【放弃】，不登记、不跟进。",
+  "gate": {
+    "cla": "必须签 CLA：个人入口 https://clasign.osinfra.cn/sign-cla/68cbd4a3dbabc050b436cdd4/individual（最佳实践=用**个人邮箱**签，公司邮箱可能被自动判无效）；企业员工走 /employee，企业代表走 /corporation。未签或 commit 邮箱与签署邮箱不一致 ⇒ 机器人打 cann-cla/no ⇒ PR 无法合入。",
+    "ci": "门禁靠**在 PR 下评论 `compile`** 触发（对 PR 的合并结果跑全仓 pre-commit 等）；纯文档 PR 也跑。",
+    "issue": "先提 Issue（模板 `Bug-Report|缺陷反馈`），评论 `/assign` 认领；非简单 bug 修复（新增特性/接口/配置/改流程）必须先 Issue 讨论方案。",
+    "language": "全中文流程；仓库文档多为中文（部分仓如 DeepEP/Triton-distributed-ascend 的 CONTRIBUTING 为英文）。",
+    "dco": "CANN 侧靠 CLA 标签而非 DCO；Gitee/GitCode 式 PR（merge_request）。"
+  },
+  "repos": [
+    {
+      "repo": "cann/crypto",
+      "verdict": "优先",
+      "why": "外部合入最猛：样本内 30 天合入 35 条中 32 条来自外部邮箱（山东大学 sdu.edu.cn 一人 19 条），说明外部 PR 真的会被合",
+      "stars": 62,
+      "updated": "2026-09-16",
+      "merged30_sample": 35,
+      "ext_merged30_sample": 32,
+      "ext_authors": [
+        [
+          "jiangbo.wang@mail.sdu.edu.cn",
+          19
+        ],
+        [
+          "karanocave@qq.com",
+          5
+        ],
+        [
+          "tianjun.zou@foxmail.com",
+          2
+        ],
+        [
+          "M202610664@xs.ustb.edu.cn",
+          2
+        ],
+        [
+          "3178612685@qq.com",
+          2
+        ],
+        [
+          "1595630181@qq.com",
+          1
+        ]
+      ],
+      "open_issues": 10,
+      "cla": true,
+      "compile_gate": true,
+      "ext_contributors": [
+        "Jiangbowang",
+        "KaranocaVe",
+        "m0_73542579",
+        "cxyjerryitkiller",
+        "Ethan_Zou"
+      ]
+    },
+    {
+      "repo": "Ascend/Triton-distributed-ascend",
+      "verdict": "优先",
+      "why": "30 天外部合入 20 条（gmail/qq/bytedance 混合），字节在推，题目多为 kernel/autotune 类，我们的 ASCEND/GPU 经验用得上",
+      "stars": 21,
+      "updated": "2026-09-16",
+      "merged30_sample": 54,
+      "ext_merged30_sample": 20,
+      "ext_authors": [
+        [
+          "baberrehman26@gmail.com",
+          6
+        ],
+        [
+          "615399365@qq.com",
+          5
+        ],
+        [
+          "1329295162@qq.com",
+          3
+        ],
+        [
+          "FrontclvSong@noreply.gitcode.com",
+          2
+        ],
+        [
+          "weilinquan@noreply.gitcode.com",
+          2
+        ],
+        [
+          "Estella516@noreply.gitcode.com",
+          1
+        ]
+      ],
+      "open_issues": 10,
+      "cla": true,
+      "compile_gate": true,
+      "ext_contributors": [
+        "ZCHNO",
+        "Hanshi Sun",
+        "Wenlei Bao",
+        "郑学贵",
+        "侯奇"
+      ]
+    },
+    {
+      "repo": "Ascend/MindIE-SD",
+      "verdict": "优先",
+      "why": "30 天外部合入 9 条（qq 为主），文档/镜像 tag 类 PR 有被合入先例",
+      "stars": 119,
+      "updated": "2026-09-09",
+      "merged30_sample": 36,
+      "ext_merged30_sample": 9,
+      "ext_authors": [
+        [
+          "wang-taicheng@qq.com",
+          6
+        ],
+        [
+          "m0_58285429@noreply.gitcode.com",
+          1
+        ],
+        [
+          "1105319308@qq.com",
+          1
+        ],
+        [
+          "2281753944@qq.com",
+          1
+        ]
+      ],
+      "open_issues": 95,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "changetheway",
+        "HAAZZZEEEE",
+        "wenjiali_sh",
+        "renxiaolong12",
+        "xiao-qing123"
+      ]
+    },
+    {
+      "repo": "cann/cannbot-knowledge",
+      "verdict": "优先",
+      "why": "30 天外部合入 8 条（qq/fudan），是 Agent 知识库插件仓，纯文档/脚本类改动多，门槛低",
+      "stars": 74,
+      "updated": "2026-09-15",
+      "merged30_sample": 33,
+      "ext_merged30_sample": 8,
+      "ext_authors": [
+        [
+          "ariel_zjl@noreply.gitcode.com",
+          2
+        ],
+        [
+          "287458000@qq.com",
+          2
+        ],
+        [
+          "25213050226@m.fudan.edu.cn",
+          1
+        ],
+        [
+          "karanocave@qq.com",
+          1
+        ],
+        [
+          "wenyuantao@noreply.gitcode.com",
+          1
+        ],
+        [
+          "yan-zhang21@tsinghua.org.cn",
+          1
+        ]
+      ],
+      "open_issues": 16,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "cann-robot",
+        "wangsj0012",
+        "utopiax",
+        "gcw_n4Vd0eRZ",
+        "KaranocaVe"
+      ]
+    },
+    {
+      "repo": "cann/oam-tools",
+      "verdict": "优先",
+      "why": "30 天外部合入 8 条（partner/outlook），故障定位工具仓，文档+小修",
+      "stars": 390,
+      "updated": "2026-09-30",
+      "merged30_sample": 40,
+      "ext_merged30_sample": 8,
+      "ext_authors": [
+        [
+          "liuxiaofang17@huawei-partners.com",
+          4
+        ],
+        [
+          "liaopinyi714@outlook.com",
+          4
+        ]
+      ],
+      "open_issues": 45,
+      "cla": true,
+      "compile_gate": false,
+      "ext_contributors": [
+        "mei-feiyao",
+        "lwx1255555",
+        "cann-robot",
+        "chenhuan1061620",
+        "imaginationhh"
+      ]
+    },
+    {
+      "repo": "cann/oil-gas-ops-prospect",
+      "verdict": "优先",
+      "why": "30 天外部合入 5 条（复旦/qq/163），行业 SIG 算子仓，有 LST 风格的小修被合入",
+      "stars": 54,
+      "updated": "2026-09-16",
+      "merged30_sample": 16,
+      "ext_merged30_sample": 5,
+      "ext_authors": [
+        [
+          "25213050226@m.fudan.edu.cn",
+          3
+        ],
+        [
+          "3901796952@qq.com",
+          1
+        ],
+        [
+          "karanocave@qq.com",
+          1
+        ]
+      ],
+      "open_issues": 9,
+      "cla": true,
+      "compile_gate": true,
+      "ext_contributors": [
+        "LiJianhao2",
+        "wangyunxiang1",
+        "wsnidie1",
+        "cann_robot",
+        "nawenyu139"
+      ]
+    },
+    {
+      "repo": "cann/cannbot",
+      "verdict": "优先",
+      "why": "30 天外部合入 3 条、PR 量 70；Agent 插件仓，改动小、迭代快",
+      "stars": 100,
+      "updated": "2026-09-02",
+      "merged30_sample": 44,
+      "ext_merged30_sample": 3,
+      "ext_authors": [
+        [
+          "ariel_zjl@noreply.gitcode.com",
+          1
+        ],
+        [
+          "OpSphere@noreply.gitcode.com",
+          1
+        ],
+        [
+          "yan-zhang21@tsinghua.org.cn",
+          1
+        ]
+      ],
+      "open_issues": 18,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "cann-robot",
+        "gcw_n4Vd0eRZ",
+        "Junren6415",
+        "cui_jiahao",
+        "cann_robot"
+      ]
+    },
+    {
+      "repo": "Ascend/EcoDevHub",
+      "verdict": "可投",
+      "why": "30 天外部合入 4 条；社区任务/生态仓，另有 34 个 open issue（含社区任务发布）",
+      "stars": 7,
+      "updated": "2026-09-07",
+      "merged30_sample": 11,
+      "ext_merged30_sample": 4,
+      "ext_authors": [
+        [
+          "gover001@noreply.gitcode.com",
+          2
+        ],
+        [
+          "rwfeng@noreply.gitcode.com",
+          1
+        ],
+        [
+          "858180665@qq.com",
+          1
+        ]
+      ],
+      "open_issues": 34,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "AscendAISystem",
+        "qq_38223480"
+      ]
+    },
+    {
+      "repo": "Ascend/DeepEP",
+      "verdict": "可投",
+      "why": "30 天外部合入 3 条（qq），但 CONTRIBUTING 是英文版（含 CLA 说明）+ compile 门禁",
+      "stars": 6,
+      "updated": "2026-09-16",
+      "merged30_sample": 26,
+      "ext_merged30_sample": 3,
+      "ext_authors": [
+        [
+          "316931656@qq.com",
+          3
+        ]
+      ],
+      "open_issues": 0,
+      "cla": true,
+      "compile_gate": true,
+      "ext_contributors": [
+        "overfitting_zh",
+        "Joyce_An",
+        "candy_cloud_fly",
+        "ryan_li"
+      ]
+    },
+    {
+      "repo": "cann/cann-samples",
+      "verdict": "可投",
+      "why": "30 天外部合入 2 条（songkai111 的 docs/内存泄漏修复），样例仓，CLA+compile 门禁齐全",
+      "stars": 742,
+      "updated": "2026-09-01",
+      "merged30_sample": 27,
+      "ext_merged30_sample": 2,
+      "ext_authors": [
+        [
+          "songkai111@noreply.gitcode.com",
+          2
+        ]
+      ],
+      "open_issues": 16,
+      "cla": true,
+      "compile_gate": true,
+      "ext_contributors": [
+        "cann-robot",
+        "xujiachen8",
+        "qq_51867290",
+        "wanker",
+        "cann-robot"
+      ]
+    },
+    {
+      "repo": "Ascend/MoonEP",
+      "verdict": "可投",
+      "why": "30 天外部合入 1 条（weixin_49096267 的 950 支持），仓刚起步、开放度高",
+      "stars": 3,
+      "updated": "2026-09-08",
+      "merged30_sample": 2,
+      "ext_merged30_sample": 1,
+      "ext_authors": [
+        [
+          "weixin_49096267@noreply.gitcode.com",
+          1
+        ]
+      ],
+      "open_issues": 0,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "asp0ex",
+        "leesou",
+        "jxp",
+        "Nyakku Shigure",
+        "esp0r"
+      ]
+    },
+    {
+      "repo": "cann/ge",
+      "verdict": "需观察",
+      "why": "体量最大（30 天样本内合入 21 条、open issue 60），但样本内**外部合入 0 条** ⇒ 评审偏内部，先观察再动",
+      "stars": 782,
+      "updated": "2026-09-09",
+      "merged30_sample": 21,
+      "ext_merged30_sample": 0,
+      "ext_authors": [],
+      "open_issues": 60,
+      "cla": true,
+      "compile_gate": true,
+      "ext_contributors": [
+        "cann-robot",
+        "wangxiaotian995",
+        "niyi01",
+        "cann-robot",
+        "wangyunxiang1"
+      ]
+    },
+    {
+      "repo": "cann/cannbot-sentry",
+      "verdict": "需观察",
+      "why": "30 天合入 40 条但外部 0 条；仓库描述是面向 Agent 的哨站，可能有内部节奏",
+      "stars": 77,
+      "updated": "2026-09-10",
+      "merged30_sample": 40,
+      "ext_merged30_sample": 0,
+      "ext_authors": [],
+      "open_issues": 16,
+      "cla": true,
+      "compile_gate": false,
+      "ext_contributors": [
+        "cui_jiahao",
+        "cann_robot",
+        "wangyunxiang1"
+      ]
+    },
+    {
+      "repo": "cann/ops-tilelang",
+      "verdict": "需观察",
+      "why": "30 天合入 25 条、外部 0 条；CONTRIBUTING.md 取不到（未建/路径不同），门禁细节待探",
+      "stars": 32,
+      "updated": "2026-09-30",
+      "merged30_sample": 25,
+      "ext_merged30_sample": 0,
+      "ext_authors": [],
+      "open_issues": 0,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "cui_jiahao",
+        "cann_robot"
+      ]
+    },
+    {
+      "repo": "Ascend/solution-agent",
+      "verdict": "需观察",
+      "why": "近 30 天只合入 3 条且全为内部；仓很新，流程未成型",
+      "stars": 23,
+      "updated": "2026-09-01",
+      "merged30_sample": 3,
+      "ext_merged30_sample": 0,
+      "ext_authors": [],
+      "open_issues": 0,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": [
+        "yk77"
+      ]
+    },
+    {
+      "repo": "cann/npu-simulator",
+      "verdict": "放弃",
+      "why": "近 30 天无任何合入（6 个 PR 未合）；内部节奏",
+      "stars": 13,
+      "updated": "2026-09-30",
+      "merged30_sample": 0,
+      "ext_merged30_sample": 0,
+      "ext_authors": [],
+      "open_issues": 2,
+      "cla": true,
+      "compile_gate": false,
+      "ext_contributors": []
+    },
+    {
+      "repo": "Ascend/monarch_npu",
+      "verdict": "放弃",
+      "why": "近 30 天 0 PR、0 issue、贡献者仅 1 人 ⇒ 死仓",
+      "stars": 0,
+      "updated": "2026-09-01",
+      "merged30_sample": 0,
+      "ext_merged30_sample": 0,
+      "ext_authors": [],
+      "open_issues": 0,
+      "cla": false,
+      "compile_gate": false,
+      "ext_contributors": []
+    }
+  ]
+}
