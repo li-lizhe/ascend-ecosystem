@@ -90,3 +90,4 @@
 - `Lightning-AI/pytorch-lightning #21960 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
 - `pytorch/pytorch #195260 — 2026-09-30 关闭 — [Feature Refactoring] Resolve fake process group supported devices la… → 已立项 upstream issue pytorch/pytorch#199239（fake PG 设备白名单 + LocalTensor RNG 状态分类，含 #195261），等 triaged/actionable 后重开 PR`
 - `Lightning-AI/pytorch-lightning #21987 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
+- `huggingface/peft #3860 — 2026-10-01 关闭 — fix: clear the NPU allocator cache in prepare_model_for_kbit_training`

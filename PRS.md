@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 10:57
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-02 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
-> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (-1) | 2 (+1) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 121 (+2) | 43 (+2) | 50 (-2) | 28 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 137 (+2) | 45 (+2) | 62 (-3) | 30 (+3) | |
+> | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 127 (+6) | 44 (+1) | 54 (+4) | 29 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 143 (+6) | 46 (+1) | 66 (+4) | 31 (+1) | |
 >
-> **较昨日（基线 2026-09-30）：提交 +2 · ✅ 已合入 +2 · 📡 跟踪中 -3 · ❌ 关闭未合入 +3**
+> **较昨日（基线 2026-10-01）：提交 +6 · ✅ 已合入 +1 · 📡 跟踪中 +4 · ❌ 关闭未合入 +1**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（50）
+## 📡 B 类跟踪中（54）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -106,10 +106,14 @@
 | EleutherAI/lm-evaluation-harness | fix(models): move hf-audiolm generate_until inputs to the… | [#4257](https://github.com/EleutherAI/lm-evaluation-harness/pull/4257) | 2026-09-27 |
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
 | NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
-| unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-09-29 |
 | open-compass/VLMEvalKit | fix: return evaluation summaries from dataset.evaluate() … | [#1709](https://github.com/open-compass/VLMEvalKit/pull/1709) | 2026-09-30 |
+| ByteDance-Seed/VeOmni | [data] fix: don't split HF iterable streams by worker aga… | [#1261](https://github.com/ByteDance-Seed/VeOmni/pull/1261) | 2026-10-01 |
+| open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-01 |
+| vllm-project/vllm-ascend | [Doc][Misc] Clarify container test environment prerequisi… | [#17864](https://github.com/vllm-project/vllm-ascend/pull/17864) | 2026-10-01 |
+| verl-project/verl | [trainer, data, tool] fix: correct misspellings in reward… | [#8084](https://github.com/verl-project/verl/pull/8084) | 2026-10-01 |
+| triton-lang/triton-ascend | [Docs](fix) add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
 
-## ✅ B 类已合入（43）
+## ✅ B 类已合入（44）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -156,8 +160,9 @@
 | huggingface/speech-to-speech | fix: pick Ascend NPU when resolving the `auto` device | [#616](https://github.com/huggingface/speech-to-speech/pull/616) | 2026-09-29 |
 | modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-30 |
 | axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-30 |
+| unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-10-01 |
 
-## ❌ B 类关闭未合入（28）
+## ❌ B 类关闭未合入（29）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -189,6 +194,7 @@
 | huggingface/diffusers | fix(minimax): enable autocast on all accelerators in VAE … | [#14884](https://github.com/huggingface/diffusers/pull/14884) | 2026-09-28 |
 | Lightning-AI/pytorch-lightning | fix: set sampler epoch before creating iterator in setup_… | [#21987](https://github.com/Lightning-AI/pytorch-lightning/pull/21987) | 2026-09-30 |
 | Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-30 |
+| huggingface/peft | fix: clear the NPU allocator cache in prepare_model_for_k… | [#3860](https://github.com/huggingface/peft/pull/3860) | 2026-10-01 |
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 
