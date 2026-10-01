@@ -9,7 +9,10 @@
     "issue": "先提 Issue（模板 `Bug-Report|缺陷反馈`），评论 `/assign` 认领；非简单 bug 修复（新增特性/接口/配置/改流程）必须先 Issue 讨论方案。",
     "language": "全中文流程；仓库文档多为中文（部分仓如 DeepEP/Triton-distributed-ascend 的 CONTRIBUTING 为英文）。",
     "dco": "CANN 侧靠 CLA 标签而非 DCO；Gitee/GitCode 式 PR（merge_request）。",
-    "cla_verified": "【2026-10-01 实测】查询接口 https://clasign.osinfra.cn/api/v1/individual-signing/<pid>?email=<邮箱>（成功= signed 与 version_matched 双 true）。TorchNPU/Ascend 社区 pid=690ca9ddf91c03dee6082ab1（入口见 Ascend/pytorch/CONTRIBUTING.md，标签 ascend-cla）：lizhe.li@huawei.com → signed=true/version_matched=true/type=corporation ✅ 可用；CANN 社区 pid=68cbd4a3dbabc050b436cdd4（标签 cann-cla）：同邮箱 → signed=false ❌ 未签；147392333@qq.com 两边均为 false。⇒ Ascend 组织现在即可开工；CANN 组织需另签（个人邮箱签个人 CLA，或用 @huawei.com 走法人贡献者登记/企业员工流程）。邮箱一致性：CANN=以 commit 的 committer 邮箱为准；Ascend=平台默认邮箱/commit 邮箱/签署邮箱三者一致；与 GitHub 侧 QQ 身份冲突 ⇒ 按平台分身份。"
+    "cla_verified": "【2026-10-01 实测核对（双向）】查询接口 https://clasign.osinfra.cn/api/v1/individual-signing/<pid>?email=<邮箱>，成功= signed 与 version_matched 双 true。CANN 项目 pid=68cbd4a3dbabc050b436cdd4：147392333@qq.com → signed:true/version_matched:true ✅（个人 CLA，已签）；lizhe.li@huawei.com → false。TorchNPU/Ascend 项目 pid=690ca9ddf91c03dee6082ab1：lizhe.li@huawei.com → signed:true/version_matched:true ✅（type=corporation，华为企业 CLA 覆盖）；147392333@qq.com → false。⇒ 两套 CLA 互相独立，**提交身份必须分平台**。",
+    "identity": "cann/* 仓提交用 `147392333@qq.com`；Ascend/* 仓提交用 `lizhe.li@huawei.com`。Ascend 侧要求「平台默认邮箱 = commit 邮箱 = CLA 签署邮箱」三者一致，且 CLA 机器人以 **commit 的 committer 邮箱**为凭；两邮箱均已挂到 GitCode 账号 lizhe_li 上。",
+    "flow_verified": "【2026-10-01 全链路实测通过】令牌存 `~/.config/gc-token`，用法 `api.gitcode.com/api/v5` + 请求头 `PRIVATE-TOKEN`（也支持 ?access_token=）；① fork：`POST /repos/{owner}/{repo}/forks`（返回 lizhe_li/<repo>）② push：SSH `git@gitcode.com:lizhe_li/<repo>.git`（本地 user.email 必须先设成对应平台身份）③ 建 MR：`POST /repos/{owner}/{repo}/pulls`，body {title, head:'<user>:<branch>', base, body}④ 评论 `compile` 触发流水线，评论 `/check-cla` 复检 CLA，读状态 `GET /repos/{o}/{r}/pulls/{n}` 看 labels。MR #306 实测：机器人自动打 `ascend-cla/yes`（CLA 链路已通）+ `ci-pipeline-running`/`SC-SUCC`；合入还差 `ci-pipeline-passed`、`docs-ci-pipeline-success` 与 `lgtm`/`approved`（由 reviewers/committer 执行 /lgtm、/approve）。",
+    "issue_rule": "Ascend 侧同样要求先 Issue 后 MR；本仓 issue #16 为开放 [bug]，可在 issue 下直接认领后提 MR。"
   },
   "repos": [
     {
@@ -100,6 +103,22 @@
         "Wenlei Bao",
         "郑学贵",
         "侯奇"
+      ],
+      "our_prs": [
+        {
+          "number": 306,
+          "title": "fix(docs): correct stale libtorch_cuda.so comment in triton_dist/__init__.py",
+          "branch": "fix/stale-libtorch-comment",
+          "issue": 16,
+          "state": "open",
+          "created": "2026-10-01",
+          "labels": [
+            "ascend-cla/yes",
+            "ci-pipeline-running",
+            "SC-SUCC"
+          ],
+          "identity": "lizhe.li@huawei.com"
+        }
       ]
     },
     {

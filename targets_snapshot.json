@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T16:14:15+08:00",
+  "updated": "2026-10-01T16:54:58+08:00",
   "repos": {
     "triton-lang/triton-ascend": {
       "stars": 179,
@@ -14,11 +14,11 @@
     },
     "sgl-project/sglang": {
       "stars": 36686,
-      "open_issues": 5441,
+      "open_issues": 5443,
       "pushed": "2026-10-01",
-      "merged14": 819,
-      "merged7": 357,
-      "open_prs": 4531,
+      "merged14": 822,
+      "merged7": 360,
+      "open_prs": 4533,
       "ours": {
         "40355": "OPEN"
       }
@@ -39,16 +39,16 @@
       }
     },
     "vllm-project/vllm-omni": {
-      "stars": 7163,
-      "open_issues": 1892,
+      "stars": 7164,
+      "open_issues": 1897,
       "pushed": "2026-10-01",
       "merged14": 265,
       "merged7": 85,
-      "open_prs": 1039,
+      "open_prs": 1044,
       "ours": {}
     },
     "verl-project/verl": {
-      "stars": 23715,
+      "stars": 23714,
       "open_issues": 1295,
       "pushed": "2026-09-30",
       "merged14": 52,
