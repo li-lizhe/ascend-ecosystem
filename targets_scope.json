@@ -120,7 +120,7 @@
           "title": "[Doc][Misc] Clarify container test environment prerequisites in testing.md",
           "opened": "2026-10-01",
           "for_issue": 17718,
-          "status_note": "单文件 +46/-0；只做 #17718『问题一』（testing.md 前置条件：镜像已含 vLLM/vllm-ascend、挂载后重装并 _build_info 自检、source CANN/NNAL、SOC_VERSION 兜底、COMPILE_CUSTOM_KERNELS=0、镜像源兜底）；已在 issue 留认领评论；index.md 部分刻意不做（#9580/#9541/#16733 三个老 PR 压在同一节）"
+          "status_note": "单文件 +45/-0；只做 #17718『问题一』（testing.md 前置条件）；已在 issue 留认领评论；index.md 部分刻意不做（#9580/#9541/#16733 压在同一节）。过门记录：初版两处 docs-CI 翻红已修——① Docs link check 对粘贴的华为云 index URL 返回 429 ⇒ 改为文字指向 CPU tab；② mkdocs --strict 因相对路径少一层而 abort（docs_dir=docs/source）⇒ 改 ../../getting_started/installation.md；本地用 uv 建 venv 装 docs/requirements-docs.txt 后跑 DOCS_LANG=en bash tools/rtd_build.sh 复现+验证。当前 head：DCO / pre-commit / Markdown link check / RTD(en+cn) 全绿"
         }
       ],
       "candidates": [
@@ -128,7 +128,7 @@
           "ref": "#17718",
           "type": "文档(开发者贡献场景)",
           "status": "已投一半（PR #17864）",
-          "note": "已覆盖 testing.md 前置条件；index.md『Run CI locally』表述仍待处理（被 #9580/#9541/#16733 压着）"
+          "note": "已覆盖 testing.md 前置条件（PR #17864，CI 全绿）；index.md『Run CI locally』表述仍待处理（被 #9580/#9541/#16733 压着）"
         },
         {
           "ref": "#16543",
@@ -207,7 +207,7 @@
           "title": "[trainer, data, tool] fix: correct misspellings in reward loop comments and install script",
           "opened": "2026-10-01",
           "for_issue": null,
-          "status_note": "4 文件 +4/-4；原含 docs/advance/reward_loop.rst 两处 initalize，核实发现他人 open PR #7721 已改同两行 ⇒ 本 PR 主动剔除该文件并在 PR 里说明，避免撞车"
+          "status_note": "4 文件 +4/-4；本仓首个 PR。注意：verl 对首次贡献者的 fork PR 需要维护者手动批准工作流 ⇒ 所有 run 处于 action_required（不产生 check-run，见 CI 盲区），不是失败，等维护者点批准即可"
         }
       ],
       "candidates": [
@@ -248,6 +248,6 @@
       ]
     }
   ],
-  "next_actions": "① triton-ascend #2449：8/9 CI 绿、剩 Docs examples test (a5) 在跑，等 code-review/Docs gate 结果，翻红即修；② verl #8084 + vllm-ascend #17864 今日并行开，盯 CI 与 review；③ verl 下一候选：Ascend 安装/示例文档 vs 仓库脚本一致性核对（纯静态）；④ sglang：只给 #40355 催 run-ci 标签（09-26 已催一次无人应），标签门解决前不新增；⑤ vllm-omni：暂缓。",
+  "next_actions": "① vllm-ascend #17864：CI/RTD 全绿，等 review（内部 doc team 常接手同类文档）；② triton-ascend #2449：8/9 绿，剩 Docs examples test (a5) 排队；③ verl #8084：等维护者批准工作流（action_required），批准后看 check-pr-title 是否认标题；④ verl 下一候选：Ascend 安装/示例文档 vs 仓库脚本一致性核对（纯静态）；⑤ sglang：只给 #40355 催 run-ci 标签；vllm-omni：暂缓。",
   "updated": "2026-10-01"
 }
