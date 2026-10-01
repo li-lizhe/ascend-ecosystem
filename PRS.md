@@ -1,6 +1,6 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 06:12
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-01 10:57
 >
 > 括号内为**较前一次记录的变化量**。
 >
@@ -46,7 +46,9 @@
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
 | pytorch/pytorch | [Testcase Refactoring] Add NPU/PrivateUse1 support to common_fsdp.py | [#193347](https://github.com/pytorch/pytorch/pull/193347) | 2026-08-13 |
-| pytorch/pytorch | [Feature Refactoring] Resolve fake process group supported devices la… | [#195260](https://github.com/pytorch/pytorch/pull/195260) | 2026-09-30 |
+| pytorch/pytorch | [Feature Refactoring] Resolve fake process group supported devices la… | [#195260](https://github.com/pytorch/pytorch/pull/195260) ⏳ | 2026-09-30 |
+
+> ⏳ **非死案（待重开）**：#195260 — 已立项 upstream issue pytorch/pytorch#199239（fake PG 设备白名单 + LocalTensor RNG 状态分类，含 #195261），等 triaged/actionable 后重开 PR
 
 逐条留档见 `EXCLUDED.md`。
 

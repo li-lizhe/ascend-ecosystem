@@ -88,5 +88,5 @@
 - `kohya-ss/musubi-tuner #1079 — 2026-09-27 关闭 — Fix fp8_scaled dtype mismatch on non-scaled_mm path`
 - `huggingface/diffusers #14884 — 2026-09-28 关闭 — fix(minimax): enable autocast on all accelerators in VAE decoding`
 - `Lightning-AI/pytorch-lightning #21960 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
-- `pytorch/pytorch #195260 — 2026-09-30 关闭 — [Feature Refactoring] Resolve fake process group supported devices la…`
+- `pytorch/pytorch #195260 — 2026-09-30 关闭 — [Feature Refactoring] Resolve fake process group supported devices la… → 已立项 upstream issue pytorch/pytorch#199239（fake PG 设备白名单 + LocalTensor RNG 状态分类，含 #195261），等 triaged/actionable 后重开 PR`
 - `Lightning-AI/pytorch-lightning #21987 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
