@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-02 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-03 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 127 (+6) | 44 (+1) | 54 (+4) | 29 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 143 (+6) | 46 (+1) | 66 (+4) | 31 (+1) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 130 (+3) | 45 (+1) | 56 (+2) | 29 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 146 (+3) | 47 (+1) | 68 (+2) | 31 (±0) | |
 >
-> **较昨日（基线 2026-10-01）：提交 +6 · ✅ 已合入 +1 · 📡 跟踪中 +4 · ❌ 关闭未合入 +1**
+> **较昨日（基线 2026-10-02）：提交 +3 · ✅ 已合入 +1 · 📡 跟踪中 +2 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（54）
+## 📡 B 类跟踪中（56）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -96,7 +96,6 @@
 | modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-09-23 |
 | fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-09-24 |
 | OpenRLHF/OpenRLHF | loss 归一化设备取自 loss mask（非 `torch.cuda`） | [#1365](https://github.com/OpenRLHF/OpenRLHF/pull/1365) | 2026-09-24 |
-| jeshraghian/snntorch | fix(loss): apply class weights per sample in the MSE loss… | [#463](https://github.com/jeshraghian/snntorch/pull/463) | 2026-09-25 |
 | espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-09-25 |
 | InternLM/xtuner | fix(datasets): build the DP all_reduce tensor on the mesh… | [#2127](https://github.com/InternLM/xtuner/pull/2127) | 2026-09-25 |
 | EleutherAI/lm-evaluation-harness | fix(models): point the `hf-audiolm-qwen` lazy mapping at … | [#4244](https://github.com/EleutherAI/lm-evaluation-harness/pull/4244) | 2026-09-26 |
@@ -111,9 +110,12 @@
 | open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-01 |
 | vllm-project/vllm-ascend | [Doc][Misc] Clarify container test environment prerequisi… | [#17864](https://github.com/vllm-project/vllm-ascend/pull/17864) | 2026-10-01 |
 | verl-project/verl | [trainer, data, tool] fix: correct misspellings in reward… | [#8084](https://github.com/verl-project/verl/pull/8084) | 2026-10-01 |
-| triton-lang/triton-ascend | [Docs](fix) add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
+| triton-lang/triton-ascend | Docs add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
+| debpalash/VoiceStudio | fix(system): report a host Ascend NPU in device info and … | [#2582](https://github.com/debpalash/VoiceStudio/pull/2582) | 2026-10-02 |
+| tile-ai/tilelang | fix(autodd): reject non-positive --jobs instead of hanging | [#3385](https://github.com/tile-ai/tilelang/pull/3385) | 2026-10-02 |
+| sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-02 |
 
-## ✅ B 类已合入（44）
+## ✅ B 类已合入（45）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -161,6 +163,7 @@
 | modelscope/FunASR | fix(amp): resolve autocast/GradScaler device type for non… | [#3735](https://github.com/modelscope/FunASR/pull/3735) | 2026-09-30 |
 | axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-30 |
 | unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-10-01 |
+| jeshraghian/snntorch | fix(loss): apply class weights per sample in the MSE loss… | [#463](https://github.com/jeshraghian/snntorch/pull/463) | 2026-10-02 |
 
 ## ❌ B 类关闭未合入（29）
 
