@@ -1,0 +1,25 @@
+extracted converter (lines verbatim from comfyui/z_image/nodes.py):
+    def convert_state_dict(old_state_dict):
+        new_state_dict = {}
+        for key, value in old_state_dict.items():
+            # 1. Convert x_embedder to all_x_embedder.2-1
+            if key.startswith('x_embedder.'):
+                new_key = key.replace('x_embedder.', 'all_x_embedder.2-1.' ...
+gate: if "x_embedder.weight" in transformer_state_dict.keys():
+prefix-strip block present in file: True
+
+[BEFORE fix: ComfyUI-prefixed checkpoint, no prefix handling]
+  keys=9  prefix kept=True
+  -> load_state_dict(strict=True): RuntimeError
+     Missing key(s):    ['all_final_layer.2-1.weight', 'all_x_embedder.2-1.bias', 'all_x_embedder.2-1.weight'] ...
+     Unexpected key(s): ['model.diffusion_model.context_refiner.0.attention.qkv.weight', 'model.diffusion_model.final_layer.weight', 'model.diffusion_model.layers.0.attention.k_norm.weight'] ...
+
+[AFTER fix: same checkpoint with the prefix stripped first]
+  keys=13  prefix kept=False
+  -> load_state_dict(strict=True): OK
+
+[REFERENCE: bare-key checkpoint (already worked)]
+  keys=13  prefix kept=False
+  -> load_state_dict(strict=True): OK
+
+RESULT: PASS - fix converts the prefixed checkpoint to the expected key space

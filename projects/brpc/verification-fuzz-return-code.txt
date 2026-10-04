@@ -1,0 +1,33 @@
+=== bp: brpc fuzzing harness return-value contract, clang 17.0.6 / openEuler 24.03 (aarch64) ===
+host: 192.168.9.169 (ssh channel; CPU-only verification, no NPU involved)
+
+--- BEFORE (return 1) ---
+$ clang++ -std=c++17 -DBEFORE_FIX -o bv_before bv.cpp
+$ ./bv_before
+exit=134
+stderr: bv.cpp:35: int main(): Assertion `r == 0 || r == -1' failed.
+        bash: 行 1：112034 Aborted （核心已转储）./bv_before
+
+--- AFTER (return 0) ---
+$ clang++ -std=c++17 -o bv_after bv.cpp
+$ ./bv_after
+LLVMFuzzerTestOneInput(empty input) -> 0
+return-value contract satisfied: CBRes=0
+exit=0
+
+--- AFTER linked with the real libFuzzer, -runs=5 ---
+$ clang++ -std=c++17 -fsanitize=fuzzer -o bf bf.cpp
+$ ./bf -runs=5
+INFO: Loaded 1 PC tables (4 PCs): 4 [0xaaaae1f83130,0xaaaae1f83170),
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 2 ft: 2 corp: 1/1b exec/s: 0 rss: 26Mb
+#5	DONE   cov: 2 ft: 2 corp: 1/1b lim: 4 exec/s: 0 rss: 26Mb
+Done 5 runs in 0 second(s)
+exit=0
+
+--- static check on the repo ---
+$ grep -rc "return 1;" test/fuzzing/*.cpp      # before: 18 files x 1
+$ grep -rn "return 1;" test/fuzzing/          # after: none
+$ git diff --stat                              # 18 files changed, 18 insertions(+), 18 deletions(-)
+$ grep -rn "return -1" test/fuzzing/           # none (no pre-existing convention to follow)
