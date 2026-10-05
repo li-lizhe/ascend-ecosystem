@@ -52,8 +52,8 @@
         {
           "ref": "#2306",
           "type": "构建(Filecheck 保留)",
-          "status": "可投·静态",
-          "note": "[2026-10-05 实跑] Filecheck 因安全检查被删；维护者倾向『方案1：改 LLVM 构建模式加编译选项』。纯构建配置，本机可静态核对 dif。"
+          "status": "已投（PR #2454）",
+          "note": "[2026-10-05 夜岗投出] 实现维护者方案1：把 safe_compile.cmake 的加固选项（-fstack-protector-strong / -Wl,-z,relro,-z,now -pie -s / PIC）加进 LLVM 构建（llvm-build.yml + build/almalinux.Dockerfile），并还原 #2297 删掉的 FileCheck 拷贝 hunk。本机已验：改后 patch 对 triton v3.6.0 CMakeLists.txt 可干净 apply（rc=0）且 FileCheck 保留；CRLF=0。未验：LLVM 构建(240min)与安全检查（fork PR 无 OBS 密钥，CI 跑不了）。等 CI/CLA。"
         },
         {
           "ref": "#2246",
@@ -352,6 +352,6 @@
       ]
     }
   ],
-  "next_actions": "① [10-05 已投] vllm-ascend #17784 -> PR #17888（等 pre-commit/CLA/CI）；② 次选：#17786（需维护者定 no-op SOC allow-list）、sglang #42510（受 run-ci 标签门所阻，暂不投）、verl #8030（transformers 钉版致 Qwen3.5 分词错，需定钉哪版）；③ #17787/#17789 报者本人建议先讨论（MODULE_DIR/依赖对齐属维护者决策），暂不投；④ 真机项 #17856/#2291/#2246 待真机通路。",
-  "updated": "2026-10-05"
+  "next_actions": "① [10-05 夜岗已投] triton-ascend #2306 -> PR #2454（实现方案1：LLVM 构建加固 + 还原 FileCheck；待 CI/CLA，注意 fork PR 可能无 OBS 密钥跑不了 llvm-build）；② [10-05 已投] vllm-ascend #17784 -> PR #17888（等 pre-commit/CLA/CI）；③ 次选：#17786（需维护者定 no-op SOC allow-list）、verl #8030（transformers 钉版被 vllm0.29/sglang0.5.20 锁死，不可动）；④ sglang 受 run-ci 标签门所阻（#40355 起 5 天无 CI），标签问题解决前不新增；⑤ 真机项 #17856/#2291/#2246 待真机通路。",
+  "updated": "2026-10-05 23:30"
 }
