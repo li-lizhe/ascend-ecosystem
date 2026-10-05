@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-05 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-06 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 134 (+3) | 45 (±0) | 60 (+3) | 29 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 150 (+3) | 47 (±0) | 72 (+3) | 31 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 139 (+5) | 48 (+3) | 62 (+2) | 29 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 155 (+5) | 50 (+3) | 74 (+2) | 31 (±0) | |
 >
-> **较昨日（基线 2026-10-04）：提交 +3 · ✅ 已合入 ±0 · 📡 跟踪中 +3 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-05）：提交 +5 · ✅ 已合入 +3 · 📡 跟踪中 +2 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（60）
+## 📡 B 类跟踪中（62）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -116,10 +116,12 @@
 | sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-02 |
 | modelscope/ms-swift | fix(patcher): resolve MP+DDP device_map memory through th… | [#10292](https://github.com/modelscope/ms-swift/pull/10292) | 2026-10-04 |
 | aigc-apps/VideoX-Fun | fix(z-image): strip the ComfyUI `model.diffusion_model.` key prefix before converting | [#522](https://github.com/aigc-apps/VideoX-Fun/pull/522) | 2026-10-04 |
-| apache/brpc | fix(fuzzing): return 0 (not 1) from the size guard in every harness | [#3579](https://github.com/apache/brpc/pull/3579) | 2026-10-04 |
-| fangwei123456/spikingjelly | fix(neuron): build SlidingPSN gemm weight with the parameter dtype | [#769](https://github.com/fangwei123456/spikingjelly/pull/769) | 2026-10-04 |
+| triton-lang/triton-ascend | [safe](fix) Harden the LLVM build and keep FileCheck in t… | [#2454](https://github.com/triton-lang/triton-ascend/pull/2454) | 2026-10-05 |
+| vllm-project/speculators | fix(data): abort dataset build when the render endpoint f… | [#1196](https://github.com/vllm-project/speculators/pull/1196) | 2026-10-05 |
+| gpustack/gpustack | fix(chart): refuse unsupported worker.gpuVendors names | [#6338](https://github.com/gpustack/gpustack/pull/6338) | 2026-10-05 |
+| vllm-project/vllm-ascend | [BugFix] Exit non-zero when batch_invariant ops installat… | [#17888](https://github.com/vllm-project/vllm-ascend/pull/17888) | 2026-10-05 |
 
-## ✅ B 类已合入（45）
+## ✅ B 类已合入（48）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -168,6 +170,9 @@
 | axolotl-ai-cloud/axolotl | offload + AMP kernels 设备无关（合并#3996） | [#3995](https://github.com/axolotl-ai-cloud/axolotl/pull/3995) | 2026-09-30 |
 | unslothai/unsloth | fix(device_type): flush and fence through the shared devi… | [#12284](https://github.com/unslothai/unsloth/pull/12284) | 2026-10-01 |
 | jeshraghian/snntorch | fix(loss): apply class weights per sample in the MSE loss… | [#463](https://github.com/jeshraghian/snntorch/pull/463) | 2026-10-02 |
+| vladmandic/sdnext | fix(control): release the device cache through devices.to… | [#5128](https://github.com/vladmandic/sdnext/pull/5128) | 2026-10-05 |
+| apache/brpc | fix(fuzzing): return 0 (not 1) from the size guard in every harness | [#3579](https://github.com/apache/brpc/pull/3579) | 2026-10-05 |
+| fangwei123456/spikingjelly | fix(neuron): build SlidingPSN gemm weight with the parameter dtype | [#769](https://github.com/fangwei123456/spikingjelly/pull/769) | 2026-10-05 |
 
 ## ❌ B 类关闭未合入（29）
 
