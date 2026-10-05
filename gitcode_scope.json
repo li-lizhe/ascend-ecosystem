@@ -522,8 +522,10 @@
       "total_reported": 19441,
       "rows_captured": 9850,
       "pages_done": "200/389",
-      "status": "partial·疑似限流（第 200 页后连续 3 页 JSON 解析失败即收工）",
-      "resume": "脚本已改为增量落盘（含 pages_done/complete 字段）；限流窗口过后重跑即可覆盖后续页。"
+      "status": "partial·深度分页上限",
+      "resume": "脚本支持 `python gc_model_catalog.py 201 389` 增量续跑（按 url 去重合并），但受同一上限约束；要覆盖 19,441 需按维度（组织/任务类型/sort 维度）分区多次拉取。",
+      "limit_finding": "接口深度分页上限 = 10000 条（200 页 × per_page 50）；第 201 页起返回空体/非 JSON，与限流无关，重跑无效。",
+      "recovered_full": "ascend-gitcode-ops/data/ascend_model_catalog.p200.json（200 页快照副本）"
     },
     "observed": {
       "hw_tag_all_npu": true,
