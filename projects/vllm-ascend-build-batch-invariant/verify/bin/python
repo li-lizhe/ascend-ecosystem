@@ -1,0 +1,3 @@
+#!/bin/bash
+# Stub python -> venv interpreter (only used for `python -m zipfile`).
+exec "/c/Users/华为/AppData/Local/hermes/hermes-agent/venv/Scripts/python" "$@"

@@ -1,0 +1,83 @@
+wrote C:\Users\华为\ascend-eco-repo\projects\vllm-ascend-build-batch-invariant\verify\whl.zip
+### scenario=download-fail script=before.sh
+[install_batch_invariant] Starting batch_invariant installation...
+[install_batch_invariant] SOC_ARG=ascend910b
+[install_batch_invariant] Downloading batch_invariant run package...
+curl: (22) stub download failure
+[install_batch_invariant] Failed to download batch_invariant run package: https://vllm-ascend.obs.cn-north-4.myhuaweicloud.com/vllm-ascend/cann-ops-batch_invariant-910b-2.0.0-linux.x86_64.run
+[install_batch_invariant] Downloading batch_invariant whl package...
+[install_batch_invariant] Failed to download batch_invariant whl package: https://vllm-ascend.obs.cn-north-4.myhuaweicloud.com/vllm-ascend/batch_invariant-torch_ops_extension-2.0.0.zip
+[install_batch_invariant] batch_invariant_ops build completed
+EXIT_CODE=0
+
+### scenario=download-fail script=after.sh
+[install_batch_invariant] Starting batch_invariant installation...
+[install_batch_invariant] SOC_ARG=ascend910b
+[install_batch_invariant] Downloading batch_invariant run package...
+curl: (22) stub download failure
+[install_batch_invariant] Failed to download batch_invariant run package: https://vllm-ascend.obs.cn-north-4.myhuaweicloud.com/vllm-ascend/cann-ops-batch_invariant-910b-2.0.0-linux.x86_64.run
+[install_batch_invariant] Downloading batch_invariant whl package...
+[install_batch_invariant] Failed to download batch_invariant whl package: https://vllm-ascend.obs.cn-north-4.myhuaweicloud.com/vllm-ascend/batch_invariant-torch_ops_extension-2.0.0.zip
+[install_batch_invariant] ERROR: batch_invariant_ops build failed
+EXIT_CODE=1
+
+### scenario=install-fail script=before.sh
+[install_batch_invariant] Starting batch_invariant installation...
+[install_batch_invariant] SOC_ARG=ascend910b
+[install_batch_invariant] Downloading batch_invariant run package...
+[install_batch_invariant] Running installer: cann-ops-batch_invariant-910b-2.0.0-linux.x86_64.run
+[stub run installer] exiting 1
+[install_batch_invariant] Failed to install batch_invariant run package
+[install_batch_invariant] Downloading batch_invariant whl package...
+[install_batch_invariant] Building and installing batch_invariant whl package...
+[stub build_and_install] ok
+[install_batch_invariant] batch_invariant whl package installed successfully
+/c/Users/华为/ascend-eco-repo/projects/vllm-ascend-build-batch-invariant/verify/run
+[install_batch_invariant] batch_invariant_ops build completed
+EXIT_CODE=0
+
+### scenario=install-fail script=after.sh
+[install_batch_invariant] Starting batch_invariant installation...
+[install_batch_invariant] SOC_ARG=ascend910b
+[install_batch_invariant] Downloading batch_invariant run package...
+[install_batch_invariant] Running installer: cann-ops-batch_invariant-910b-2.0.0-linux.x86_64.run
+[stub run installer] exiting 1
+[install_batch_invariant] Failed to install batch_invariant run package
+[install_batch_invariant] Downloading batch_invariant whl package...
+[install_batch_invariant] Building and installing batch_invariant whl package...
+[stub build_and_install] ok
+[install_batch_invariant] batch_invariant whl package installed successfully
+/c/Users/华为/ascend-eco-repo/projects/vllm-ascend-build-batch-invariant/verify/run
+[install_batch_invariant] ERROR: batch_invariant_ops build failed
+EXIT_CODE=1
+
+### scenario=all-success script=before.sh
+[install_batch_invariant] Starting batch_invariant installation...
+[install_batch_invariant] SOC_ARG=ascend910b
+[install_batch_invariant] Downloading batch_invariant run package...
+[install_batch_invariant] Running installer: cann-ops-batch_invariant-910b-2.0.0-linux.x86_64.run
+[stub run installer] exiting 0
+[install_batch_invariant] batch_invariant run package installed successfully
+[install_batch_invariant] Downloading batch_invariant whl package...
+[install_batch_invariant] Building and installing batch_invariant whl package...
+[stub build_and_install] ok
+[install_batch_invariant] batch_invariant whl package installed successfully
+/c/Users/华为/ascend-eco-repo/projects/vllm-ascend-build-batch-invariant/verify/run
+[install_batch_invariant] batch_invariant_ops build completed
+EXIT_CODE=0
+
+### scenario=all-success script=after.sh
+[install_batch_invariant] Starting batch_invariant installation...
+[install_batch_invariant] SOC_ARG=ascend910b
+[install_batch_invariant] Downloading batch_invariant run package...
+[install_batch_invariant] Running installer: cann-ops-batch_invariant-910b-2.0.0-linux.x86_64.run
+[stub run installer] exiting 0
+[install_batch_invariant] batch_invariant run package installed successfully
+[install_batch_invariant] Downloading batch_invariant whl package...
+[install_batch_invariant] Building and installing batch_invariant whl package...
+[stub build_and_install] ok
+[install_batch_invariant] batch_invariant whl package installed successfully
+/c/Users/华为/ascend-eco-repo/projects/vllm-ascend-build-batch-invariant/verify/run
+[install_batch_invariant] batch_invariant_ops build completed successfully
+EXIT_CODE=0
+

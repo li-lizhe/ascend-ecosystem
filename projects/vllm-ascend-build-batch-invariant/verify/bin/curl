@@ -1,0 +1,21 @@
+#!/bin/bash
+# Stub curl for the harness. Behaviour driven by CURL_MODE.
+url=""
+for a in "$@"; do
+  case "$a" in
+    http*) url="$a" ;;
+  esac
+done
+base="${url##*/}"
+case "${CURL_MODE:-fail}" in
+  fail) echo "curl: (22) stub download failure" >&2; exit 22 ;;
+  ok)
+    if [[ "$base" == *.run ]]; then
+      printf '#!/bin/bash\necho "[stub run installer] exiting %s"\nexit %s\n' "${RUN_EXIT:-0}" "${RUN_EXIT:-0}" > "$base"
+      chmod +x "$base"
+    else
+      cp "$ZIP_SRC" "$base"
+    fi
+    exit 0
+    ;;
+esac
