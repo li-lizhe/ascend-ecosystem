@@ -501,5 +501,52 @@
       "compile_gate": false,
       "ext_contributors": []
     }
-  ]
+  ],
+  "updated": "2026-10-05",
+  "model_ecosystem": {
+    "title": "GitCode 昇腾模型生态（NPU 硬件口径）模型目录 —— 新增候选源",
+    "declared_scope": "用户 2026-10-05 指定：ai.gitcode.com/models?hardware=NPU 目录内的模型也在候选范围内。",
+    "ui_url": "https://ai.gitcode.com/models?hardware=NPU",
+    "resolved_entry": "ai.gitcode.com 对未登录/直连一律 302 到 gitcode.com（/models 不是前端路由）。真实入口：gitcode.com 首页左侧「昇腾模型生态」按钮 → https://gitcode.com/?tn=ascend-overview（生态全景：模型总数 321 / 已适配 155 / 已验证 2894 / 调优中 5 / Skills 162 / Spaces 1345），其「完整目录」= https://gitcode.com/?tn=6a55a84dcbe9c05bd87c4c6f（channel_id=6a55a84dcbe9c05bd87c4c6f）。",
+    "api": "https://web-api.gitcode.com/api/v1/agg/index?channel_id=6a55a84dcbe9c05bd87c4c6f&sort=all&repo_type=-1&m_code=recommendList&d_code=projects&c_id=6a55a84dcbe9c05bd87c4c6f&page=N&per_page=50",
+    "api_notes": [
+      "per_page 上限 50（100 起返回空体）；total=19441、page_count=389。",
+      "直连 curl 被 CloudWAF 拦（HTTP 418 访问被拦截），必须复用浏览器登录态 cookie：CDP Network.getCookies 导出 → %LOCALAPPDATA%\\Temp\\gc_session.json（脚本已内置）。",
+      "hardware=NPU 参数对 total 无影响（目录本身就是昇腾生态）；硬件证据在条目字段 model_meta_data_other=['NPU']。"
+    ],
+    "scan": {
+      "script": "ascend-gitcode-ops/scripts/gc_model_catalog.py",
+      "data": "ascend-gitcode-ops/data/ascend_model_catalog.json",
+      "active": "ascend-gitcode-ops/data/ascend_model_catalog_active.json",
+      "run_at": "2026-10-05 11:39 CST",
+      "total_reported": 19441,
+      "rows_captured": 9850,
+      "pages_done": "200/389",
+      "status": "partial·疑似限流（第 200 页后连续 3 页 JSON 解析失败即收工）",
+      "resume": "脚本已改为增量落盘（含 pages_done/complete 字段）；限流窗口过后重跑即可覆盖后续页。"
+    },
+    "observed": {
+      "hw_tag_all_npu": true,
+      "hw_tag_variants": {
+        "NPU": 9815,
+        "NPU|ASCEND_HAS_WEIGHT": 25,
+        "NPU|MODEL_ARTS|ONLINE": 10
+      },
+      "hf_mirrors_weight_only": 1631,
+      "code_or_adapt_repos": 8219,
+      "active_within_30d_repos": 124,
+      "official_adapt_entries_active30d": 78,
+      "top_orgs_by_entries": {
+        "HuggingFace镜像": 1631,
+        "Ascend-SACT": 465,
+        "Albert-zhw": 257
+      }
+    },
+    "how_to_use": [
+      "优先级最高的新单来源：官方/准官方适配仓近 30 天活跃条目 78 个（Ascend-SACT / Atomgit-Ascend / Eco-Tech / vLLM_Ascend / ascend-tribe / ai-ascend-models）。",
+      "hf_mirrors/* 是权重镜像（1631 条），不含代码，不作 PR 目标。",
+      "个人仓（Albert-zhw、gcw_* 等）虽带 NPU 标签，门槛/活跃度需逐个核对，默认低优先。",
+      "这些仓是「适配 + 部署 + 精度/性能调优」型代码仓，天然适配我们的报错类/逻辑类 bug 方向；开工前仍按本文件 gate 走 CLA/Issue 口径。"
+    ]
+  }
 }

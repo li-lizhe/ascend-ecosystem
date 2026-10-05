@@ -42,6 +42,24 @@
           "type": "文档(版本矩阵/驱动)",
           "status": "排除·wait-feedback",
           "note": "被维护者挂 wait-feedback，等外部信息才能推进"
+        },
+        {
+          "ref": "#2291",
+          "type": "Bug(编译器静默误编译)",
+          "status": "待决·需真机",
+          "note": "[2026-10-05 实跑] tl.sum(acc,0) 对 3-D tile [RBLOCK,X1,X0] 归约静默误编译（16 天，无关联 PR，triage review）。语义层缺陷，最小复现后可上机；无真机不得声称修好。"
+        },
+        {
+          "ref": "#2306",
+          "type": "构建(Filecheck 保留)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] Filecheck 因安全检查被删；维护者倾向『方案1：改 LLVM 构建模式加编译选项』。纯构建配置，本机可静态核对 dif。"
+        },
+        {
+          "ref": "#2246",
+          "type": "Bug(编译器 UB 溢出)",
+          "status": "待决·需真机",
+          "note": "[2026-10-05 实跑] A5 bf16 online softmax + tl.static_range 编译 UB 溢出（18 天，无 PR）。编译器侧缺陷。"
         }
       ],
       "excluded": []
@@ -67,6 +85,18 @@
           "type": "文档清理(微)",
           "status": "待决",
           "note": "该文件仍是 Mintlify 模板原文，首行留着 '> **Customize this file**: Tailor this template…'，全仓仅此 1 处；仍要等 run-ci 标签"
+        },
+        {
+          "ref": "#42510",
+          "type": "Bug(显存/逻辑)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] EAGLE/MTP 同 checkpoint draft 保留冗余 embed_tokens/lm_head 副本（1 天，无 PR，无标签）。可在本机按代码路径核对，不需 GPU。"
+        },
+        {
+          "ref": "#42459",
+          "type": "Chore(镜像/CI)",
+          "status": "待决",
+          "note": "[2026-10-05 实跑] CUDA devel 基础镜像内置 Nsight Compute 版本升级（1 天，无 PR）。改 Dockerfile 固定版本，小 diff。"
         }
       ],
       "excluded": [
@@ -141,6 +171,42 @@
           "type": "文档(支持矩阵)",
           "status": "排除·已由文档团队补齐",
           "note": "#16543 池化支持矩阵：main 已有『### Pooling Models』分硬件表（09-28 #17474 还在加 A5 内容）⇒ 已非缺口；#17329 支持矩阵：GLM-5.2 已在表内 ⇒ 同样已补"
+        },
+        {
+          "ref": "#17784",
+          "type": "Bug(构建脚本)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] csrc/build_batch_invariant_ops.sh 下载/构建失败仍 exit 0 ⇒ CI 假绿（6 天，无 PR）。纯 shell 加校验，静态可验证。"
+        },
+        {
+          "ref": "#17786",
+          "type": "Bug(构建脚本)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] csrc/build_aclnn.sh 对未知/拼错 SOC 参数静默 exit 0（6 天，无 PR）。加参数校验+报错即可。"
+        },
+        {
+          "ref": "#17787",
+          "type": "Bug(构建配置)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] MODULE_DIR 从未定义 ⇒ RTY/... 的 AICPU 源码被静默丢弃（6 天，无 PR）。CMake 配置修正。"
+        },
+        {
+          "ref": "#17789",
+          "type": "Misc(依赖漂移)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] requirements.txt 与 pyproject.toml requires 列表漂移，需对齐（6 天，无 PR）。纯文件一致性。"
+        },
+        {
+          "ref": "#17856",
+          "type": "Bug(310P 内核)",
+          "status": "待决·需真机",
+          "note": "[2026-10-05 实跑] recurrent_gated_delta_rule_v310 在某请求 accepted_tokens_prev>query_length 时整批放弃输出；自述是已修 #17837 的 310P 对应缺口 ⇒ 可照搬修法，但要 310P 真机验证。"
+        },
+        {
+          "ref": "#17801",
+          "type": "Bug(注解失效)",
+          "status": "待决",
+          "note": "[2026-10-05 实跑] do_not_specialize 对 task_num 无效（chunk_scaled_dot_...），Triton 注解层逻辑问题。"
         }
       ],
       "excluded": [
@@ -186,6 +252,12 @@
           "type": "文档(RFC 清点部署 YAML)",
           "status": "暂缓",
           "note": "RFC 性质，需维护者表态"
+        },
+        {
+          "ref": "#8396 / #8382 / #8372",
+          "type": "RFC(注意力后端)",
+          "status": "暂缓·无小切口",
+          "note": "[2026-10-05 实跑] 近 4 天 3 个 RFC（共享 block-sparse 执行/统一稠密稀疏注意力适配器/MiniMax-H3 SAGE_ATTN 切片）均在讨论中，RFC 需维护者表态，当前无静态可投小项。"
         }
       ],
       "excluded": [
@@ -222,6 +294,30 @@
           "type": "文档(一致性)",
           "status": "可投·下一轮",
           "note": "clone 仅 31MB，本机可做纯静态核对"
+        },
+        {
+          "ref": "#8089",
+          "type": "Bug(Triton 融合核)",
+          "status": "排除·已被PR认领",
+          "note": "[2026-10-05 实跑] use_fused_kernels=True+use_remove_padding=False 崩溃 —— 已被外部 PR #8090（kylemontgomery1, 10-02）认领，勿撞车。"
+        },
+        {
+          "ref": "#8030",
+          "type": "Bug(分词/依赖)",
+          "status": "可投·静态",
+          "note": "[2026-10-05 实跑] pyproject 钉 transformers==5.12.1 后 Qwen3.5 泰/印地语分词错误（上游 HF 报告已定位根因）。可静态核对钉版与 tokenizer 行为。"
+        },
+        {
+          "ref": "#8027",
+          "type": "Feature(导出可配置)",
+          "status": "排除·已有2个PR",
+          "note": "[2026-10-05 实跑] HF safetensors 导出可配置 —— 已有 lbaolin 的 open PR #8019/#7997（09-23/09-25），勿撞车。"
+        },
+        {
+          "ref": "#8099",
+          "type": "RFC(优化步数)",
+          "status": "暂缓",
+          "note": "[2026-10-05 实跑] V1 trainer 多输出 rollout 的优化步数稳定化，RFC 需设计。"
         }
       ],
       "excluded": [
@@ -248,6 +344,6 @@
       ]
     }
   ],
-  "next_actions": "① vllm-ascend #17864：CI/RTD 全绿，等 review（内部 doc team 常接手同类文档）；② triton-ascend #2449：8/9 绿，剩 Docs examples test (a5) 排队；③ verl #8084：等维护者批准工作流（action_required），批准后看 check-pr-title 是否认标题；④ verl 下一候选：Ascend 安装/示例文档 vs 仓库脚本一致性核对（纯静态）；⑤ sglang：只给 #40355 催 run-ci 标签；vllm-omni：暂缓。",
-  "updated": "2026-10-01"
+  "next_actions": "① vllm-ascend 构建脚本簇 #17784/#17786/#17787/#17789（静态可验证、无 PR 认领）优先投；② sglang #42510 与 verl #8089/#8030 为次选（本机可跑逻辑）；③ vllm-ascend #17856 需 310P 真机；④ 新增候选源：GitCode 昇腾模型生态目录（ai.gitcode.com/models?hardware=NPU）已登记 gitcode_scope.json.model_ecosystem，数据 data/ascend_model_catalog.json（见 ascend-gitcode-ops）。",
+  "updated": "2026-10-05"
 }
