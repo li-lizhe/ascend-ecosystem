@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T13:05:11+08:00",
+  "updated": "2026-10-05T13:13:13+08:00",
   "repos": {
     "triton-lang/triton-ascend": {
       "stars": 181,
@@ -13,12 +13,12 @@
       }
     },
     "sgl-project/sglang": {
-      "stars": 36786,
-      "open_issues": 5500,
+      "stars": 36788,
+      "open_issues": 5501,
       "pushed": "2026-10-05",
       "merged14": 782,
       "merged7": 368,
-      "open_prs": 4577,
+      "open_prs": 4578,
       "ours": {
         "40355": "OPEN"
       }

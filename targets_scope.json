@@ -189,20 +189,20 @@
         {
           "ref": "#17786",
           "type": "Bug(构建脚本)",
-          "status": "可投·静态",
-          "note": "[2026-10-05 评估] csrc/build_aclnn.sh 未知/拼错 SOC 静默 exit 0；最小修法需维护者确认『合法无自定义算子的 SOC allow-list』（如 ascend910a 是否合法），盲加 exit 1 有误伤风险 ⇒ 本轮未与 #17784 合并投递，等维护者表态。"
+          "status": "待决·需维护者定 allow-list",
+          "note": "[10-05 复核] 修法需维护者先定『合法但无自定义算子的 SOC 名单』（如 ascend910a 是否合法）——盲加 exit 1 有误伤风险，不投。"
         },
         {
           "ref": "#17787",
           "type": "Bug(构建配置)",
-          "status": "可投·静态",
-          "note": "[2026-10-05 实跑] MODULE_DIR 从未定义 ⇒ RTY/... 的 AICPU 源码被静默丢弃（6 天，无 PR）。CMake 配置修正。"
+          "status": "待决·报告者称 for discussion",
+          "note": "[10-05 复核] 报告者本人写明『filing for discussion rather than sending a blind fix / which side is right is a maintainer decision』⇒ 非可投项，等维护者表态。"
         },
         {
           "ref": "#17789",
           "type": "Misc(依赖漂移)",
-          "status": "可投·静态",
-          "note": "[2026-10-05 实跑] requirements.txt 与 pyproject.toml requires 列表漂移，需对齐（6 天，无 PR）。纯文件一致性。"
+          "status": "待决·报告者称 for discussion",
+          "note": "[10-05 复核] 同上（依赖漂移由报告者提出讨论，非可投项）。"
         },
         {
           "ref": "#17856",
