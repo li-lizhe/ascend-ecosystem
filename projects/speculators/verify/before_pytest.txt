@@ -1,0 +1,74 @@
+...............FFF.F                                                     [100%]
+================================== FAILURES ===================================
+________ test_render_conversation_transport_error_is_an_endpoint_error ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022303463250>
+
+    def test_render_conversation_transport_error_is_an_endpoint_error(monkeypatch):
+        # A dead server raises a transport error, which says nothing about the
+        # conversation being rendered.
+        def post(*a, **k):
+            raise render_client.httpx.ConnectError("Connection refused")
+    
+        monkeypatch.setattr(render_client, "_post", post)
+        monkeypatch.setattr(time, "sleep", lambda _: None)
+>       with pytest.raises(render_client.RenderEndpointError):
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'speculators.data_generation.render_client' has no attribute 'RenderEndpointError'
+
+C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py:318: AttributeError
+______________ test_render_conversation_5xx_is_an_endpoint_error ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022303463B10>
+
+    def test_render_conversation_5xx_is_an_endpoint_error(monkeypatch):
+        monkeypatch.setattr(
+            render_client, "_post", lambda *a, **k: _Resp(503, {}, "unavailable")
+        )
+        monkeypatch.setattr(time, "sleep", lambda _: None)
+>       with pytest.raises(render_client.RenderEndpointError):
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'speculators.data_generation.render_client' has no attribute 'RenderEndpointError'
+
+C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py:329: AttributeError
+_________ test_render_conversation_rows_reraises_an_endpoint_failure __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022303472110>
+
+    def test_render_conversation_rows_reraises_an_endpoint_failure(monkeypatch):
+        # The regression: the broad `except Exception` here used to turn an endpoint
+        # failure into a dropped conversation, so the build finished with a dataset
+        # silently missing everything after the first failure.
+        def fake_render(*a, **k):
+            raise render_client.RenderEndpointError("endpoint down")
+    
+        monkeypatch.setattr(preprocessing, "render_conversation", fake_render)
+>       with pytest.raises(render_client.RenderEndpointError):
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'speculators.data_generation.render_client' has no attribute 'RenderEndpointError'
+
+C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py:343: AttributeError
+______________ test_build_aborts_when_the_render_endpoint_fails _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022303459A50>
+
+    def test_build_aborts_when_the_render_endpoint_fails(monkeypatch):
+        # End to end: the run must surface the failure rather than return a partial
+        # training set with no error.
+        def fake_render(*a, **k):
+            raise render_client.RenderEndpointError("connection refused")
+    
+        monkeypatch.setattr(preprocessing, "render_conversation", fake_render)
+        data = {"conversations": [_conv(3), _conv(3)]}
+>       with pytest.raises(render_client.RenderEndpointError):
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'speculators.data_generation.render_client' has no attribute 'RenderEndpointError'
+
+C:\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py:368: AttributeError
+=========================== short test summary info ===========================
+FAILED ..\..\..\..\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py::test_render_conversation_transport_error_is_an_endpoint_error
+FAILED ..\..\..\..\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py::test_render_conversation_5xx_is_an_endpoint_error
+FAILED ..\..\..\..\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py::test_render_conversation_rows_reraises_an_endpoint_failure
+FAILED ..\..\..\..\WINDOWS\system32\config\systemprofile\AppData\Local\Temp\spec_before\tests\integration\datagen\test_render_boundary.py::test_build_aborts_when_the_render_endpoint_fails
+4 failed, 16 passed in 11.42s
+exit=1

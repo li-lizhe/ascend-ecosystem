@@ -1,0 +1,27 @@
+# 渲染成功（exit 0）：共 182 个 YAML 文档，此处仅留前 25 行以免膨胀
+---
+# Source: gpustack-chart/charts/gpustack-operator/charts/csi-driver-nfs/templates/rbac-csi-nfs.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: csi-nfs-controller-sa
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: "t"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/name: "csi-driver-nfs"
+    app.kubernetes.io/version: "4.13.4"
+    helm.sh/chart: "csi-driver-nfs-4.13.4"
+---
+# Source: gpustack-chart/charts/gpustack-operator/charts/csi-driver-nfs/templates/rbac-csi-nfs.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: csi-nfs-node-sa
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: "t"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/name: "csi-driver-nfs"
+    app.kubernetes.io/version: "4.13.4"
+...[truncated, 原始 32741 行]

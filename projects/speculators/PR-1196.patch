@@ -1,0 +1,174 @@
+From 15f5d9c80366a13091327d7695849da7bd21e109 Mon Sep 17 00:00:00 2001
+From: li-lizhe <147392333@qq.com>
+Date: Mon, 5 Oct 2026 21:26:04 +0800
+Subject: [PATCH] fix(data): abort dataset build when the render endpoint fails
+
+RenderEndpointError marks conditions that affect every conversation
+(connection/timeout failures, retry-exhausted non-200 responses); a dead
+render endpoint now aborts the build instead of dropping the conversations
+it hits. Conversation-specific failures keep skipping.
+
+Reported in #1159.
+
+Signed-off-by: li-lizhe <147392333@qq.com>
+---
+ .../data_generation/preprocessing.py          | 11 ++-
+ .../data_generation/render_client.py          | 23 +++++-
+ .../datagen/test_render_boundary.py           | 70 +++++++++++++++++++
+ 3 files changed, 101 insertions(+), 3 deletions(-)
+
+diff --git a/src/speculators/data_generation/preprocessing.py b/src/speculators/data_generation/preprocessing.py
+index 790af4cb5..f50b81f1f 100644
+--- a/src/speculators/data_generation/preprocessing.py
++++ b/src/speculators/data_generation/preprocessing.py
+@@ -15,7 +15,10 @@
+ )
+ 
+ from speculators.data_generation.logging_utils import PipelineLogger
+-from speculators.data_generation.render_client import render_conversation
++from speculators.data_generation.render_client import (
++    RenderEndpointError,
++    render_conversation,
++)
+ from speculators.data_generation.torch_utils import set_default_torch_num_threads
+ from speculators.train.vocab_mapping import save_token_frequency_distribution
+ 
+@@ -367,6 +370,12 @@ def _render_conversation_rows(
+             max_length,
+             tools=parsed_tools,
+         )
++    except RenderEndpointError:
++        # The endpoint, not this conversation, is failing: every remaining
++        # conversation would fail the same way. Let it abort the build instead
++        # of returning a training set silently missing everything after the
++        # first failure.
++        raise
+     # One row the render endpoint or boundary derivation can't handle must
+     # not kill the run. The failure modes can't be enumerated -- templates
+     # are swappable and raise arbitrary types -- so catch broadly and skip.
+diff --git a/src/speculators/data_generation/render_client.py b/src/speculators/data_generation/render_client.py
+index ed57a80ee..529033277 100644
+--- a/src/speculators/data_generation/render_client.py
++++ b/src/speculators/data_generation/render_client.py
+@@ -51,6 +51,16 @@ class RenderError(Exception):
+     """Non-200, retry-eligible response from the render endpoint."""
+ 
+ 
++class RenderEndpointError(RenderError):
++    """The endpoint itself is unreachable or failing, not this request.
++
++    A connection failure, a timeout, or a retry-exhausted 5xx says nothing about
++    the conversation being rendered, so it affects every conversation. Callers
++    abort the build on this rather than skipping the conversations that happen
++    to hit it.
++    """
++
++
+ @with_retries
+ def render_conversation(
+     endpoint: str,
+@@ -84,7 +94,14 @@ def render_conversation(
+     if truncation_side is not None:
+         body["truncation_side"] = truncation_side
+ 
+-    resp = _post(url, json=body, timeout=timeout)
++    try:
++        resp = _post(url, json=body, timeout=timeout)
++    except httpx.TransportError as e:
++        # Connection refused, DNS failure, read timeout -- none of these are
++        # about the conversation being rendered.
++        raise RenderEndpointError(
++            f"Render endpoint {endpoint} is unreachable: {type(e).__name__}: {e}"
++        ) from e
+ 
+     if (
+         HTTPStatus.BAD_REQUEST <= resp.status_code < HTTPStatus.INTERNAL_SERVER_ERROR
+@@ -97,7 +114,9 @@ def render_conversation(
+             f"Render endpoint returned {resp.status_code}: {resp.text}"
+         )
+     if resp.status_code != HTTPStatus.OK:
+-        raise RenderError(f"Render endpoint returned {resp.status_code}: {resp.text}")
++        raise RenderEndpointError(
++            f"Render endpoint {endpoint} returned {resp.status_code}: {resp.text}"
++        )
+ 
+     data = resp.json()
+     if "token_ids" not in data:
+diff --git a/tests/integration/datagen/test_render_boundary.py b/tests/integration/datagen/test_render_boundary.py
+index 70ab4e21f..728a79338 100644
+--- a/tests/integration/datagen/test_render_boundary.py
++++ b/tests/integration/datagen/test_render_boundary.py
+@@ -302,3 +302,73 @@ def test_pretokenized_dataset_skips_render():
+         HFDataset.from_dict(data), NO_PROCESSOR, num_proc=1
+     )
+     assert len(ds) == 1
++
++
++# --------------------------------------------------------------------------- #
++# endpoint-level failures abort the build instead of dropping conversations    #
++# --------------------------------------------------------------------------- #
++def test_render_conversation_transport_error_is_an_endpoint_error(monkeypatch):
++    # A dead server raises a transport error, which says nothing about the
++    # conversation being rendered.
++    def post(*a, **k):
++        raise render_client.httpx.ConnectError("Connection refused")
++
++    monkeypatch.setattr(render_client, "_post", post)
++    monkeypatch.setattr(time, "sleep", lambda _: None)
++    with pytest.raises(render_client.RenderEndpointError):
++        render_client.render_conversation(
++            "http://x", [], add_generation_prompt=False, max_retries=1
++        )
++
++
++def test_render_conversation_5xx_is_an_endpoint_error(monkeypatch):
++    monkeypatch.setattr(
++        render_client, "_post", lambda *a, **k: _Resp(503, {}, "unavailable")
++    )
++    monkeypatch.setattr(time, "sleep", lambda _: None)
++    with pytest.raises(render_client.RenderEndpointError):
++        render_client.render_conversation(
++            "http://x", [], add_generation_prompt=False, max_retries=0
++        )
++
++
++def test_render_conversation_rows_reraises_an_endpoint_failure(monkeypatch):
++    # The regression: the broad `except Exception` here used to turn an endpoint
++    # failure into a dropped conversation, so the build finished with a dataset
++    # silently missing everything after the first failure.
++    def fake_render(*a, **k):
++        raise render_client.RenderEndpointError("endpoint down")
++
++    monkeypatch.setattr(preprocessing, "render_conversation", fake_render)
++    with pytest.raises(render_client.RenderEndpointError):
++        preprocessing._render_conversation_rows(_conv(2), None, 0, "http://x", 100)
++
++
++def test_render_conversation_rows_still_skips_conversation_failures(monkeypatch):
++    # A conversation the chat template cannot handle is still skipped: only
++    # endpoint-level failures are fatal.
++    def fake_render(*a, **k):
++        raise preprocessing.BoundaryUnstableError("template rewrites history")
++
++    monkeypatch.setattr(preprocessing, "render_conversation", fake_render)
++    assert (
++        preprocessing._render_conversation_rows(_conv(2), None, 0, "http://x", 100)
++        == []
++    )
++
++
++def test_build_aborts_when_the_render_endpoint_fails(monkeypatch):
++    # End to end: the run must surface the failure rather than return a partial
++    # training set with no error.
++    def fake_render(*a, **k):
++        raise render_client.RenderEndpointError("connection refused")
++
++    monkeypatch.setattr(preprocessing, "render_conversation", fake_render)
++    data = {"conversations": [_conv(3), _conv(3)]}
++    with pytest.raises(render_client.RenderEndpointError):
++        build_speculator_training_dataset(
++            HFDataset.from_dict(data),
++            NO_PROCESSOR,
++            num_proc=1,
++            render_endpoint="http://x",
++        )

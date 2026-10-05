@@ -1,0 +1,207 @@
+From 5e4dcc3f55bd33dd4dd23fc93bdbb7d370ada93f Mon Sep 17 00:00:00 2001
+From: li-lizhe <147392333@qq.com>
+Date: Mon, 5 Oct 2026 21:18:12 +0800
+Subject: [PATCH] fix(chart): refuse unsupported worker.gpuVendors names
+
+worker-daemonset.yaml iterates the canonical vendor list, so a name outside it
+renders no DaemonSet at all. With the CPU DaemonSet on, that installed
+successfully: the release reported success while a class of GPU nodes never
+gained a worker. A typo in a multi-vendor list was the worst case -- the
+recognised vendors still rendered their DaemonSets, so the release looked
+healthy and the missing one was easy to attribute anywhere but a values typo.
+
+Refuse the render and name both the offending entries and the vendors that are
+accepted, so the fix is a one-line values edit. Document the behaviour in the
+chart README and the Helm install guide.
+
+The guard reads the raw (deduplicated) vendor list rather than the sorted one,
+because the sorted list has already dropped exactly the names it needs to see.
+
+Fixes #6264.
+
+Signed-off-by: li-lizhe <147392333@qq.com>
+---
+ charts/gpustack-chart/README.md               |  2 +-
+ charts/gpustack-chart/templates/validate.yaml | 43 ++++++++++--
+ docs/installation/helm.md                     |  4 +-
+ tests/charts/test_chart_render.py             | 67 +++++++++++++++++++
+ 4 files changed, 108 insertions(+), 8 deletions(-)
+
+diff --git a/charts/gpustack-chart/README.md b/charts/gpustack-chart/README.md
+index d61e0b57ea..e5221b382d 100644
+--- a/charts/gpustack-chart/README.md
++++ b/charts/gpustack-chart/README.md
+@@ -135,7 +135,7 @@ If you need to customize Higress parameters, refer to the [Higress documentation
+ | higressPlugins.image.repository          | gpustack/higress-plugins          | Image repo with namespace; see note below                                 |
+ | higressPlugins.image.tag                 | "0.2.3.post5"                     | Higress plugins image tag; CI overrides from uv.lock at package time      |
+ | higressPlugins.image.pullPolicy          | IfNotPresent                      | Higress plugins image pull policy                                         |
+-| worker.gpuVendors                        | [nvidia]                          | List of GPU vendors; `[]` renders the CPU worker DaemonSet only           |
++| worker.gpuVendors                        | [nvidia]                          | GPU vendors; `[]` = CPU DaemonSet only, unsupported names fail the render  |
+ | worker.cpuEnabled                        | true                              | Render the CPU worker DaemonSet; `false` requires a GPU vendor            |
+ | worker.nodeSelector                      | {}                                | Base worker nodeSelector; replaces `global.nodeSelector` when non-empty   |
+ | worker.port                              | 10150                             | Worker service port                                                       |
+diff --git a/charts/gpustack-chart/templates/validate.yaml b/charts/gpustack-chart/templates/validate.yaml
+index c6f90fa04c..8b2b1530c7 100644
+--- a/charts/gpustack-chart/templates/validate.yaml
++++ b/charts/gpustack-chart/templates/validate.yaml
+@@ -4,9 +4,10 @@ a guard placed at the top level of `_helper.tpl` is never executed, because Helm
+ parses that file for its `define` blocks without rendering it.
+ 
+ Guards that reject a configuration which installs today belong in a deliberate
+-separate change, not here: two such guards currently sit dead at the top of
+-`_helper.tpl` (TLS cert/key pairing, and `server.replicas > 1` requiring
+-`server.externalDatabaseURL`).
++separate change, not folded into an unrelated one. The unsupported-vendor guard
++at the bottom of this file is the first such change to land here; two more,
++still unmigrated, sit dead at the top of `_helper.tpl` (TLS cert/key pairing,
++and `server.replicas > 1` requiring `server.externalDatabaseURL`).
+ */}}
+ {{- if not (or .Values.server.enabled .Values.worker.enabled) }}
+ {{- fail "Nothing to deploy: set server.enabled and/or worker.enabled to true." }}
+@@ -21,8 +22,8 @@ worker to the cluster at all.
+ Counted over the *sorted* vendors, which is the list worker-daemonset.yaml
+ iterates: it renders nothing for a name outside the canonical set, so a typo
+ would otherwise satisfy a guard reading the raw list and land in exactly the
+-state this rejects. A name it drops while the CPU DaemonSet is on still installs
+-today — that is a separate guard, and this file is not where one of those goes.
++state this rejects. A name it drops while the CPU DaemonSet is on is caught
++upstream by the unsupported-vendor guard below.
+ */}}
+ {{- if and .Values.worker.enabled (not (include "gpustack.workerCPUEnabled" .)) }}
+ {{- if not (include "gpustack.sortedVendors" . | fromJsonArray) }}
+@@ -41,3 +42,35 @@ supplying a username and password asks for.
+ {{- if and (not $pullSecret.create) $credentials.username $credentials.password }}
+ {{- fail "imagePullSecret.credentials are set but imagePullSecret.create is false: the credentials would be discarded. Drop them, or set create=true to have this release own the Secret." }}
+ {{- end }}
++
++{{/*
++A vendor name the DaemonSet template will not render.
++
++worker-daemonset.yaml iterates the *canonical* vendor list, so a name outside it
++produces no DaemonSet at all. With the CPU DaemonSet on that used to install
++successfully: the release reported success while a whole class of GPU nodes
++never gained a worker. A typo in a multi-vendor list is the worst case, because
++the recognised vendors still render — the release looks half-healthy and the
++missing DaemonSet is easy to attribute anywhere but a values typo.
++
++Refused rather than warned about because Helm templates have no way to warn
++without failing. Naming both the offending entries and the accepted vendors
++makes the fix a one-line values edit, which is cheaper than the debugging a
++silently absent DaemonSet costs.
++
++Read off the *raw* (deduplicated) vendor list via `gpustack.workerVendors`, not
++`gpustack.sortedVendors`: the sorted list has already dropped exactly the names
++this guard needs to see.
++*/}}
++{{- if .Values.worker.enabled }}
++{{- $canonical := include "gpustack.canonicalVendorOrder" . | fromJsonArray }}
++{{- $unsupported := list }}
++{{- range (include "gpustack.workerVendors" . | fromJsonArray) }}
++{{- if not (has . $canonical) }}
++{{- $unsupported = append $unsupported . }}
++{{- end }}
++{{- end }}
++{{- if $unsupported }}
++{{- fail (printf "worker.gpuVendors names unsupported GPU vendor(s): %s. Supported vendors are: %s. No DaemonSet is rendered for an unsupported name, so the release would install without a worker for those nodes — fix the spelling or remove the entry." (join ", " $unsupported) (include "gpustack.canonicalVendorOrder" . | fromJsonArray | join ", ")) }}
++{{- end }}
++{{- end }}
+diff --git a/docs/installation/helm.md b/docs/installation/helm.md
+index 46e29e1c7c..2cf8d48748 100644
+--- a/docs/installation/helm.md
++++ b/docs/installation/helm.md
+@@ -145,7 +145,7 @@ helm install gpustack oci://registry-1.docker.io/gpustack/gpustack-chart \
+   --set 'worker.gpuVendors={nvidia}'
+ ```
+ 
+-Supported `worker.gpuVendors` values: `nvidia`, `mthreads`, `amd`, `ascend`, `hygon`, `metax`, `iluvatar`, `cambricon`, `thead`.
++Supported `worker.gpuVendors` values: `nvidia`, `mthreads`, `amd`, `ascend`, `hygon`, `metax`, `iluvatar`, `cambricon`, `thead`. Any other name fails the render rather than being dropped: no DaemonSet is rendered for an unsupported vendor, so a typo would otherwise install successfully while the nodes that vendor serves gained no worker.
+ 
+ !!! note
+ 
+@@ -264,7 +264,7 @@ The most commonly used parameters are listed below. For the complete and authori
+ | `gateway.ingressClassname`             | `higress`                | Higress IngressClass name; enables in-cluster gateway mode when found.     |
+ | `higress-core.enabled`                 | `true`                   | Deploy the bundled Higress gateway; disable if already installed.          |
+ | `worker.enabled`                       | `false`                  | Render worker DaemonSets.                                                 |
+-| `worker.gpuVendors`                    | `[nvidia]`               | GPU vendors; one DaemonSet per vendor plus the CPU DaemonSet.              |
++| `worker.gpuVendors`                    | `[nvidia]`               | GPU vendors; one DaemonSet each plus the CPU one; unsupported names fail.  |
+ | `worker.cpuEnabled`                    | `true`                   | Render the CPU worker DaemonSet; `false` requires a GPU vendor.            |
+ | `worker.nodeSelector`                  | `{}`                     | Base worker nodeSelector; replaces `global.nodeSelector` when non-empty.   |
+ | `worker.port`                          | `10150`                  | Worker service port.                                                      |
+diff --git a/tests/charts/test_chart_render.py b/tests/charts/test_chart_render.py
+index 4cb51f550b..546f62a0b1 100644
+--- a/tests/charts/test_chart_render.py
++++ b/tests/charts/test_chart_render.py
+@@ -296,6 +296,73 @@ def test_a_server_only_release_is_unaffected(self):
+         render("--set", "worker.cpuEnabled=false")
+ 
+ 
++class TestUnsupportedVendorNames:
++    """A vendor the DaemonSet template will not render is refused, not dropped.
++
++    `worker-daemonset.yaml` iterates the canonical vendor list, so a name outside
++    it produces no DaemonSet. With the CPU DaemonSet on, such a release used to
++    install successfully while a whole class of GPU nodes never registered a
++    worker; a typo in a multi-vendor list left the release looking half-healthy,
++    since the recognised vendors' DaemonSets still rendered.
++    """
++
++    def test_accepts_a_fully_supported_vendor_list(self):
++        docs = render(
++            "--set",
++            "worker.enabled=true",
++            "--set",
++            "worker.gpuVendors={nvidia,ascend}",
++        )
++        assert names(docs, "DaemonSet") >= {
++            "gpustack-worker",
++            "gpustack-worker-nvidia",
++            "gpustack-worker-ascend",
++        }
++
++    def test_refuses_a_single_misspelling(self):
++        error = render_error(
++            "--set", "worker.enabled=true", "--set", "worker.gpuVendors={bogus}"
++        )
++        # The offending entry, so the typo is identifiable from the message ...
++        assert "bogus" in error
++        # ... and the names it would have accepted, so it is fixable from the
++        # message alone.
++        assert "nvidia" in error and "ascend" in error
++
++    def test_refuses_a_multi_vendor_list_with_one_misspelling(self):
++        # The worst case the guard exists for: the recognised vendor still
++        # renders its DaemonSet, so the release looks healthy and the missing
++        # one is easy to attribute anywhere but a values typo.
++        error = render_error(
++            "--set",
++            "worker.enabled=true",
++            "--set",
++            "worker.gpuVendors={nvidia,bogus}",
++        )
++        assert "bogus" in error
++        assert "nvidia" in error
++
++    def test_refuses_a_misspelling_even_alongside_the_cpu_daemonset(self):
++        # With the CPU DaemonSet off, the existing cpuEnabled guard only fires
++        # when *no* supported vendor remains. A recognised vendor plus a typo
++        # leaves the CPU DaemonSet off and the typo's nodes without a worker,
++        # which the new guard catches on its own.
++        error = render_error(
++            "--set",
++            "worker.enabled=true",
++            "--set",
++            "worker.cpuEnabled=false",
++            "--set",
++            "worker.gpuVendors={nvidia,bogus}",
++        )
++        assert "bogus" in error
++
++    def test_a_server_only_release_is_unaffected(self):
++        # Nothing worker-side renders, so a stale vendor list must not block a
++        # control-plane-only install.
++        render("--set", "worker.gpuVendors={bogus}")
++
++
+ class TestWorkerOnly:
+     def test_deploys_no_server_side_components(self):
+         docs = render(*WORKER_ONLY, *SERVER_AND_TOKEN)

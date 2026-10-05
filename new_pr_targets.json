@@ -38,13 +38,17 @@
    "T4-已提交过(轮换/促活)": 59,
    "T6-巨型仓(默认跳过)": 7,
    "T9-dead": 34
-  }
+  },
+  "pr_open": 8,
+  "todo": 163,
+  "skip": 7,
+  "total": 178
  },
  "queue": [
   {
    "repo": "gpustack/gpustack",
    "tier": "T1-新仓+近60天有新issue",
-   "submitted_prs": 0,
+   "submitted_prs": 1,
    "ml_lang": 1,
    "pushed_days_ago": 0,
    "stars": 5770,
@@ -103,10 +107,10 @@
      "l": []
     }
    ],
-   "attempts": 0,
-   "last_try": null,
-   "state": "todo",
-   "note": ""
+   "attempts": 1,
+   "last_try": "2026-10-05",
+   "state": "pr_open",
+   "note": "2026-10-05 投出 PR #6338（chart: worker.gpuVendors 非法名静默丢整个 DaemonSet；本机 helm 3.16.4 4 场景 before/after + pytest 42 passed）。issue #6264 已认领。等 review。"
   },
   {
    "repo": "flashserve/flash-linear-attention-npu",
@@ -471,7 +475,7 @@
   {
    "repo": "vllm-project/speculators",
    "tier": "T1-新仓+近60天有新issue",
-   "submitted_prs": 0,
+   "submitted_prs": 1,
    "ml_lang": 1,
    "pushed_days_ago": 0,
    "stars": 858,
@@ -526,10 +530,10 @@
      "l": []
     }
    ],
-   "attempts": 0,
-   "last_try": null,
-   "state": "todo",
-   "note": ""
+   "attempts": 1,
+   "last_try": "2026-10-05",
+   "state": "pr_open",
+   "note": "2026-10-05 投出 PR #1196（render endpoint 挂掉时静默丢数据 ⇒ 新增 RenderEndpointError 直接中止；红/绿 修前 4 failed → 修后 20 passed）。issue #1159 已认领。等 review（Mergify 仅等 approval）。"
   },
   {
    "repo": "kvcache-ai/Mooncake",
@@ -10111,5 +10115,5 @@
    "note": ""
   }
  ],
- "updated": "2026-10-04"
+ "updated": "2026-10-05"
 }

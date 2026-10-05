@@ -1,0 +1,4 @@
+Error: execution error at (gpustack-chart/templates/validate.yaml:74:4): worker.gpuVendors names unsupported GPU vendor(s): bogus. Supported vendors are: amd, ascend, cambricon, hygon, iluvatar, metax, mthreads, nvidia, thead. No DaemonSet is rendered for an unsupported name, so the release would install without a worker for those nodes — fix the spelling or remove the entry.
+
+Use --debug flag to render out invalid YAML
+exit=1
