@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-08 19:59
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-08 22:10
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 139 (±0) | 49 (+1) | 61 (-1) | 29 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 155 (±0) | 51 (+1) | 73 (-1) | 31 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 139 (±0) | 50 (+2) | 58 (-4) | 31 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 155 (±0) | 52 (+2) | 70 (-4) | 33 (+2) | |
 >
-> **较昨日（基线 2026-10-06）：提交 ±0 · ✅ 已合入 +1 · 📡 跟踪中 -1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-06）：提交 ±0 · ✅ 已合入 +2 · 📡 跟踪中 -4 · ❌ 关闭未合入 +2**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（61）
+## 📡 B 类跟踪中（58）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -75,11 +75,8 @@
 | deepspeedai/DeepSpeed | zenflow 用 optimizer_z3.device | [#8524](https://github.com/deepspeedai/DeepSpeed/pull/8524) | 2026-09-15 |
 | Comfy-Org/ComfyUI | pixart 用输入 tensor device 做 label | [#16331](https://github.com/Comfy-Org/ComfyUI/pull/16331) | 2026-09-15 |
 | huggingface/diffusers | modular_pipeline 含 Ascend NPU | [#14786](https://github.com/huggingface/diffusers/pull/14786) | 2026-09-16 |
-| huggingface/diffusers | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) | 2026-09-16 |
 | NVIDIA/Megatron-LM | torch.amp.custom_fwd 动态 device_type | [#7422](https://github.com/NVIDIA/Megatron-LM/pull/7422) | 2026-09-17 |
-| huggingface/transformers | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) | 2026-09-18 |
 | huggingface/lerobot | device type 比较含 npu/xpu | [#4678](https://github.com/huggingface/lerobot/pull/4678) | 2026-09-18 |
-| huggingface/lerobot | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-09-18 |
 | OpenADMET/openadmet-models | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-09-18 |
 | huggingface/datasets | py_utils 保存/恢复 NPU RNG state | [#8644](https://github.com/huggingface/datasets/pull/8644) | 2026-09-18 |
 | PaddlePaddle/PaddleOCR | #18370 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 |
@@ -120,7 +117,7 @@
 | gpustack/gpustack | fix(chart): refuse unsupported worker.gpuVendors names | [#6338](https://github.com/gpustack/gpustack/pull/6338) | 2026-10-05 |
 | vllm-project/vllm-ascend | [BugFix] Exit non-zero when batch_invariant ops installat… | [#17888](https://github.com/vllm-project/vllm-ascend/pull/17888) | 2026-10-05 |
 
-## ✅ B 类已合入（49）
+## ✅ B 类已合入（50）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -173,8 +170,9 @@
 | apache/brpc | fix(fuzzing): return 0 (not 1) from the size guard in every harness | [#3579](https://github.com/apache/brpc/pull/3579) | 2026-10-05 |
 | fangwei123456/spikingjelly | fix(neuron): build SlidingPSN gemm weight with the parameter dtype | [#769](https://github.com/fangwei123456/spikingjelly/pull/769) | 2026-10-05 |
 | modelscope/ms-swift | fix(patcher): resolve MP+DDP device_map memory through th… | [#10292](https://github.com/modelscope/ms-swift/pull/10292) | 2026-10-07 |
+| huggingface/lerobot | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-10-08 |
 
-## ❌ B 类关闭未合入（29）
+## ❌ B 类关闭未合入（31）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -207,6 +205,10 @@
 | Lightning-AI/pytorch-lightning | fix: set sampler epoch before creating iterator in setup_… | [#21987](https://github.com/Lightning-AI/pytorch-lightning/pull/21987) | 2026-09-30 |
 | Lightning-AI/pytorch-lightning | sampler epoch 在迭代器创建前设置 | [#21960](https://github.com/Lightning-AI/pytorch-lightning/pull/21960) | 2026-09-30 |
 | huggingface/peft | fix: clear the NPU allocator cache in prepare_model_for_k… | [#3860](https://github.com/huggingface/peft/pull/3860) | 2026-10-01 |
+| huggingface/transformers | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) 🔁 已关闭（被取代） | 2026-10-08 |
+| huggingface/diffusers | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) 🔁 已关闭（被取代） | 2026-10-08 |
+
+> 🔁 **已关闭（被取代）**：#48937 — 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）；#14785 — 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）
 
 逐条留档见 `EXCLUDED.md` 的「已投 PR 被关闭未合入」段。
 

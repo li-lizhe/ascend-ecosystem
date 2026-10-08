@@ -91,3 +91,5 @@
 - `pytorch/pytorch #195260 — 2026-09-30 关闭 — [Feature Refactoring] Resolve fake process group supported devices la… → 已立项 upstream issue pytorch/pytorch#199239（fake PG 设备白名单 + LocalTensor RNG 状态分类，含 #195261），等 triaged/actionable 后重开 PR`
 - `Lightning-AI/pytorch-lightning #21987 — 2026-09-30 关闭 — fix: set sampler epoch before creating iterator in setup_data`
 - `huggingface/peft #3860 — 2026-10-01 关闭 — fix: clear the NPU allocator cache in prepare_model_for_kbit_training`
+- `huggingface/transformers #48937 — 2026-10-08 关闭 — fix: support NPU/XPU compute stream in ContinuousBatchingState → 已被上游取代： 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）`
+- `huggingface/diffusers #14785 — 2026-10-08 关闭 — fix(group_offloading): support Ascend NPU stream when available → 已被上游取代： 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）`
