@@ -14,7 +14,7 @@
 
 | 分类 | 计数 | 详情 |
 |------|------|------|
-| ✅ **已合并**（上游合入） | 52 | kornia(8) · snntorch(6) · unsloth(5) · VoiceStudio(4) · sdnext(4) · spikingjelly(4) · FunASR(3) · ComfyUI LayerStyle(2) · FastVideo(2) · ms-swift(2) · pytorch(2) · 其余 10 项目各 1 |
+| ✅ **已合并**（上游合入） | 52 | kornia(8) · snntorch(6) · unsloth(5) · VoiceStudio(4) · sdnext(4) · spikingjelly(4) · FunASR(3) · ComfyUI LayerStyle(2) · FastVideo(2) · ms-swift(2) · pytorch(2) · lerobot · 其余 9 项目各 1 |
 | 📡 **跟踪中**（PR 待 review） | 70 | 详见下方 |
 
 详见 **[PRS.md](PRS.md)**（已合入 52 · 跟踪中 70，分表格）。每项目细节见 `projects/<name>/README.md`。
