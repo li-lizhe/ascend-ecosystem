@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-08 22:10
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-10 23:17
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 139 (±0) | 50 (+2) | 58 (-4) | 31 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 155 (±0) | 52 (+2) | 70 (-4) | 33 (+2) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 142 (+3) | 52 (+2) | 58 (±0) | 32 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 158 (+3) | 54 (+2) | 70 (±0) | 34 (+1) | |
 >
-> **较昨日（基线 2026-10-06）：提交 ±0 · ✅ 已合入 +2 · 📡 跟踪中 -4 · ❌ 关闭未合入 +2**
+> **较昨日（基线 2026-10-08）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +1**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -88,10 +88,8 @@
 | MiniMax-AI/MiniMax-M1 | main.py `.to("cuda")` 自动回退 CPU | [#43](https://github.com/MiniMax-AI/MiniMax-M1/pull/43) | 2026-09-20 |
 | Vaibhavs10/insanely-fast-whisper | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#288](https://github.com/Vaibhavs10/insanely-fast-whisper/pull/288) | 2026-09-21 |
 | m-bain/whisperX | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#1483](https://github.com/m-bain/whisperX/pull/1483) | 2026-09-21 |
-| opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-09-22 |
 | chflame163/ComfyUI_LayerStyle | crop mask multiple 设备无关 | [#612](https://github.com/chflame163/ComfyUI_LayerStyle/pull/612) | 2026-09-22 |
 | modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-09-23 |
-| fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-09-24 |
 | OpenRLHF/OpenRLHF | loss 归一化设备取自 loss mask（非 `torch.cuda`） | [#1365](https://github.com/OpenRLHF/OpenRLHF/pull/1365) | 2026-09-24 |
 | espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-09-25 |
 | InternLM/xtuner | fix(datasets): build the DP all_reduce tensor on the mesh… | [#2127](https://github.com/InternLM/xtuner/pull/2127) | 2026-09-25 |
@@ -109,15 +107,17 @@
 | verl-project/verl | [trainer, data, tool] fix: correct misspellings in reward… | [#8084](https://github.com/verl-project/verl/pull/8084) | 2026-10-01 |
 | triton-lang/triton-ascend | Docs add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
 | debpalash/VoiceStudio | fix(system): report a host Ascend NPU in device info and … | [#2582](https://github.com/debpalash/VoiceStudio/pull/2582) | 2026-10-02 |
-| tile-ai/tilelang | fix(autodd): reject non-positive --jobs instead of hanging | [#3385](https://github.com/tile-ai/tilelang/pull/3385) | 2026-10-02 |
 | sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-02 |
 | aigc-apps/VideoX-Fun | fix(z-image): strip the ComfyUI `model.diffusion_model.` key prefix before converting | [#522](https://github.com/aigc-apps/VideoX-Fun/pull/522) | 2026-10-04 |
 | triton-lang/triton-ascend | fix: Harden the LLVM build and keep FileCheck in the wheel | [#2454](https://github.com/triton-lang/triton-ascend/pull/2454) | 2026-10-05 |
 | vllm-project/speculators | fix(data): abort dataset build when the render endpoint f… | [#1196](https://github.com/vllm-project/speculators/pull/1196) | 2026-10-05 |
 | gpustack/gpustack | fix(chart): refuse unsupported worker.gpuVendors names | [#6338](https://github.com/gpustack/gpustack/pull/6338) | 2026-10-05 |
 | vllm-project/vllm-ascend | [BugFix] Exit non-zero when batch_invariant ops installat… | [#17888](https://github.com/vllm-project/vllm-ascend/pull/17888) | 2026-10-05 |
+| verl-project/verl | [fsdp] fix: preserve FP32 buffers when casting the model … | [#8189](https://github.com/verl-project/verl/pull/8189) | 2026-10-10 |
+| kornia/kornia | fix(geometry): avoid quadratic weight storage in the line… | [#5703](https://github.com/kornia/kornia/pull/5703) | 2026-10-10 |
+| modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-10 |
 
-## ✅ B 类已合入（50）
+## ✅ B 类已合入（52）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -171,8 +171,10 @@
 | fangwei123456/spikingjelly | fix(neuron): build SlidingPSN gemm weight with the parameter dtype | [#769](https://github.com/fangwei123456/spikingjelly/pull/769) | 2026-10-05 |
 | modelscope/ms-swift | fix(patcher): resolve MP+DDP device_map memory through th… | [#10292](https://github.com/modelscope/ms-swift/pull/10292) | 2026-10-07 |
 | huggingface/lerobot | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-10-08 |
+| tile-ai/tilelang | fix(autodd): reject non-positive --jobs instead of hanging | [#3385](https://github.com/tile-ai/tilelang/pull/3385) | 2026-10-09 |
+| fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-10-10 |
 
-## ❌ B 类关闭未合入（31）
+## ❌ B 类关闭未合入（32）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -207,6 +209,7 @@
 | huggingface/peft | fix: clear the NPU allocator cache in prepare_model_for_k… | [#3860](https://github.com/huggingface/peft/pull/3860) | 2026-10-01 |
 | huggingface/transformers | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) 🔁 已关闭（被取代） | 2026-10-08 |
 | huggingface/diffusers | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) 🔁 已关闭（被取代） | 2026-10-08 |
+| opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-10-09 |
 
 > 🔁 **已关闭（被取代）**：#48937 — 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）；#14785 — 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）
 
