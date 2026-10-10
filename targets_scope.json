@@ -312,8 +312,14 @@
         {
           "ref": "#8030",
           "type": "Bug(分词/依赖)",
-          "status": "可投·静态",
-          "note": "[2026-10-05 实跑] pyproject 钉 transformers==5.12.1 后 Qwen3.5 泰/印地语分词错误（上游 HF 报告已定位根因）。可静态核对钉版与 tokenizer 行为。"
+          "status": "排除·等上游",
+          "note": "[2026-10-10 复核] 维护者 09-28 回复上游 transformers#49116 当日合入 ⇒ 属上游修复；且 verl 钉版被 vllm0.29 / sglang0.5.20 锁死，源上不可动，不投。"
+        },
+        {
+          "ref": "#8154",
+          "type": "Bug(精度/FSDP)",
+          "status": "已投（PR #8189）",
+          "note": "[2026-10-10 夜岗] FSDPEngine._build_module 收尾的 module.to(torch_dtype) 连带把 FP32 buffer（RoPE inv_freq）降到 bf16 且不可逆（后续 buffer_dtype=fp32 只是把已舍入的值再上转）；改为只 cast 浮点/复数参数、保留 buffer 构造精度，helper 落在 verl.utils.torch_dtypes.cast_module_params_to_dtype。🟡 CPU 真机 177（torch 2.10.0+cpu）新测试 6 passed + 机制前后对照；#7165 只覆盖声明过 HF _keep_in_fp32_modules 的模块，不含 Qwen3/Qwen3.5。"
         },
         {
           "ref": "#8027",
@@ -352,6 +358,6 @@
       ]
     }
   ],
-  "next_actions": "① [10-05 夜岗已投] triton-ascend #2306 -> PR #2454（实现方案1：LLVM 构建加固 + 还原 FileCheck；待 CI/CLA，注意 fork PR 可能无 OBS 密钥跑不了 llvm-build）；② [10-05 已投] vllm-ascend #17784 -> PR #17888（等 pre-commit/CLA/CI）；③ 次选：#17786（需维护者定 no-op SOC allow-list）、verl #8030（transformers 钉版被 vllm0.29/sglang0.5.20 锁死，不可动）；④ sglang 受 run-ci 标签门所阻（#40355 起 5 天无 CI），标签问题解决前不新增；⑤ 真机项 #17856/#2291/#2246 待真机通路。",
-  "updated": "2026-10-05 23:30"
+  "next_actions": "① [10-10 夜岗已投] verl #8154 -> PR #8189（FSDP 建模块只 cast 参数、保留 FP32 buffer；2 commit / 3 文件 +118/-3，LF 已核；verl 对首次贡献者的 fork PR 所有 run 处于 action_required ⇒ 等维护者点批准）；② 5 仓「本机可验证真 bug」近枯竭：verl 10-06~10-09 新 issue 基本被外部 PR 秒认领（#8174/#8123/#8076/#8021/#8011/#8028/#8122），sglang #42510 被 #43074 认领，vllm-ascend 新 issue 均需 NPU；③ 下次优先：verl「Ascend 安装/示例文档 vs 脚本核对」（本机静态核对）、vllm-ascend #17801（Triton 注解 do_not_specialize 失效，需真机）、sglang docs/CONTRIBUTING.md 模板残留（需 run-ci 标签）；④ 169 ssh 通道现可用（npu-smi OK）⇒ 下次可评估需真机项 triton-ascend #2291/#2246；⑤ sglang 仍受 run-ci 标签门所阻。",
+  "updated": "2026-10-10 23:45"
 }
