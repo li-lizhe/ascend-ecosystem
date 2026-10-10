@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-10 23:17
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-11 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 142 (+3) | 52 (+2) | 58 (±0) | 32 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 158 (+3) | 54 (+2) | 70 (±0) | 34 (+1) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 143 (+1) | 55 (+3) | 56 (-2) | 32 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 159 (+1) | 57 (+3) | 68 (-2) | 34 (±0) | |
 >
-> **较昨日（基线 2026-10-08）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +1**
+> **较昨日（基线 2026-10-10）：提交 +1 · ✅ 已合入 +3 · 📡 跟踪中 -2 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（58）
+## 📡 B 类跟踪中（56）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -91,11 +91,9 @@
 | chflame163/ComfyUI_LayerStyle | crop mask multiple 设备无关 | [#612](https://github.com/chflame163/ComfyUI_LayerStyle/pull/612) | 2026-09-22 |
 | modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-09-23 |
 | OpenRLHF/OpenRLHF | loss 归一化设备取自 loss mask（非 `torch.cuda`） | [#1365](https://github.com/OpenRLHF/OpenRLHF/pull/1365) | 2026-09-24 |
-| espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-09-25 |
 | InternLM/xtuner | fix(datasets): build the DP all_reduce tensor on the mesh… | [#2127](https://github.com/InternLM/xtuner/pull/2127) | 2026-09-25 |
 | EleutherAI/lm-evaluation-harness | fix(models): point the `hf-audiolm-qwen` lazy mapping at … | [#4244](https://github.com/EleutherAI/lm-evaluation-harness/pull/4244) | 2026-09-26 |
 | hpcaitech/ColossalAI | fix: use the accelerator API instead of hard-coded cuda/c… | [#6455](https://github.com/hpcaitech/ColossalAI/pull/6455) | 2026-09-26 |
-| espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-09-26 |
 | huggingface/diffusers | fix(wan): use device-agnostic default for get_i2v_mask | [#14883](https://github.com/huggingface/diffusers/pull/14883) | 2026-09-27 |
 | EleutherAI/lm-evaluation-harness | fix(models): move hf-audiolm generate_until inputs to the… | [#4257](https://github.com/EleutherAI/lm-evaluation-harness/pull/4257) | 2026-09-27 |
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
@@ -113,11 +111,11 @@
 | vllm-project/speculators | fix(data): abort dataset build when the render endpoint f… | [#1196](https://github.com/vllm-project/speculators/pull/1196) | 2026-10-05 |
 | gpustack/gpustack | fix(chart): refuse unsupported worker.gpuVendors names | [#6338](https://github.com/gpustack/gpustack/pull/6338) | 2026-10-05 |
 | vllm-project/vllm-ascend | [BugFix] Exit non-zero when batch_invariant ops installat… | [#17888](https://github.com/vllm-project/vllm-ascend/pull/17888) | 2026-10-05 |
+| ISEEKYAN/mbridge | fix: do not cast non-floating-point tensors in _weight_to… | [#161](https://github.com/ISEEKYAN/mbridge/pull/161) | 2026-10-10 |
 | verl-project/verl | [fsdp] fix: preserve FP32 buffers when casting the model … | [#8189](https://github.com/verl-project/verl/pull/8189) | 2026-10-10 |
-| kornia/kornia | fix(geometry): avoid quadratic weight storage in the line… | [#5703](https://github.com/kornia/kornia/pull/5703) | 2026-10-10 |
 | modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-10 |
 
-## ✅ B 类已合入（52）
+## ✅ B 类已合入（55）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -172,6 +170,9 @@
 | modelscope/ms-swift | fix(patcher): resolve MP+DDP device_map memory through th… | [#10292](https://github.com/modelscope/ms-swift/pull/10292) | 2026-10-07 |
 | huggingface/lerobot | fastwam Wan VAE 设备无关默认值 | [#4677](https://github.com/huggingface/lerobot/pull/4677) | 2026-10-08 |
 | tile-ai/tilelang | fix(autodd): reject non-positive --jobs instead of hanging | [#3385](https://github.com/tile-ai/tilelang/pull/3385) | 2026-10-09 |
+| kornia/kornia | fix(geometry): avoid quadratic weight storage in the line… | [#5703](https://github.com/kornia/kornia/pull/5703) | 2026-10-10 |
+| espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-10-10 |
+| espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-10-10 |
 | fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-10-10 |
 
 ## ❌ B 类关闭未合入（32）
