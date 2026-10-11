@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-11 09:30
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-12 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 143 (+1) | 55 (+3) | 56 (-2) | 32 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 159 (+1) | 57 (+3) | 68 (-2) | 34 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 146 (+3) | 57 (+2) | 57 (+1) | 32 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 162 (+3) | 59 (+2) | 69 (+1) | 34 (±0) | |
 >
-> **较昨日（基线 2026-10-10）：提交 +1 · ✅ 已合入 +3 · 📡 跟踪中 -2 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-11）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（56）
+## 📡 B 类跟踪中（57）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -64,7 +64,6 @@
 | ostris/ai-toolkit | torchaudio 可选化 + captioner librosa 兜底 | [#1022](https://github.com/ostris/ai-toolkit/pull/1022) | 2026-08-29 |
 | OpenMOSS/MOSS-TTS-Nano | ONNX runtime 路径 torch-free | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 2026-08-30 |
 | ModelTC/LightX2V | pre-weights 忽略 dit_quant_scheme（fp8 dtype） | [#1470](https://github.com/ModelTC/LightX2V/pull/1470) | 2026-09-01 |
-| speechbrain/speechbrain | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-09-02 |
 | kijai/ComfyUI-KJNodes | WanVideoNAG dtype mismatch 修复 | [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749) | 2026-09-02 |
 | RVC-Boss/GPT-SoVITS | 导出脚本 device 无关加速器检测 | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) | 2026-09-04 |
 | docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-09-04 |
@@ -114,8 +113,10 @@
 | ISEEKYAN/mbridge | fix: do not cast non-floating-point tensors in _weight_to… | [#161](https://github.com/ISEEKYAN/mbridge/pull/161) | 2026-10-10 |
 | verl-project/verl | [fsdp] fix: preserve FP32 buffers when casting the model … | [#8189](https://github.com/verl-project/verl/pull/8189) | 2026-10-10 |
 | modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-10 |
+| modelscope/FunASR | fix(train): bind distributed training to the active accel… | [#3771](https://github.com/modelscope/FunASR/pull/3771) | 2026-10-11 |
+| modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-11 |
 
-## ✅ B 类已合入（55）
+## ✅ B 类已合入（57）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -174,6 +175,8 @@
 | espnet/espnet | fix(speechlm): make synchronize_batches() equalize the ba… | [#6813](https://github.com/espnet/espnet/pull/6813) | 2026-10-10 |
 | espnet/espnet | fix(speechlm): make synchronize_batches work on non-CUDA … | [#6808](https://github.com/espnet/espnet/pull/6808) | 2026-10-10 |
 | fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-10-10 |
+| modelscope/twinkle | fix(utils): make find_node_ip return a usable address on … | [#301](https://github.com/modelscope/twinkle/pull/301) | 2026-10-11 |
+| speechbrain/speechbrain | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-10-11 |
 
 ## ❌ B 类关闭未合入（32）
 
