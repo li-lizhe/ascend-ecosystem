@@ -94,3 +94,5 @@
 - `huggingface/transformers #48937 — 2026-10-08 关闭 — fix: support NPU/XPU compute stream in ContinuousBatchingState → 已被上游取代： 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）`
 - `huggingface/diffusers #14785 — 2026-10-08 关闭 — fix(group_offloading): support Ascend NPU stream when available → 已被上游取代： 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）`
 - `opendatalab/MinerU #5572 — 2026-10-09 关闭 — fix(kit): accept an existing --output file for single-file parse`
+- `modelscope/evalscope #1837 — 2026-10-12 关闭 — fix(perf): don't abort the run when a successful response has no toke…`
+- `open-compass/VLMEvalKit #1711 — 2026-10-12 关闭 — [Fix] do not score an unparseable MCQ item as correct`

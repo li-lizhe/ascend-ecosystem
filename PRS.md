@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-12 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-13 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 146 (+3) | 57 (+2) | 57 (+1) | 32 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 162 (+3) | 59 (+2) | 69 (+1) | 34 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 147 (+1) | 59 (+2) | 54 (-3) | 34 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 163 (+1) | 61 (+2) | 66 (-3) | 36 (+2) | |
 >
-> **较昨日（基线 2026-10-11）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-12）：提交 +1 · ✅ 已合入 +2 · 📡 跟踪中 -3 · ❌ 关闭未合入 +2**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（57）
+## 📡 B 类跟踪中（54）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -81,7 +81,6 @@
 | PaddlePaddle/PaddleOCR | #18370 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 |
 | Lightning-AI/torchmetrics | forward 保留累计 metric state | [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 2026-09-19 |
 | sgl-project/sglang | frozen-kv-mtp 接受 pp_proxy_tensors | [#40355](https://github.com/sgl-project/sglang/pull/40355) | 2026-09-19 |
-| speechbrain/speechbrain | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-09-19 |
 | crewAIInc/crewAI | evaluation 返回 False 替代 True | [#7603](https://github.com/crewAIInc/crewAI/pull/7603) | 2026-09-19 |
 | crewAIInc/crewAI | crewai-tools strip UTF-8 BOM | [#7602](https://github.com/crewAIInc/crewAI/pull/7602) | 2026-09-19 |
 | MiniMax-AI/MiniMax-M1 | main.py `.to("cuda")` 自动回退 CPU | [#43](https://github.com/MiniMax-AI/MiniMax-M1/pull/43) | 2026-09-20 |
@@ -98,8 +97,6 @@
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
 | NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
 | open-compass/VLMEvalKit | fix: return evaluation summaries from dataset.evaluate() … | [#1709](https://github.com/open-compass/VLMEvalKit/pull/1709) | 2026-09-30 |
-| ByteDance-Seed/VeOmni | [data] fix: don't split HF iterable streams by worker aga… | [#1261](https://github.com/ByteDance-Seed/VeOmni/pull/1261) | 2026-10-01 |
-| open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-01 |
 | vllm-project/vllm-ascend | [Doc][Misc] Clarify container test environment prerequisi… | [#17864](https://github.com/vllm-project/vllm-ascend/pull/17864) | 2026-10-01 |
 | verl-project/verl | [trainer, data, tool] fix: correct misspellings in reward… | [#8084](https://github.com/verl-project/verl/pull/8084) | 2026-10-01 |
 | triton-lang/triton-ascend | Docs add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
@@ -112,11 +109,11 @@
 | vllm-project/vllm-ascend | [BugFix] Exit non-zero when batch_invariant ops installat… | [#17888](https://github.com/vllm-project/vllm-ascend/pull/17888) | 2026-10-05 |
 | ISEEKYAN/mbridge | fix: do not cast non-floating-point tensors in _weight_to… | [#161](https://github.com/ISEEKYAN/mbridge/pull/161) | 2026-10-10 |
 | verl-project/verl | [fsdp] fix: preserve FP32 buffers when casting the model … | [#8189](https://github.com/verl-project/verl/pull/8189) | 2026-10-10 |
-| modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-10 |
 | modelscope/FunASR | fix(train): bind distributed training to the active accel… | [#3771](https://github.com/modelscope/FunASR/pull/3771) | 2026-10-11 |
 | modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-11 |
+| unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-12 |
 
-## ✅ B 类已合入（57）
+## ✅ B 类已合入（59）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -177,8 +174,10 @@
 | fishaudio/fish-speech | extract_vq 用 codec 设备重采样（非硬编码 CUDA） | [#1339](https://github.com/fishaudio/fish-speech/pull/1339) | 2026-10-10 |
 | modelscope/twinkle | fix(utils): make find_node_ip return a usable address on … | [#301](https://github.com/modelscope/twinkle/pull/301) | 2026-10-11 |
 | speechbrain/speechbrain | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-10-11 |
+| ByteDance-Seed/VeOmni | [data] fix: don't split HF iterable streams by worker aga… | [#1261](https://github.com/ByteDance-Seed/VeOmni/pull/1261) | 2026-10-12 |
+| speechbrain/speechbrain | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-10-12 |
 
-## ❌ B 类关闭未合入（32）
+## ❌ B 类关闭未合入（34）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -214,6 +213,8 @@
 | huggingface/transformers | ContinuousBatching 支持 NPU/XPU compute stream | [#48937](https://github.com/huggingface/transformers/pull/48937) 🔁 已关闭（被取代） | 2026-10-08 |
 | huggingface/diffusers | group_offloading 支持 Ascend NPU stream | [#14785](https://github.com/huggingface/diffusers/pull/14785) 🔁 已关闭（被取代） | 2026-10-08 |
 | opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-10-09 |
+| modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-12 |
+| open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-12 |
 
 > 🔁 **已关闭（被取代）**：#48937 — 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）；#14785 — 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）
 
