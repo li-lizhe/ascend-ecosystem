@@ -1,35 +1,35 @@
 {
-  "updated": "2026-10-10T23:15:55+08:00",
+  "updated": "2026-10-12T23:10:18+08:00",
   "repos": {
     "triton-lang/triton-ascend": {
-      "stars": 184,
-      "open_issues": 290,
-      "pushed": "2026-10-10",
-      "merged14": 61,
-      "merged7": 26,
-      "open_prs": 228,
+      "stars": 186,
+      "open_issues": 284,
+      "pushed": "2026-10-12",
+      "merged14": 50,
+      "merged7": 33,
+      "open_prs": 220,
       "ours": {
         "2449": "OPEN"
       }
     },
     "sgl-project/sglang": {
-      "stars": 36962,
-      "open_issues": 5644,
-      "pushed": "2026-10-10",
-      "merged14": 874,
-      "merged7": 469,
-      "open_prs": 4693,
+      "stars": 37037,
+      "open_issues": 5656,
+      "pushed": "2026-10-12",
+      "merged14": 907,
+      "merged7": 503,
+      "open_prs": 4732,
       "ours": {
         "40355": "OPEN"
       }
     },
     "vllm-project/vllm-ascend": {
-      "stars": 2949,
-      "open_issues": 3913,
-      "pushed": "2026-10-10",
-      "merged14": 288,
-      "merged7": 144,
-      "open_prs": 2317,
+      "stars": 2955,
+      "open_issues": 3968,
+      "pushed": "2026-10-12",
+      "merged14": 349,
+      "merged7": 254,
+      "open_prs": 2360,
       "ours": {
         "9543": "CLOSED",
         "9549": "CLOSED",
@@ -40,21 +40,21 @@
       }
     },
     "vllm-project/vllm-omni": {
-      "stars": 7114,
-      "open_issues": 1934,
-      "pushed": "2026-10-10",
-      "merged14": 207,
-      "merged7": 131,
-      "open_prs": 1054,
+      "stars": 7134,
+      "open_issues": 1990,
+      "pushed": "2026-10-12",
+      "merged14": 209,
+      "merged7": 123,
+      "open_prs": 1087,
       "ours": {}
     },
     "verl-project/verl": {
-      "stars": 23822,
-      "open_issues": 1335,
-      "pushed": "2026-10-10",
-      "merged14": 55,
-      "merged7": 33,
-      "open_prs": 712,
+      "stars": 23837,
+      "open_issues": 1353,
+      "pushed": "2026-10-12",
+      "merged14": 52,
+      "merged7": 35,
+      "open_prs": 728,
       "ours": {
         "8084": "OPEN"
       }
