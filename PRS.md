@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-13 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-14 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 147 (+1) | 59 (+2) | 54 (-3) | 34 (+2) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 163 (+1) | 61 (+2) | 66 (-3) | 36 (+2) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 152 (+5) | 62 (+3) | 56 (+2) | 34 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 168 (+5) | 64 (+3) | 68 (+2) | 36 (±0) | |
 >
-> **较昨日（基线 2026-10-12）：提交 +1 · ✅ 已合入 +2 · 📡 跟踪中 -3 · ❌ 关闭未合入 +2**
+> **较昨日（基线 2026-10-13）：提交 +5 · ✅ 已合入 +3 · 📡 跟踪中 +2 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -76,7 +76,6 @@
 | huggingface/diffusers | modular_pipeline 含 Ascend NPU | [#14786](https://github.com/huggingface/diffusers/pull/14786) | 2026-09-16 |
 | NVIDIA/Megatron-LM | torch.amp.custom_fwd 动态 device_type | [#7422](https://github.com/NVIDIA/Megatron-LM/pull/7422) | 2026-09-17 |
 | huggingface/lerobot | device type 比较含 npu/xpu | [#4678](https://github.com/huggingface/lerobot/pull/4678) | 2026-09-18 |
-| OpenADMET/openadmet-models | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-09-18 |
 | huggingface/datasets | py_utils 保存/恢复 NPU RNG state | [#8644](https://github.com/huggingface/datasets/pull/8644) | 2026-09-18 |
 | PaddlePaddle/PaddleOCR | #18370 | [#18370](https://github.com/PaddlePaddle/PaddleOCR/pull/18370) | 2026-09-18 |
 | Lightning-AI/torchmetrics | forward 保留累计 metric state | [#3507](https://github.com/Lightning-AI/torchmetrics/pull/3507) | 2026-09-19 |
@@ -87,7 +86,6 @@
 | Vaibhavs10/insanely-fast-whisper | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#288](https://github.com/Vaibhavs10/insanely-fast-whisper/pull/288) | 2026-09-21 |
 | m-bain/whisperX | feat: auto-detect Ascend NPU and other non-CUDA accelerat… | [#1483](https://github.com/m-bain/whisperX/pull/1483) | 2026-09-21 |
 | chflame163/ComfyUI_LayerStyle | crop mask multiple 设备无关 | [#612](https://github.com/chflame163/ComfyUI_LayerStyle/pull/612) | 2026-09-22 |
-| modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-09-23 |
 | OpenRLHF/OpenRLHF | loss 归一化设备取自 loss mask（非 `torch.cuda`） | [#1365](https://github.com/OpenRLHF/OpenRLHF/pull/1365) | 2026-09-24 |
 | InternLM/xtuner | fix(datasets): build the DP all_reduce tensor on the mesh… | [#2127](https://github.com/InternLM/xtuner/pull/2127) | 2026-09-25 |
 | EleutherAI/lm-evaluation-harness | fix(models): point the `hf-audiolm-qwen` lazy mapping at … | [#4244](https://github.com/EleutherAI/lm-evaluation-harness/pull/4244) | 2026-09-26 |
@@ -110,12 +108,14 @@
 | ISEEKYAN/mbridge | fix: do not cast non-floating-point tensors in _weight_to… | [#161](https://github.com/ISEEKYAN/mbridge/pull/161) | 2026-10-10 |
 | verl-project/verl | [fsdp] fix: preserve FP32 buffers when casting the model … | [#8189](https://github.com/verl-project/verl/pull/8189) | 2026-10-10 |
 | modelscope/FunASR | fix(train): bind distributed training to the active accel… | [#3771](https://github.com/modelscope/FunASR/pull/3771) | 2026-10-11 |
-| modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-11 |
 | unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-12 |
-| deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
+| fangwei123456/spikingjelly | fix(layer): size the WSLinear gain with out_features | [#780](https://github.com/fangwei123456/spikingjelly/pull/780) | 2026-10-13 |
+| PaddlePaddle/PaddleX | [text recognition] fix: group accented Latin letters into… | [#5222](https://github.com/PaddlePaddle/PaddleX/pull/5222) | 2026-10-13 |
+| X-GenGroup/Flow-Factory | [utils,trainers,test] fix: restore accelerator RNG state … | [#244](https://github.com/X-GenGroup/Flow-Factory/pull/244) | 2026-10-13 |
 | vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs（对应 issue #8816，含 CPU-only 回归测试） | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) | 2026-10-13 |
+| deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
 
-## ✅ B 类已合入（59）
+## ✅ B 类已合入（62）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -178,6 +178,9 @@
 | speechbrain/speechbrain | infer_device 用 torch.accelerator 支持非 CUDA | [#3080](https://github.com/speechbrain/speechbrain/pull/3080) | 2026-10-11 |
 | ByteDance-Seed/VeOmni | [data] fix: don't split HF iterable streams by worker aga… | [#1261](https://github.com/ByteDance-Seed/VeOmni/pull/1261) | 2026-10-12 |
 | speechbrain/speechbrain | weight_norm parametrizations 静默 deprecation 警告 | [#3087](https://github.com/speechbrain/speechbrain/pull/3087) | 2026-10-12 |
+| modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-13 |
+| modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-10-13 |
+| OpenADMET/openadmet-models | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-10-13 |
 
 ## ❌ B 类关闭未合入（34）
 
