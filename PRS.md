@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（54）
+## 📡 B 类跟踪中（55）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -112,6 +112,7 @@
 | modelscope/FunASR | fix(train): bind distributed training to the active accel… | [#3771](https://github.com/modelscope/FunASR/pull/3771) | 2026-10-11 |
 | modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-11 |
 | unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-12 |
+| deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
 
 ## ✅ B 类已合入（59）
 
