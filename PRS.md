@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（55）
+## 📡 B 类跟踪中（56）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -113,6 +113,7 @@
 | modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-11 |
 | unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-12 |
 | deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
+| vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs（对应 issue #8816，含 CPU-only 回归测试） | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) | 2026-10-13 |
 
 ## ✅ B 类已合入（59）
 
