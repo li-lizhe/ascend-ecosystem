@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（56）
+## 📡 B 类跟踪中（55）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -112,7 +112,6 @@
 | fangwei123456/spikingjelly | fix(layer): size the WSLinear gain with out_features | [#780](https://github.com/fangwei123456/spikingjelly/pull/780) | 2026-10-13 |
 | PaddlePaddle/PaddleX | [text recognition] fix: group accented Latin letters into… | [#5222](https://github.com/PaddlePaddle/PaddleX/pull/5222) | 2026-10-13 |
 | X-GenGroup/Flow-Factory | [utils,trainers,test] fix: restore accelerator RNG state … | [#244](https://github.com/X-GenGroup/Flow-Factory/pull/244) | 2026-10-13 |
-| vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs（对应 issue #8816，含 CPU-only 回归测试） | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) | 2026-10-13 |
 | deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
 
 ## ✅ B 类已合入（62）
@@ -182,7 +181,7 @@
 | modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-10-13 |
 | OpenADMET/openadmet-models | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-10-13 |
 
-## ❌ B 类关闭未合入（34）
+## ❌ B 类关闭未合入（35）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -220,6 +219,9 @@
 | opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-10-09 |
 | modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-12 |
 | open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-12 |
+| vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) 🔁 已关闭（被取代） | 2026-10-14 |
+
+> 🔁 **已关闭（被取代）**：#8866 — 同仓 #8867（JoeLoveSally，provenance 标记方案）功能等价。实测对方 16 个回归测试在我方分支全绿；我方第一版「所有 dict 一律重建」绕过上游 auto-enable 是对方挑出的真缺陷。我方唯一增量仅为把重建抽成可单测的 `restore_serialized_engine_args()` + 常量命名，已在 #8866 留言赠予，主动关闭让位（2026-10-14）。
 
 > 🔁 **已关闭（被取代）**：#48937 — 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）；#14785 — 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）
 
