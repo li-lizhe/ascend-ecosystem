@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-14 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-15 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 152 (+5) | 62 (+3) | 56 (+2) | 34 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 168 (+5) | 64 (+3) | 68 (+2) | 36 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 154 (+2) | 65 (+3) | 54 (-2) | 35 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 170 (+2) | 67 (+3) | 66 (-2) | 37 (+1) | |
 >
-> **较昨日（基线 2026-10-13）：提交 +5 · ✅ 已合入 +3 · 📡 跟踪中 +2 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-14）：提交 +2 · ✅ 已合入 +3 · 📡 跟踪中 -2 · ❌ 关闭未合入 +1**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（55）
+## 📡 B 类跟踪中（54）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -100,7 +100,6 @@
 | triton-lang/triton-ascend | Docs add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
 | debpalash/VoiceStudio | fix(system): report a host Ascend NPU in device info and … | [#2582](https://github.com/debpalash/VoiceStudio/pull/2582) | 2026-10-02 |
 | sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-02 |
-| aigc-apps/VideoX-Fun | fix(z-image): strip the ComfyUI `model.diffusion_model.` key prefix before converting | [#522](https://github.com/aigc-apps/VideoX-Fun/pull/522) | 2026-10-04 |
 | triton-lang/triton-ascend | fix: Harden the LLVM build and keep FileCheck in the wheel | [#2454](https://github.com/triton-lang/triton-ascend/pull/2454) | 2026-10-05 |
 | vllm-project/speculators | fix(data): abort dataset build when the render endpoint f… | [#1196](https://github.com/vllm-project/speculators/pull/1196) | 2026-10-05 |
 | gpustack/gpustack | fix(chart): refuse unsupported worker.gpuVendors names | [#6338](https://github.com/gpustack/gpustack/pull/6338) | 2026-10-05 |
@@ -109,12 +108,12 @@
 | verl-project/verl | [fsdp] fix: preserve FP32 buffers when casting the model … | [#8189](https://github.com/verl-project/verl/pull/8189) | 2026-10-10 |
 | modelscope/FunASR | fix(train): bind distributed training to the active accel… | [#3771](https://github.com/modelscope/FunASR/pull/3771) | 2026-10-11 |
 | unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-12 |
-| fangwei123456/spikingjelly | fix(layer): size the WSLinear gain with out_features | [#780](https://github.com/fangwei123456/spikingjelly/pull/780) | 2026-10-13 |
 | PaddlePaddle/PaddleX | [text recognition] fix: group accented Latin letters into… | [#5222](https://github.com/PaddlePaddle/PaddleX/pull/5222) | 2026-10-13 |
 | X-GenGroup/Flow-Factory | [utils,trainers,test] fix: restore accelerator RNG state … | [#244](https://github.com/X-GenGroup/Flow-Factory/pull/244) | 2026-10-13 |
 | deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
+| areal-project/AReaL | fix(engine): route Megatron residency memory calls throug… | [#1787](https://github.com/areal-project/AReaL/pull/1787) | 2026-10-14 |
 
-## ✅ B 类已合入（62）
+## ✅ B 类已合入（65）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -180,6 +179,9 @@
 | modelscope/mcore-bridge | fix(lora): mark NPU grouped LoRA expert adapters as exper… | [#231](https://github.com/modelscope/mcore-bridge/pull/231) | 2026-10-13 |
 | modelscope/DiffSynth-Studio | WanToDance music encoder 设备无关 | [#1708](https://github.com/modelscope/DiffSynth-Studio/pull/1708) | 2026-10-13 |
 | OpenADMET/openadmet-models | 'auto' accelerator（非 'gpu'）作默认 | [#604](https://github.com/OpenADMET/openadmet-models/pull/604) | 2026-10-13 |
+| SWivid/F5-TTS | fix: resolve the default device through torch.accelerator | [#1327](https://github.com/SWivid/F5-TTS/pull/1327) | 2026-10-14 |
+| fangwei123456/spikingjelly | fix(layer): size the WSLinear gain with out_features | [#780](https://github.com/fangwei123456/spikingjelly/pull/780) | 2026-10-14 |
+| aigc-apps/VideoX-Fun | fix(z-image): strip the ComfyUI `model.diffusion_model.` key prefix before converting | [#522](https://github.com/aigc-apps/VideoX-Fun/pull/522) | 2026-10-14 |
 
 ## ❌ B 类关闭未合入（35）
 
@@ -219,9 +221,7 @@
 | opendatalab/MinerU | `resolve_batch_output_paths()` 冗余判断 | [#5572](https://github.com/opendatalab/MinerU/pull/5572) | 2026-10-09 |
 | modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-12 |
 | open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-12 |
-| vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) 🔁 已关闭（被取代） | 2026-10-14 |
-
-> 🔁 **已关闭（被取代）**：#8866 — 同仓 #8867（JoeLoveSally，provenance 标记方案）功能等价。实测对方 16 个回归测试在我方分支全绿；我方第一版「所有 dict 一律重建」绕过上游 auto-enable 是对方挑出的真缺陷。我方唯一增量仅为把重建抽成可单测的 `restore_serialized_engine_args()` + 常量命名，已在 #8866 留言赠予，主动关闭让位（2026-10-14）。
+| vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) | 2026-10-14 |
 
 > 🔁 **已关闭（被取代）**：#48937 — 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）；#14785 — 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）
 

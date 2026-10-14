@@ -96,3 +96,4 @@
 - `opendatalab/MinerU #5572 — 2026-10-09 关闭 — fix(kit): accept an existing --output file for single-file parse`
 - `modelscope/evalscope #1837 — 2026-10-12 关闭 — fix(perf): don't abort the run when a successful response has no toke…`
 - `open-compass/VLMEvalKit #1711 — 2026-10-12 关闭 — [Fix] do not score an unparseable MCQ item as correct`
+- `vllm-project/vllm-omni #8866 — 2026-10-14 关闭 — [Bugfix] Rebuild serialized fault_tolerance_config before OmniEngineA…`
