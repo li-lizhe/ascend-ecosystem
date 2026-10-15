@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-15 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-16 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 154 (+2) | 65 (+3) | 54 (-2) | 35 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 170 (+2) | 67 (+3) | 66 (-2) | 37 (+1) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 156 (+2) | 65 (±0) | 56 (+2) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 172 (+2) | 67 (±0) | 68 (+2) | 37 (±0) | |
 >
-> **较昨日（基线 2026-10-14）：提交 +2 · ✅ 已合入 +3 · 📡 跟踪中 -2 · ❌ 关闭未合入 +1**
+> **较昨日（基线 2026-10-15）：提交 +2 · ✅ 已合入 ±0 · 📡 跟踪中 +2 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（54）
+## 📡 B 类跟踪中（56）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -112,6 +112,8 @@
 | X-GenGroup/Flow-Factory | [utils,trainers,test] fix: restore accelerator RNG state … | [#244](https://github.com/X-GenGroup/Flow-Factory/pull/244) | 2026-10-13 |
 | deepseek-ai/DeepEP | fix: parse the full /proc/self/maps pathname in check_nccl_so（对应 issue #777） | [#779](https://github.com/deepseek-ai/DeepEP/pull/779) | 2026-10-13 |
 | areal-project/AReaL | fix(engine): route Megatron residency memory calls throug… | [#1787](https://github.com/areal-project/AReaL/pull/1787) | 2026-10-14 |
+| jeshraghian/snntorch | fix(spikegen): keep the input dtype when padding rate-enc… | [#481](https://github.com/jeshraghian/snntorch/pull/481) | 2026-10-15 |
+| LMCache/LMCache | fix(disagg): do not crash on aborted requests with no fir… | [#5776](https://github.com/LMCache/LMCache/pull/5776) | 2026-10-15 |
 
 ## ✅ B 类已合入（65）
 
