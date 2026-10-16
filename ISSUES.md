@@ -28,5 +28,6 @@
 | triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 归约轴被 split（`R0_BLOCK < rnumel`）时 index 归约丢 ch | [#2530](https://github.com/triton-lang/triton-ascend/issues/2530) | 2026-10-13 | 2026-10-15 | 1 | wait-feedback, compiler, python, ascend-backend, kernels, scripts |
 | triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: launcher 把 `KernelMetadata` 当 dict 传给 C 层，同进程 | [#2529](https://github.com/triton-lang/triton-ascend/issues/2529) | 2026-10-13 | 2026-10-15 | 1 | bug, triage review, compiler, python, ascend-backend, kernels |
 | unslothai/unsloth | RFC: Ascend NPU (昇腾) backend support for unsloth | [#10772](https://github.com/unslothai/unsloth/issues/10772) | 2026-09-11 | 2026-09-11 | 0 | - |
+| verl-project/verl-omni | [reward] whisper_cer scorer cannot run on non-CUDA accelerat | [#768](https://github.com/verl-project/verl-omni/issues/768) | 2026-10-16 | 2026-10-16 | 0 | - |
 
-共 21 个 open issue。
+共 22 个 open issue。
