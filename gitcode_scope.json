@@ -500,9 +500,47 @@
       "cla": false,
       "compile_gate": false,
       "ext_contributors": []
+    },
+    {
+      "repo": "Ascend/msprobe",
+      "verdict": "优先（我方 2 单在跟踪）",
+      "why": "MindStudio 精度工具（dump / 精度预检 / 溢出检测），昇腾用户跑精度问题必用；bug 单多、报错栈清晰、可本机复现（不依赖 NPU 也能验 YAML/解析/去重类逻辑），与本岗「本机可验证的真实 bug」方向高度吻合。",
+      "identity": "lizhe.li@huawei.com",
+      "our_prs": [
+        {
+          "number": 1103,
+          "title": "[bugfix] 修复精度预检 forward/backward 解析与去重的两处报错",
+          "branch": "fix/acc-check-forward-backward-parse",
+          "issue": "641,642",
+          "state": "open",
+          "created": "2026-10-15",
+          "head_commit": "77dc25d",
+          "labels": [
+            "stat/needs-squash",
+            "ascend-cla/yes",
+            "ci-pipeline-running",
+            "docs-ci-pipeline-success"
+          ],
+          "note": "10-16 采纳 reviewer ylw1234 两条检视意见，追加提交 77dc25d（+4/-3，无行为变化）"
+        },
+        {
+          "number": 1108,
+          "title": "[bugfix] get_ops 兼容 support_wrap_ops.yaml 缺省/留空的算子类别",
+          "branch": "fix/get-ops-missing-section",
+          "issue": "643",
+          "state": "open",
+          "created": "2026-10-16",
+          "head_commit": "af5d7f1",
+          "labels": [
+            "ascend-cla/yes",
+            "ci-pipeline-running"
+          ],
+          "note": "本仓已达 2 个 open MR 上限，暂停向本仓投新单"
+        }
+      ]
     }
   ],
-  "updated": "2026-10-05",
+  "updated": "2026-10-16",
   "model_ecosystem": {
     "title": "GitCode 昇腾模型生态（NPU 硬件口径）模型目录 —— 新增候选源",
     "declared_scope": "用户 2026-10-05 指定：ai.gitcode.com/models?hardware=NPU 目录内的模型也在候选范围内。",
