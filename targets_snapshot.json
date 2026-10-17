@@ -1,35 +1,35 @@
 {
-  "updated": "2026-10-16T23:16:57+08:00",
+  "updated": "2026-10-18T01:17:29+08:00",
   "repos": {
     "triton-lang/triton-ascend": {
       "stars": 194,
-      "open_issues": 321,
-      "pushed": "2026-10-16",
-      "merged14": 61,
-      "merged7": 39,
-      "open_prs": 238,
+      "open_issues": 310,
+      "pushed": "2026-10-17",
+      "merged14": 67,
+      "merged7": 41,
+      "open_prs": 227,
       "ours": {
         "2449": "OPEN"
       }
     },
     "sgl-project/sglang": {
-      "stars": 37217,
-      "open_issues": 5914,
-      "pushed": "2026-10-16",
-      "merged14": 940,
-      "merged7": 472,
-      "open_prs": 4970,
+      "stars": 37249,
+      "open_issues": 5947,
+      "pushed": "2026-10-17",
+      "merged14": 954,
+      "merged7": 471,
+      "open_prs": 4999,
       "ours": {
         "40355": "OPEN"
       }
     },
     "vllm-project/vllm-ascend": {
       "stars": 2995,
-      "open_issues": 4142,
-      "pushed": "2026-10-16",
-      "merged14": 505,
-      "merged7": 394,
-      "open_prs": 2495,
+      "open_issues": 4150,
+      "pushed": "2026-10-17",
+      "merged14": 540,
+      "merged7": 391,
+      "open_prs": 2496,
       "ours": {
         "9543": "CLOSED",
         "9549": "CLOSED",
@@ -40,21 +40,21 @@
       }
     },
     "vllm-project/vllm-omni": {
-      "stars": 7208,
-      "open_issues": 1967,
-      "pushed": "2026-10-16",
-      "merged14": 266,
-      "merged7": 148,
-      "open_prs": 1064,
+      "stars": 7222,
+      "open_issues": 1962,
+      "pushed": "2026-10-17",
+      "merged14": 279,
+      "merged7": 147,
+      "open_prs": 1057,
       "ours": {}
     },
     "verl-project/verl": {
-      "stars": 23901,
-      "open_issues": 1363,
+      "stars": 23909,
+      "open_issues": 1370,
       "pushed": "2026-10-16",
       "merged14": 54,
-      "merged7": 31,
-      "open_prs": 732,
+      "merged7": 21,
+      "open_prs": 739,
       "ours": {
         "8084": "OPEN"
       }
