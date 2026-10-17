@@ -5,63 +5,63 @@
 
 ## 结论：2 件真需要动手，其余为「等对方」或「非我方问题」
 
-### 🔴 1. crewAI #7603 —— 我们加的测试里有一条错断言（我们自己的缺陷）
+### 🔴 1. crewAI #7603 — 我们自己加的测试里有一条断言是错的（已修）
 
-`lib/crewai/tests/experimental/evaluation/test_experiment_runner.py` 第 237 行（在**我们新增的 33 行块内**，
-base 文件只有 209 行、该块从 210 行起）：
+`lib/crewai/tests/experimental/evaluation/test_experiment_runner.py` 第 237 行
+（在**本 PR 新增的 33 行里**；该文件原 209 行）：
 
 ```python
 assert runner._assert_scores({"a": 3, "b": 7}, 5) is True   # 实际返回 False
 ```
 
-**实测证据**：取出 head `1ddd0307` 的**真实** `runner.py` 源码执行该真实方法，逐条跑该测试块的全部 11 条断言
-⇒ 10 条 ok、**这条 FAIL**（expected dict 非空、actual 标量 ⇒ `all(5>=3, 5>=7)` = False）。
-两个独立 bot（coderabbit、cursor）都指向这一处，方向一致。
+`_assert_scores` 的规则是 actual 必须 >= expected 中每个值，`5 >= 7` 为假。
+两个 review bot（coderabbit、cursor）都指向这一行。
 
-危害：PR 合入即让该仓测试变红。改法一行：`is True` → `is False`（或改成 `{"a": 3, "b": 4}` 保持 True 的语义）。
+**验证方式（可复现）**：从 PR head 拉真实
+`lib/crewai/src/crewai/experimental/evaluation/experiment/runner.py`，抽出
+`_assert_scores` 绑定到实例，再**逐条执行测试块里的 assertion**：
+- 原版：13 条中 **1 条失败**（就是第 237 行）→ RED 确认
+- 修正后：**0 条失败** → GREEN
 
-### 🟠 2. VoiceStudio #2582 —— 冲突（dirty），可自主 rebase
+**处置**：改成 `is False`，一行。head `e1af20e0`，CI **4/4 success**。
+（初版我多加了两条边界断言，其中 `({"a":3,"b":7}, 7) is False` 本身也错——`7 >= 7` 为真——
+已在推送前自查发现并改为最小单行修正。）
 
-`mergeable=false`，落后 main 2 个提交。冲突源：`CHANGELOG.md` 在 main 上从 369482 → 373534 字节（别人也改了它）。
-另两条 `backend/api/routers/system.py`、`tests/.../test_system_gpu_detection.py` 双方字节数相同、应可干净合。
+### 🟠 2. VoiceStudio #2582 — rebase 冲突（已解决）
 
-## ⏳ 等对方（不必动）
+`mergeable=false`，落后 main **131 个提交**。
+
+**冲突根因**：本分支的 `CHANGELOG.md` 曾被污染成**别的项目（SpikingJelly）的变更日志**
+（commit `c162e095` 的 diff 是 `# 变更日志 | Changelog` + "All notable changes to SpikingJelly"）。
+这是本 PR 唯一冲突文件；另两个文件可干净 rebase。
+
+**处置**：rebase 到当前 `origin/main@481cf4c4`，CHANGELOG 取上游版本 + 只补我方那一行
+`- Settings → System reports an Ascend NPU host's device name and VRAM … (#2582)`（放在 `[Unreleased] → ### Fixed` 下）；
+第二个 commit（纯 changelog 恢复件）内容已归并，跳过。
+- head `128cf3bc`，**1 commit**（原 2）、3 文件 `+151/−15`
+- **`mergeable: true`**（冲突消除），`mergeable_state: blocked`（等 review / CI）
+- `backend/api/routers/system.py`（68546B）与 `tests/.../test_system_gpu_detection.py`（5118B）
+  **与改前 PR head 逐字节一致**——只动了 CHANGELOG
+- 全部 LF（`\r` = 0）
+
+## 其余不用动
 
 | PR | 状态 | 说明 |
 |----|------|------|
-| docling #4158 | ms=clean | 维护者 cau-git 已于 10-14 **APPROVED**，等合并 |
-| chatterbox #554 | ms=blocked | 最后发言者是外人，APPROVED 但非维护者（注册于 approve 前 12 分钟），按 open 处理 |
-| LMCache #5776 | ms=blocked | 真人 deng451e 10-16 给了一条 nit（建议别给 in-process 模式加测试）；**我们已在 issue comment 回复**解释覆盖的是 `ret_first_tok` 分支，且该 review 同时给了 APPROVED |
-| vllm-ascend #17888 | ms=blocked | CI 红在 `cpu-ut`（`FileExistsError: /tmp/pytest-of-root/.../shared-output`，本 PR 未触及的路径；同轮另一 matrix 项 7741 测试通过）。已评论说明并请求重跑（fork 无 rerun 权限） |
-| sglang #40355 | ms=blocked | `pr-gate` 卡在 `Missing required label 'run-ci'`（仓库规定 fork PR 需维护者加标签），已评论请求 |
-| triton-ascend #2454 | ms=blocked | 3 个失败全是 **自托管 runner 的容器失败**（annotations：`Executing the custom container implementation failed. Please contact your self hosted runner administrator.`）⇒ 非我方代码问题 |
+| docling #4158 | ✅ 维护者已 APPROVED（10-14） | 等合并 |
+| LMCache #5776 | 真人 nit 已回复 | 同轮 review 给了 APPROVED |
+| vllm-ascend #17888 | CI 红在 `cpu-ut` 的 `/tmp/.../shared-output` | 非本 PR 路径；同轮另项 7741 测试通过；已评论+请求重跑（fork 无重跑权限） |
+| sglang #40355 | 等维护者加 `run-ci` 标签 | 已请求 |
+| triton-ascend #2454 | 3 个失败 | 全是**对方自托管 runner 容器起不来**（annotations 原文「请联系你的自托管 runner 管理员」），非我方代码 |
+| whisperX #1469 | Copilot 称「只 catch ImportError」 | 已过时：代码现为 `except Exception` |
+| DeepSpeed #8524/#8525 | codex 称「缺 sign-off」 | 已过时：**实测两个 head 提交都带 `Signed-off-by` 且邮箱正确** |
 
-## 📮 有未回的 bot 评论线程（低优先，可选择性回复）
+## 健康度
 
-共 10 个 B 类 PR 存在未回的 bot 线程。已核实其中两条**已过时**（不必回）：
+- CLA：**全部 success**（EasyCLA 11 / license/cla 5 / CLA 1），零失败
+- 12 条 PR 自投出起零真人评论（纯等 review）
+- 扫描 0 错误
 
-- **whisperX #1469**：Copilot 说「只 catch ImportError 不够」——head `50ab570b` 现在写的是 `except Exception`，已覆盖（正是我在 verl-omni #769 修的同一类问题）。另两条「注释是中文」的指摘也已不成立（`# torchaudio has no Linux aarch64 wheels`，英文）。
-- **DeepSpeed #8524/#8525**：codex 的 P1「缺 sign-off trailer」——**实测两个 PR 的 head 提交都有 `Signed-off-by: li-lizhe <147392333@qq.com>`**，author/committer 也都是该邮箱；bot 说的是更早的 commit，已过时。
-  另一条 P1「ZenFlow 通信 buffer 应留在加速器」——PR 改的正是 `device='cuda'` → `get_accelerator().current_device_name()`，**就是我们想做的事**，无冲突；但可考虑回一条澄清。
+## A 类（pytorch，按规矩只报不动）
 
-其余待回（gpustack #6338 ×4、vllm-ascend #17864 ×3、crewAI #7603 的 csv_loader BOM ×1、speculators #1196 ×1、VoiceStudio #2582 ×2）多为文档措辞/风格建议。
-
-## 🅰️ A 类（pytorch，只报不动）
-
-| PR | 维度 |
-|----|------|
-| #195246 | dirty + CI 红 3 项（linux-docs 等） |
-| #195261 / #195247 / #195245 | CI 红 1 项（`torchtitan-x-pytorch-test`） |
-| #192208 | dirty |
-
-## 📊 全量健康度
-
-- open PR：68；`needs_action`（任一维度命中）：19
-- **CLA：全部 success**（`CLA` ×1 / `EasyCLA` ×11 / `license/cla` ×5），无一处失败
-- 全程零真人评论（纯等 review）：12 条
-- 扫描错误：0
-
-## 方法留痕
-
-- 工具：`our-open-prs-decision-sweep.py`（只看最后真人发言者）+ 自写四维全量扫描（补 CI/CLA/未回线程，因为前者看不到「bot 提了但我没回」——正是 verl-omni #769 那类漏网）
-- 只读 GET，全程未 POST/PATCH
+#195246 脏 + CI 红 3 项；#195245 / #195247 / #195261 CI 红 1 项；#192208 脏。
