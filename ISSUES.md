@@ -11,7 +11,7 @@
 | EleutherAI/lm-evaluation-harness | `hf-audiolm-qwen` is unusable: MODEL_MAPPING points at a cla | [#4243](https://github.com/EleutherAI/lm-evaluation-harness/issues/4243) | 2026-09-26 | 2026-09-26 | 0 | - |
 | InternLM/xtuner | [NPU] reduce_sum_across_dp_group builds the all_reduce tenso | [#2126](https://github.com/InternLM/xtuner/issues/2126) | 2026-09-25 | 2026-09-25 | 0 | - |
 | MiniMax-AI/MiniMax-M1 | main.py hard-codes CUDA and crashes on CPU/Ascend/NPU machin | [#44](https://github.com/MiniMax-AI/MiniMax-M1/issues/44) | 2026-09-20 | 2026-09-20 | 0 | - |
-| NVlabs/Sana | LongSana hardcodes CUDA/NCCL for distributed init and FSDP d | [#513](https://github.com/NVlabs/Sana/issues/513) | 2026-09-28 | 2026-09-28 | 0 | - |
+| NVlabs/Sana | LongSana hardcodes CUDA/NCCL for distributed init and FSDP d | [#513](https://github.com/NVlabs/Sana/issues/513) | 2026-09-28 | 2026-10-17 | 1 | - |
 | Vaibhavs10/insanely-fast-whisper | CLI hard-codes CUDA when --device-id is an integer, breaking | [#287](https://github.com/Vaibhavs10/insanely-fast-whisper/issues/287) | 2026-09-21 | 2026-09-21 | 0 | - |
 | Wan-Video/Wan2.2 | `import wan` fails on non-CUDA builds: torch.cuda.current_de | [#397](https://github.com/Wan-Video/Wan2.2/issues/397) | 2026-09-28 | 2026-09-28 | 0 | - |
 | X-GenGroup/Flow-Factory | [Bug] accelerator RNG state leaks out of seeded blocks on no | [#243](https://github.com/X-GenGroup/Flow-Factory/issues/243) | 2026-10-13 | 2026-10-13 | 0 | - |
@@ -23,6 +23,7 @@
 | langgenius/dify | Monaco Editor Web Worker always fails with 404 due to missin | [#39340](https://github.com/langgenius/dify/issues/39340) | 2026-07-21 | 2026-07-21 | 1 | - |
 | li-lizhe/doc | log | [#1](https://github.com/li-lizhe/doc/issues/1) | 2021-05-31 | 2021-05-31 | 2 | - |
 | m-bain/whisperX | CLI and API silently fall back to CPU on Ascend NPU because  | [#1482](https://github.com/m-bain/whisperX/issues/1482) | 2026-09-21 | 2026-09-21 | 0 | - |
+| modelscope/FunASR | [dist] XPU distributed backend selection (XCCL / oneCCL) is  | [#3777](https://github.com/modelscope/FunASR/issues/3777) | 2026-10-17 | 2026-10-17 | 1 | - |
 | pytorch/pytorch | [Feature Request] Make the fake process group and the LocalT | [#199239](https://github.com/pytorch/pytorch/issues/199239) | 2026-10-01 | 2026-10-01 | 0 | oncall: distributed, triaged, bot-triaged, oncall: distributed infra |
 | triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 静态 r-numel 被特化为 ASTSource 编译期常量时，fused softma | [#2531](https://github.com/triton-lang/triton-ascend/issues/2531) | 2026-10-13 | 2026-10-15 | 1 | wait-feedback, autotune, compiler, python, ascend-backend, kernels |
 | triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 归约轴被 split（`R0_BLOCK < rnumel`）时 index 归约丢 ch | [#2530](https://github.com/triton-lang/triton-ascend/issues/2530) | 2026-10-13 | 2026-10-15 | 1 | wait-feedback, compiler, python, ascend-backend, kernels, scripts |
@@ -30,4 +31,4 @@
 | unslothai/unsloth | RFC: Ascend NPU (昇腾) backend support for unsloth | [#10772](https://github.com/unslothai/unsloth/issues/10772) | 2026-09-11 | 2026-09-11 | 0 | - |
 | verl-project/verl-omni | [reward] whisper_cer scorer cannot run on non-CUDA accelerat | [#768](https://github.com/verl-project/verl-omni/issues/768) | 2026-10-16 | 2026-10-16 | 0 | - |
 
-共 22 个 open issue。
+共 23 个 open issue。
