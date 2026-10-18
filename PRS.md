@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-18 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-19 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 160 (+2) | 67 (+1) | 58 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 176 (+2) | 69 (+1) | 70 (+1) | 37 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 163 (+3) | 69 (+2) | 59 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 179 (+3) | 71 (+2) | 71 (+1) | 37 (±0) | |
 >
-> **较昨日（基线 2026-10-17）：提交 +2 · ✅ 已合入 +1 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-18）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（58）
+## 📡 B 类跟踪中（59）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -99,7 +99,6 @@
 | verl-project/verl | [trainer, data, tool] fix: correct misspellings in reward… | [#8084](https://github.com/verl-project/verl/pull/8084) | 2026-10-01 |
 | triton-lang/triton-ascend | Docs add --no-build-isolation note and install ver… | [#2449](https://github.com/triton-lang/triton-ascend/pull/2449) | 2026-10-01 |
 | debpalash/VoiceStudio | fix(system): report a host Ascend NPU in device info and … | [#2582](https://github.com/debpalash/VoiceStudio/pull/2582) | 2026-10-02 |
-| sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-02 |
 | triton-lang/triton-ascend | fix: Harden the LLVM build and keep FileCheck in the wheel | [#2454](https://github.com/triton-lang/triton-ascend/pull/2454) | 2026-10-05 |
 | vllm-project/speculators | fix(data): abort dataset build when the render endpoint f… | [#1196](https://github.com/vllm-project/speculators/pull/1196) | 2026-10-05 |
 | gpustack/gpustack | fix(chart): refuse unsupported worker.gpuVendors names | [#6338](https://github.com/gpustack/gpustack/pull/6338) | 2026-10-05 |
@@ -114,10 +113,12 @@
 | jeshraghian/snntorch | fix(spikegen): keep the input dtype when padding rate-enc… | [#481](https://github.com/jeshraghian/snntorch/pull/481) | 2026-10-15 |
 | LMCache/LMCache | fix(disagg): do not crash on aborted requests with no fir… | [#5776](https://github.com/LMCache/LMCache/pull/5776) | 2026-10-15 |
 | verl-project/verl-omni | [reward] fix: let the whisper_cer scorer select non-CUDA … | [#769](https://github.com/verl-project/verl-omni/pull/769) | 2026-10-16 |
-| kornia/kornia | fix(filters): promote the multichannel guidance in guided… | [#6062](https://github.com/kornia/kornia/pull/6062) | 2026-10-17 |
 | OpenBMB/VoxCPM | fix: resolve the runtime device and the training backend … | [#420](https://github.com/OpenBMB/VoxCPM/pull/420) | 2026-10-17 |
+| triton-lang/triton-ascend | fix(TritonToLinalg): annotate the index input of max/min-… | [#2615](https://github.com/triton-lang/triton-ascend/pull/2615) | 2026-10-18 |
+| InternLM/lmdeploy | fix(dlinfer): build the MoE expert-id map on the active d… | [#5039](https://github.com/InternLM/lmdeploy/pull/5039) | 2026-10-18 |
+| modelscope/modelscope | fix(torch_utils): resolve the device and the collective b… | [#1825](https://github.com/modelscope/modelscope/pull/1825) | 2026-10-18 |
 
-## ✅ B 类已合入（67）
+## ✅ B 类已合入（69）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -188,6 +189,8 @@
 | aigc-apps/VideoX-Fun | fix(z-image): strip the ComfyUI `model.diffusion_model.` key prefix before converting | [#522](https://github.com/aigc-apps/VideoX-Fun/pull/522) | 2026-10-14 |
 | vladmandic/sdnext | fix(postprocess): load the Aura SR upsampler without assu… | [#5156](https://github.com/vladmandic/sdnext/pull/5156) | 2026-10-16 |
 | modelscope/FunASR | fix(train): bind distributed training to the active accel… | [#3771](https://github.com/modelscope/FunASR/pull/3771) | 2026-10-17 |
+| kornia/kornia | fix(filters): promote the multichannel guidance in guided… | [#6062](https://github.com/kornia/kornia/pull/6062) | 2026-10-18 |
+| sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-18 |
 
 ## ❌ B 类关闭未合入（35）
 
