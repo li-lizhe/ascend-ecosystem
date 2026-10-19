@@ -16,6 +16,7 @@
 | Wan-Video/Wan2.2 | `import wan` fails on non-CUDA builds: torch.cuda.current_de | [#397](https://github.com/Wan-Video/Wan2.2/issues/397) | 2026-09-28 | 2026-09-28 | 0 | - |
 | X-GenGroup/Flow-Factory | [Bug] accelerator RNG state leaks out of seeded blocks on no | [#243](https://github.com/X-GenGroup/Flow-Factory/issues/243) | 2026-10-13 | 2026-10-13 | 0 | - |
 | areal-project/AReaL | [BUG] Megatron weight-residency calls torch.cuda.* directly, | [#1786](https://github.com/areal-project/AReaL/issues/1786) | 2026-10-14 | 2026-10-14 | 0 | - |
+| hao-ai-lab/FastVideo | [Bug] SP communication warmup hardcodes device="cuda", break | [#1987](https://github.com/hao-ai-lab/FastVideo/issues/1987) | 2026-10-19 | 2026-10-19 | 0 | installation, platform, scope: inference, scope: attention, scope: distributed |
 | hpcaitech/ColossalAI | fx tracer / rope init hard-code the device, so NPU runs fall | [#6454](https://github.com/hpcaitech/ColossalAI/issues/6454) | 2026-09-26 | 2026-09-26 | 0 | - |
 | huggingface/diffusers | WanAnimatePipeline.get_i2v_mask() defaults device to "cuda", | [#14881](https://github.com/huggingface/diffusers/issues/14881) | 2026-09-27 | 2026-09-27 | 0 | - |
 | huggingface/diffusers | `Pipeline.to()` offload guards only cover `cuda`/`xpu`: Asce | [#14878](https://github.com/huggingface/diffusers/issues/14878) | 2026-09-26 | 2026-09-26 | 0 | - |
@@ -25,10 +26,11 @@
 | m-bain/whisperX | CLI and API silently fall back to CPU on Ascend NPU because  | [#1482](https://github.com/m-bain/whisperX/issues/1482) | 2026-09-21 | 2026-09-21 | 0 | - |
 | modelscope/FunASR | [dist] XPU distributed backend selection (XCCL / oneCCL) is  | [#3777](https://github.com/modelscope/FunASR/issues/3777) | 2026-10-17 | 2026-10-17 | 1 | - |
 | modelscope/modelscope | [Bug] torch_utils distributed helpers hard-code CUDA: init_d | [#1824](https://github.com/modelscope/modelscope/issues/1824) | 2026-10-18 | 2026-10-18 | 1 | - |
+| pyannote/pyannote-audio | get_devices() and `--device auto` silently fall back to CPU  | [#2082](https://github.com/pyannote/pyannote-audio/issues/2082) | 2026-10-19 | 2026-10-19 | 1 | - |
 | pytorch/pytorch | [Feature Request] Make the fake process group and the LocalT | [#199239](https://github.com/pytorch/pytorch/issues/199239) | 2026-10-01 | 2026-10-01 | 0 | oncall: distributed, triaged, bot-triaged, oncall: distributed infra |
-| triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 静态 r-numel 被特化为 ASTSource 编译期常量时，fused softma | [#2531](https://github.com/triton-lang/triton-ascend/issues/2531) | 2026-10-13 | 2026-10-18 | 2 | wait-feedback, autotune, compiler, python, ascend-backend, kernels |
-| triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 归约轴被 split（`R0_BLOCK < rnumel`）时 index 归约丢 ch | [#2530](https://github.com/triton-lang/triton-ascend/issues/2530) | 2026-10-13 | 2026-10-18 | 2 | wait-feedback, compiler, python, ascend-backend, kernels, scripts |
+| triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 静态 r-numel 被特化为 ASTSource 编译期常量时，fused softma | [#2531](https://github.com/triton-lang/triton-ascend/issues/2531) | 2026-10-13 | 2026-10-19 | 3 | wait-feedback, autotune, compiler, python, ascend-backend, kernels |
+| triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 归约轴被 split（`R0_BLOCK < rnumel`）时 index 归约丢 ch | [#2530](https://github.com/triton-lang/triton-ascend/issues/2530) | 2026-10-13 | 2026-10-19 | 3 | triaged, compiler, python, ascend-backend, kernels, scripts |
 | unslothai/unsloth | RFC: Ascend NPU (昇腾) backend support for unsloth | [#10772](https://github.com/unslothai/unsloth/issues/10772) | 2026-09-11 | 2026-09-11 | 0 | - |
 | verl-project/verl-omni | [reward] whisper_cer scorer cannot run on non-CUDA accelerat | [#768](https://github.com/verl-project/verl-omni/issues/768) | 2026-10-16 | 2026-10-16 | 0 | - |
 
-共 23 个 open issue。
+共 25 个 open issue。

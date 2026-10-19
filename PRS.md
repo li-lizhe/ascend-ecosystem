@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-19 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-20 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 163 (+3) | 69 (+2) | 59 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 179 (+3) | 71 (+2) | 71 (+1) | 37 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 165 (+2) | 69 (±0) | 61 (+2) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 181 (+2) | 71 (±0) | 73 (+2) | 37 (±0) | |
 >
-> **较昨日（基线 2026-10-18）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-19）：提交 +2 · ✅ 已合入 ±0 · 📡 跟踪中 +2 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（59）
+## 📡 B 类跟踪中（61）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -117,6 +117,8 @@
 | triton-lang/triton-ascend | fix(TritonToLinalg): annotate the index input of max/min-… | [#2615](https://github.com/triton-lang/triton-ascend/pull/2615) | 2026-10-18 |
 | InternLM/lmdeploy | fix(dlinfer): build the MoE expert-id map on the active d… | [#5039](https://github.com/InternLM/lmdeploy/pull/5039) | 2026-10-18 |
 | modelscope/modelscope | fix(torch_utils): resolve the device and the collective b… | [#1825](https://github.com/modelscope/modelscope/pull/1825) | 2026-10-18 |
+| hao-ai-lab/FastVideo | [bugfix] SP warmup: use the rank's own device instead of … | [#1988](https://github.com/hao-ai-lab/FastVideo/pull/1988) | 2026-10-19 |
+| pyannote/pyannote-audio | fix: resolve the device through the active accelerator (g… | [#2083](https://github.com/pyannote/pyannote-audio/pull/2083) | 2026-10-19 |
 
 ## ✅ B 类已合入（69）
 
