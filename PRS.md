@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-21 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-22 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 170 (+5) | 70 (+1) | 65 (+4) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 186 (+5) | 72 (+1) | 77 (+4) | 37 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 173 (+3) | 72 (+2) | 66 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 189 (+3) | 74 (+2) | 78 (+1) | 37 (±0) | |
 >
-> **较昨日（基线 2026-10-20）：提交 +5 · ✅ 已合入 +1 · 📡 跟踪中 +4 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-21）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,7 +54,7 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（65）
+## 📡 B 类跟踪中（66）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
@@ -119,12 +119,13 @@
 | hao-ai-lab/FastVideo | [bugfix] SP warmup: use the rank's own device instead of … | [#1988](https://github.com/hao-ai-lab/FastVideo/pull/1988) | 2026-10-19 |
 | pyannote/pyannote-audio | fix: resolve the device through the active accelerator (g… | [#2083](https://github.com/pyannote/pyannote-audio/pull/2083) | 2026-10-19 |
 | fishaudio/fish-speech | fix(server): honour an explicit --device instead of forci… | [#1361](https://github.com/fishaudio/fish-speech/pull/1361) | 2026-10-20 |
-| modelscope/ms-swift | fix(trainer): checkpoint the NPU RNG state alongside CUDA… | [#10406](https://github.com/modelscope/ms-swift/pull/10406) | 2026-10-20 |
 | huggingface/speech-to-speech | fix: resolve the diarization and viseme stages onto an av… | [#741](https://github.com/huggingface/speech-to-speech/pull/741) | 2026-10-20 |
-| xorbitsai/inference | fix(ocr): resolve the load device through the accelerator… | [#5778](https://github.com/xorbitsai/inference/pull/5778) | 2026-10-20 |
 | xdit-project/xDiT | fix: seed warmup and preview generators on the platform d… | [#931](https://github.com/xdit-project/xDiT/pull/931) | 2026-10-20 |
+| modelscope/FunASR | fix(train): select XCCL as the XPU distributed backend in… | [#3786](https://github.com/modelscope/FunASR/pull/3786) | 2026-10-21 |
+| OpenADMET/openadmet-models | fix(chemprop): honour the configured aggregation when bui… | [#614](https://github.com/OpenADMET/openadmet-models/pull/614) | 2026-10-21 |
+| roboflow/inference | fix(env): resolve the default compute device through torc… | [#3234](https://github.com/roboflow/inference/pull/3234) | 2026-10-21 |
 
-## ✅ B 类已合入（70）
+## ✅ B 类已合入（72）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -198,6 +199,8 @@
 | kornia/kornia | fix(filters): promote the multichannel guidance in guided… | [#6062](https://github.com/kornia/kornia/pull/6062) | 2026-10-18 |
 | sgl-project/SpecForge | fix(data): forward loss_mask_filter on the raw-conversati… | [#919](https://github.com/sgl-project/SpecForge/pull/919) | 2026-10-18 |
 | unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-20 |
+| modelscope/ms-swift | fix(trainer): checkpoint the NPU RNG state alongside CUDA… | [#10406](https://github.com/modelscope/ms-swift/pull/10406) | 2026-10-21 |
+| xorbitsai/inference | fix(ocr): resolve the load device through the accelerator… | [#5778](https://github.com/xorbitsai/inference/pull/5778) | 2026-10-21 |
 
 ## ❌ B 类关闭未合入（35）
 

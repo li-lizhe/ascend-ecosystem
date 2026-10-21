@@ -23,15 +23,15 @@
 | huggingface/diffusers | `apply_group_offloading(use_stream=True)` raises on Ascend N | [#14877](https://github.com/huggingface/diffusers/issues/14877) | 2026-09-26 | 2026-09-26 | 0 | - |
 | langgenius/dify | Monaco Editor Web Worker always fails with 404 due to missin | [#39340](https://github.com/langgenius/dify/issues/39340) | 2026-07-21 | 2026-07-21 | 1 | - |
 | li-lizhe/doc | log | [#1](https://github.com/li-lizhe/doc/issues/1) | 2021-05-31 | 2021-05-31 | 2 | - |
-| m-bain/whisperX | CLI and API silently fall back to CPU on Ascend NPU because  | [#1482](https://github.com/m-bain/whisperX/issues/1482) | 2026-09-21 | 2026-09-21 | 0 | - |
+| m-bain/whisperX | CLI and API silently fall back to CPU on Ascend NPU because  | [#1482](https://github.com/m-bain/whisperX/issues/1482) | 2026-09-21 | 2026-10-21 | 1 | - |
 | modelscope/FunASR | [dist] XPU distributed backend selection (XCCL / oneCCL) is  | [#3777](https://github.com/modelscope/FunASR/issues/3777) | 2026-10-17 | 2026-10-17 | 1 | - |
 | modelscope/modelscope | [Bug] torch_utils distributed helpers hard-code CUDA: init_d | [#1824](https://github.com/modelscope/modelscope/issues/1824) | 2026-10-18 | 2026-10-18 | 1 | - |
 | pyannote/pyannote-audio | get_devices() and `--device auto` silently fall back to CPU  | [#2082](https://github.com/pyannote/pyannote-audio/issues/2082) | 2026-10-19 | 2026-10-19 | 1 | - |
 | pytorch/pytorch | [Feature Request] Make the fake process group and the LocalT | [#199239](https://github.com/pytorch/pytorch/issues/199239) | 2026-10-01 | 2026-10-01 | 0 | oncall: distributed, triaged, bot-triaged, oncall: distributed infra |
+| roboflow/inference | DEVICE autodetect is CUDA-only: models load on CPU on non-CU | [#3233](https://github.com/roboflow/inference/issues/3233) | 2026-10-21 | 2026-10-21 | 0 | - |
 | triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 静态 r-numel 被特化为 ASTSource 编译期常量时，fused softma | [#2531](https://github.com/triton-lang/triton-ascend/issues/2531) | 2026-10-13 | 2026-10-19 | 3 | wait-feedback, autotune, compiler, python, ascend-backend, kernels |
-| triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 归约轴被 split（`R0_BLOCK < rnumel`）时 index 归约丢 ch | [#2530](https://github.com/triton-lang/triton-ascend/issues/2530) | 2026-10-13 | 2026-10-19 | 3 | triaged, compiler, python, ascend-backend, kernels, scripts |
+| triton-lang/triton-ascend | 【硬件解耦任务】[Bug]: 归约轴被 split（`R0_BLOCK < rnumel`）时 index 归约丢 ch | [#2530](https://github.com/triton-lang/triton-ascend/issues/2530) | 2026-10-13 | 2026-10-21 | 11 | triaged, compiler, python, ascend-backend, kernels, scripts |
 | unslothai/unsloth | RFC: Ascend NPU (昇腾) backend support for unsloth | [#10772](https://github.com/unslothai/unsloth/issues/10772) | 2026-09-11 | 2026-09-11 | 0 | - |
 | verl-project/verl-omni | [reward] whisper_cer scorer cannot run on non-CUDA accelerat | [#768](https://github.com/verl-project/verl-omni/issues/768) | 2026-10-16 | 2026-10-16 | 0 | - |
-| xorbitsai/inference | PaddleOCR-VL and Unlimited-OCR ignore the configured device  | [#5777](https://github.com/xorbitsai/inference/issues/5777) | 2026-10-20 | 2026-10-20 | 0 | gpu |
 
 共 26 个 open issue。
