@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-22 06:00
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-23 06:01
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 173 (+3) | 72 (+2) | 66 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 189 (+3) | 74 (+2) | 78 (+1) | 37 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 177 (+4) | 75 (+3) | 67 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 193 (+4) | 77 (+3) | 79 (+1) | 37 (±0) | |
 >
-> **较昨日（基线 2026-10-21）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-22）：提交 +4 · ✅ 已合入 +3 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -54,19 +54,17 @@
 
 # 🅱️ B 类 · 昇腾生态 / 社区（可自主处置）
 
-## 📡 B 类跟踪中（66）
+## 📡 B 类跟踪中（67）
 
 | 项目 | 变更 | PR | 提交日期 |
 |------|------|----|---------|
 | langgenius/dify | MonacoEnvironment.getWorkerUrl 设备无关 | [#39341](https://github.com/langgenius/dify/pull/39341) | 2026-07-21 |
-| m-bain/whisperX | torchaudio 可选化 + Hugging Face 兜底 | [#1469](https://github.com/m-bain/whisperX/pull/1469) | 2026-08-27 |
 | resemble-ai/chatterbox | `from_local`/`from_pretrained` device 标准化 | [#554](https://github.com/resemble-ai/chatterbox/pull/554) | 2026-08-27 |
 | ostris/ai-toolkit | torchaudio 可选化 + captioner librosa 兜底 | [#1022](https://github.com/ostris/ai-toolkit/pull/1022) | 2026-08-29 |
 | OpenMOSS/MOSS-TTS-Nano | ONNX runtime 路径 torch-free | [#99](https://github.com/OpenMOSS/MOSS-TTS-Nano/pull/99) | 2026-08-30 |
 | ModelTC/LightX2V | pre-weights 忽略 dit_quant_scheme（fp8 dtype） | [#1470](https://github.com/ModelTC/LightX2V/pull/1470) | 2026-09-01 |
 | kijai/ComfyUI-KJNodes | WanVideoNAG dtype mismatch 修复 | [#749](https://github.com/kijai/ComfyUI-KJNodes/pull/749) | 2026-09-02 |
 | RVC-Boss/GPT-SoVITS | 导出脚本 device 无关加速器检测 | [#2837](https://github.com/RVC-Boss/GPT-SoVITS/pull/2837) | 2026-09-04 |
-| docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-09-04 |
 | hiyouga/LlamaFactory | longlora device type 检查扩展 | [#10829](https://github.com/hiyouga/LlamaFactory/pull/10829) | 2026-09-10 |
 | hiyouga/LlamaFactory | LlamaFactory 梯度切分/设备回退 | [#10828](https://github.com/hiyouga/LlamaFactory/pull/10828) | 2026-09-10 |
 | openai/whisper | torch.accelerator 默认设备选择 | [#2855](https://github.com/openai/whisper/pull/2855) | 2026-09-12 |
@@ -124,8 +122,11 @@
 | modelscope/FunASR | fix(train): select XCCL as the XPU distributed backend in… | [#3786](https://github.com/modelscope/FunASR/pull/3786) | 2026-10-21 |
 | OpenADMET/openadmet-models | fix(chemprop): honour the configured aggregation when bui… | [#614](https://github.com/OpenADMET/openadmet-models/pull/614) | 2026-10-21 |
 | roboflow/inference | fix(env): resolve the default compute device through torc… | [#3234](https://github.com/roboflow/inference/pull/3234) | 2026-10-21 |
+| modelscope/DiffSynth-Studio | fix(vram): keep the trainable parameters of the wrapped m… | [#1784](https://github.com/modelscope/DiffSynth-Studio/pull/1784) | 2026-10-22 |
+| SWivid/F5-TTS | fix: keep the caller's speed for short text outside strea… | [#1332](https://github.com/SWivid/F5-TTS/pull/1332) | 2026-10-22 |
+| Fannovel16/comfyui_controlnet_aux | fix(download): drop huggingface_hub arguments removed in … | [#639](https://github.com/Fannovel16/comfyui_controlnet_aux/pull/639) | 2026-10-22 |
 
-## ✅ B 类已合入（72）
+## ✅ B 类已合入（75）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -201,6 +202,9 @@
 | unslothai/unsloth | fix: release the device cache through the active accelera… | [#13438](https://github.com/unslothai/unsloth/pull/13438) | 2026-10-20 |
 | modelscope/ms-swift | fix(trainer): checkpoint the NPU RNG state alongside CUDA… | [#10406](https://github.com/modelscope/ms-swift/pull/10406) | 2026-10-21 |
 | xorbitsai/inference | fix(ocr): resolve the load device through the accelerator… | [#5778](https://github.com/xorbitsai/inference/pull/5778) | 2026-10-21 |
+| espnet/espnet | Pass use_sdpa through the TransformerEncoder for multi-sp… | [#6946](https://github.com/espnet/espnet/pull/6946) | 2026-10-22 |
+| docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-10-22 |
+| m-bain/whisperX | torchaudio 可选化 + Hugging Face 兜底 | [#1469](https://github.com/m-bain/whisperX/pull/1469) | 2026-10-22 |
 
 ## ❌ B 类关闭未合入（35）
 
