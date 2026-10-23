@@ -1,35 +1,35 @@
 {
-  "updated": "2026-10-22T23:23:13+08:00",
+  "updated": "2026-10-23T23:37:40+08:00",
   "repos": {
     "triton-lang/triton-ascend": {
       "stars": 200,
-      "open_issues": 331,
-      "pushed": "2026-10-22",
-      "merged14": 109,
-      "merged7": 0,
-      "open_prs": 230,
+      "open_issues": 336,
+      "pushed": "2026-10-23",
+      "merged14": 107,
+      "merged7": 68,
+      "open_prs": 228,
       "ours": {
         "2449": "OPEN"
       }
     },
     "sgl-project/sglang": {
-      "stars": 37615,
-      "open_issues": 6060,
-      "pushed": "2026-10-22",
-      "merged14": 1055,
-      "merged7": 533,
-      "open_prs": 5100,
+      "stars": 37665,
+      "open_issues": 6106,
+      "pushed": "2026-10-23",
+      "merged14": 1058,
+      "merged7": 562,
+      "open_prs": 5139,
       "ours": {
         "40355": "OPEN"
       }
     },
     "vllm-project/vllm-ascend": {
-      "stars": 3000,
-      "open_issues": 4290,
-      "pushed": "2026-10-22",
-      "merged14": 643,
+      "stars": 3004,
+      "open_issues": 4349,
+      "pushed": "2026-10-23",
+      "merged14": 652,
       "merged7": 250,
-      "open_prs": 2587,
+      "open_prs": 2625,
       "ours": {
         "9543": "CLOSED",
         "9549": "CLOSED",
@@ -40,21 +40,21 @@
       }
     },
     "vllm-project/vllm-omni": {
-      "stars": 7302,
-      "open_issues": 1888,
-      "pushed": "2026-10-22",
-      "merged14": 286,
-      "merged7": 137,
-      "open_prs": 981,
+      "stars": 7326,
+      "open_issues": 1855,
+      "pushed": "2026-10-23",
+      "merged14": 308,
+      "merged7": 157,
+      "open_prs": 952,
       "ours": {}
     },
     "verl-project/verl": {
-      "stars": 23978,
-      "open_issues": 1375,
-      "pushed": "2026-10-22",
-      "merged14": 0,
-      "merged7": 0,
-      "open_prs": 742,
+      "stars": 23994,
+      "open_issues": 1384,
+      "pushed": "2026-10-23",
+      "merged14": 59,
+      "merged7": 28,
+      "open_prs": 749,
       "ours": {
         "8084": "OPEN"
       }
