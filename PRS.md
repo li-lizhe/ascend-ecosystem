@@ -1,16 +1,16 @@
 # 汇总 PR 清单（全景 · A/B 分账）
 
-> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-23 06:01
+> 数据源：GitHub API 全量 `author:li-lizhe type:pr`，由 `prs_build.py` 重建 · 生成于 2026-10-24 06:00
 >
 > 括号内为**较前一次记录的变化量**。
 >
 > | 类别 | 范围 | 提交 | ✅ 已合入 | 📡 跟踪中 | ❌ 关闭未合入 | 处置权限 |
 > |------|------|------|---------|---------|------------|---------|
 > | 🅰️ **A 类** | pytorch 上游（`pytorch/*`、`li-lizhe/pytorch`） | 16 (±0) | 2 (±0) | 12 (±0) | 2 (±0) | **只报不动**：回复/改码/push 须用户审视确认 |
-> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 177 (+4) | 75 (+3) | 67 (+1) | 35 (±0) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
-> | **合计** | | 193 (+4) | 77 (+3) | 79 (+1) | 37 (±0) | |
+> | 🅱️ **B 类** | 昇腾生态 / 社区（其余全部） | 180 (+3) | 77 (+2) | 67 (±0) | 36 (+1) | 可自主：读 review→改码→测试→真机验证→回复/再提交 |
+> | **合计** | | 196 (+3) | 79 (+2) | 79 (±0) | 38 (+1) | |
 >
-> **较昨日（基线 2026-10-22）：提交 +4 · ✅ 已合入 +3 · 📡 跟踪中 +1 · ❌ 关闭未合入 ±0**
+> **较昨日（基线 2026-10-23）：提交 +3 · ✅ 已合入 +2 · 📡 跟踪中 ±0 · ❌ 关闭未合入 +1**
 >
 > 每日 06:00 的「昇腾PR邮件哨兵」以本表为活跃名单唯一权威源（脚本不再硬编码 PR 号）；关闭/合入即出栈归档。
 > 说明：pytorch 的 bot merge 会让 API `merged` 恒为 False，本表已按 `Merged` label + closed commit 是否 main 祖先修正。
@@ -91,7 +91,6 @@
 | huggingface/diffusers | fix(wan): use device-agnostic default for get_i2v_mask | [#14883](https://github.com/huggingface/diffusers/pull/14883) | 2026-09-27 |
 | EleutherAI/lm-evaluation-harness | fix(models): move hf-audiolm generate_until inputs to the… | [#4257](https://github.com/EleutherAI/lm-evaluation-harness/pull/4257) | 2026-09-27 |
 | Wan-Video/Wan2.2 | fix: do not hardcode CUDA/NCCL for the device and the dis… | [#398](https://github.com/Wan-Video/Wan2.2/pull/398) | 2026-09-28 |
-| NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-09-28 |
 | open-compass/VLMEvalKit | fix: return evaluation summaries from dataset.evaluate() … | [#1709](https://github.com/open-compass/VLMEvalKit/pull/1709) | 2026-09-30 |
 | vllm-project/vllm-ascend | [Doc][Misc] Clarify container test environment prerequisi… | [#17864](https://github.com/vllm-project/vllm-ascend/pull/17864) | 2026-10-01 |
 | verl-project/verl | [trainer, data, tool] fix: correct misspellings in reward… | [#8084](https://github.com/verl-project/verl/pull/8084) | 2026-10-01 |
@@ -118,15 +117,16 @@
 | pyannote/pyannote-audio | fix: resolve the device through the active accelerator (g… | [#2083](https://github.com/pyannote/pyannote-audio/pull/2083) | 2026-10-19 |
 | fishaudio/fish-speech | fix(server): honour an explicit --device instead of forci… | [#1361](https://github.com/fishaudio/fish-speech/pull/1361) | 2026-10-20 |
 | huggingface/speech-to-speech | fix: resolve the diarization and viseme stages onto an av… | [#741](https://github.com/huggingface/speech-to-speech/pull/741) | 2026-10-20 |
-| xdit-project/xDiT | fix: seed warmup and preview generators on the platform d… | [#931](https://github.com/xdit-project/xDiT/pull/931) | 2026-10-20 |
 | modelscope/FunASR | fix(train): select XCCL as the XPU distributed backend in… | [#3786](https://github.com/modelscope/FunASR/pull/3786) | 2026-10-21 |
 | OpenADMET/openadmet-models | fix(chemprop): honour the configured aggregation when bui… | [#614](https://github.com/OpenADMET/openadmet-models/pull/614) | 2026-10-21 |
-| roboflow/inference | fix(env): resolve the default compute device through torc… | [#3234](https://github.com/roboflow/inference/pull/3234) | 2026-10-21 |
 | modelscope/DiffSynth-Studio | fix(vram): keep the trainable parameters of the wrapped m… | [#1784](https://github.com/modelscope/DiffSynth-Studio/pull/1784) | 2026-10-22 |
 | SWivid/F5-TTS | fix: keep the caller's speed for short text outside strea… | [#1332](https://github.com/SWivid/F5-TTS/pull/1332) | 2026-10-22 |
 | Fannovel16/comfyui_controlnet_aux | fix(download): drop huggingface_hub arguments removed in … | [#639](https://github.com/Fannovel16/comfyui_controlnet_aux/pull/639) | 2026-10-22 |
+| axolotl-ai-cloud/axolotl | fix(ebft): place the strided feature network on the actor… | [#4203](https://github.com/axolotl-ai-cloud/axolotl/pull/4203) | 2026-10-23 |
+| vladmandic/sdnext | fix(lora): resolve prefixed PEFT keys in the native loader | [#5178](https://github.com/vladmandic/sdnext/pull/5178) | 2026-10-23 |
+| oumi-ai/oumi | fix(cli): detect the active accelerator when launching di… | [#2720](https://github.com/oumi-ai/oumi/pull/2720) | 2026-10-23 |
 
-## ✅ B 类已合入（75）
+## ✅ B 类已合入（77）
 
 | 项目 | 变更 | PR | 合入日期 |
 |------|------|----|---------|
@@ -205,8 +205,10 @@
 | espnet/espnet | Pass use_sdpa through the TransformerEncoder for multi-sp… | [#6946](https://github.com/espnet/espnet/pull/6946) | 2026-10-22 |
 | docling-project/docling | #4158 | [#4158](https://github.com/docling-project/docling/pull/4158) | 2026-10-22 |
 | m-bain/whisperX | torchaudio 可选化 + Hugging Face 兜底 | [#1469](https://github.com/m-bain/whisperX/pull/1469) | 2026-10-22 |
+| xdit-project/xDiT | fix: seed warmup and preview generators on the platform d… | [#931](https://github.com/xdit-project/xDiT/pull/931) | 2026-10-23 |
+| NVlabs/Sana | fix(longsana): pick device and collective backend from th… | [#514](https://github.com/NVlabs/Sana/pull/514) | 2026-10-23 |
 
-## ❌ B 类关闭未合入（35）
+## ❌ B 类关闭未合入（36）
 
 | 项目 | 变更 | PR | 关闭日期 |
 |------|------|----|---------|
@@ -245,6 +247,7 @@
 | modelscope/evalscope | fix(perf): don't abort the run when a successful response… | [#1837](https://github.com/modelscope/evalscope/pull/1837) | 2026-10-12 |
 | open-compass/VLMEvalKit | [Fix] do not score an unparseable MCQ item as correct | [#1711](https://github.com/open-compass/VLMEvalKit/pull/1711) | 2026-10-12 |
 | vllm-project/vllm-omni | [Bugfix] rebuild serialized fault_tolerance_config before OmniEngineArgs | [#8866](https://github.com/vllm-project/vllm-omni/pull/8866) | 2026-10-14 |
+| roboflow/inference | fix(env): resolve the default compute device through torc… | [#3234](https://github.com/roboflow/inference/pull/3234) | 2026-10-23 |
 
 > 🔁 **已关闭（被取代）**：#48937 — 上游 huggingface/transformers#49156（0bb187fe5d，stream_context/create_device_stream 设备无关）已实现同等能力（含 offloading_manager._stream_ctx），故主动关闭不再 rebase（2026-10-08）；#14785 — 上游 huggingface/diffusers#14792（acbabca385，TorchDeviceBackend 设备无关流调度）已实现同等能力，故主动关闭不再 rebase（2026-10-08）
 

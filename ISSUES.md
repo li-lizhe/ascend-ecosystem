@@ -12,7 +12,6 @@
 | Fannovel16/comfyui_controlnet_aux | Download helper still uses huggingface_hub arguments removed | [#638](https://github.com/Fannovel16/comfyui_controlnet_aux/issues/638) | 2026-10-22 | 2026-10-22 | 0 | - |
 | InternLM/xtuner | [NPU] reduce_sum_across_dp_group builds the all_reduce tenso | [#2126](https://github.com/InternLM/xtuner/issues/2126) | 2026-09-25 | 2026-09-25 | 0 | - |
 | MiniMax-AI/MiniMax-M1 | main.py hard-codes CUDA and crashes on CPU/Ascend/NPU machin | [#44](https://github.com/MiniMax-AI/MiniMax-M1/issues/44) | 2026-09-20 | 2026-09-20 | 0 | - |
-| NVlabs/Sana | LongSana hardcodes CUDA/NCCL for distributed init and FSDP d | [#513](https://github.com/NVlabs/Sana/issues/513) | 2026-09-28 | 2026-10-17 | 1 | - |
 | Vaibhavs10/insanely-fast-whisper | CLI hard-codes CUDA when --device-id is an integer, breaking | [#287](https://github.com/Vaibhavs10/insanely-fast-whisper/issues/287) | 2026-09-21 | 2026-09-21 | 0 | - |
 | Wan-Video/Wan2.2 | `import wan` fails on non-CUDA builds: torch.cuda.current_de | [#397](https://github.com/Wan-Video/Wan2.2/issues/397) | 2026-09-28 | 2026-09-28 | 0 | - |
 | X-GenGroup/Flow-Factory | [Bug] accelerator RNG state leaks out of seeded blocks on no | [#243](https://github.com/X-GenGroup/Flow-Factory/issues/243) | 2026-10-13 | 2026-10-13 | 0 | - |
@@ -27,6 +26,7 @@
 | m-bain/whisperX | CLI and API silently fall back to CPU on Ascend NPU because  | [#1482](https://github.com/m-bain/whisperX/issues/1482) | 2026-09-21 | 2026-10-21 | 2 | - |
 | modelscope/FunASR | [dist] XPU distributed backend selection (XCCL / oneCCL) is  | [#3777](https://github.com/modelscope/FunASR/issues/3777) | 2026-10-17 | 2026-10-17 | 1 | - |
 | modelscope/modelscope | [Bug] torch_utils distributed helpers hard-code CUDA: init_d | [#1824](https://github.com/modelscope/modelscope/issues/1824) | 2026-10-18 | 2026-10-18 | 1 | - |
+| oumi-ai/oumi | [Bug] `oumi torchrun` refuses to start on a local machine wh | [#2719](https://github.com/oumi-ai/oumi/issues/2719) | 2026-10-23 | 2026-10-23 | 0 | - |
 | pyannote/pyannote-audio | get_devices() and `--device auto` silently fall back to CPU  | [#2082](https://github.com/pyannote/pyannote-audio/issues/2082) | 2026-10-19 | 2026-10-19 | 1 | - |
 | pytorch/pytorch | [Feature Request] Make the fake process group and the LocalT | [#199239](https://github.com/pytorch/pytorch/issues/199239) | 2026-10-01 | 2026-10-01 | 0 | oncall: distributed, triaged, bot-triaged, oncall: distributed infra |
 | roboflow/inference | DEVICE autodetect is CUDA-only: models load on CPU on non-CU | [#3233](https://github.com/roboflow/inference/issues/3233) | 2026-10-21 | 2026-10-21 | 0 | - |

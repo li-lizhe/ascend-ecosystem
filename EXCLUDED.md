@@ -97,3 +97,4 @@
 - `modelscope/evalscope #1837 — 2026-10-12 关闭 — fix(perf): don't abort the run when a successful response has no toke…`
 - `open-compass/VLMEvalKit #1711 — 2026-10-12 关闭 — [Fix] do not score an unparseable MCQ item as correct`
 - `vllm-project/vllm-omni #8866 — 2026-10-14 关闭 — [Bugfix] Rebuild serialized fault_tolerance_config before OmniEngineA…`
+- `roboflow/inference #3234 — 2026-10-23 关闭 — fix(env): resolve the default compute device through torch.accelerator`
